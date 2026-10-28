@@ -1,0 +1,55 @@
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "header-banner": {
+      "type": "header-banner",
+      "blocks": {
+        "extra_1": {
+          "type": "extra_message",
+          "settings": {
+            "text": "Cash on delivery available across Pakistan"
+          }
+        }
+      },
+      "block_order": ["extra_1"],
+      "settings": {
+        "accessibility_label": "Store announcements and promotions",
+        "enable_scroll": false,
+        "promo_prefix": "🎁",
+        "tier_two_text": "BUY 2 GET 5% OFF",
+        "tier_three_text": "BUY 3+ GET FREE SHIPPING + 5% OFF!",
+        "promo_suffix": "🚚",
+        "show_verified_badge": true,
+        "verified_text": "Verified Markaz Dispatch Store",
+        "show_cod_badge": true,
+        "cod_badge_text": "COD PAKISTAN",
+        "whatsapp_url": "",
+        "whatsapp_label": "Help",
+        "background_color": "#022c22",
+        "text_color": "#ecfdf5",
+        "accent_color": "#fbbf24",
+        "muted_color": "#6ee7b7"
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "logo_position": "middle-left",
+        "mobile_logo_position": "center",
+        "menu": "main-menu",
+        "menu_type_desktop": "dropdown",
+        "sticky_header_type": "on-scroll-up",
+        "show_line_separator": true,
+        "color_scheme": "scheme-1",
+        "menu_color_scheme": "scheme-1",
+        "enable_country_selector": false,
+        "enable_language_selector": false,
+        "margin_bottom": 0,
+        "padding_top": 16,
+        "padding_bottom": 16
+      }
+    }
+  },
+  "order": ["header-banner", "header"]
+}

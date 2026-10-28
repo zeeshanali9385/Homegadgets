@@ -1,0 +1,131 @@
+{%- liquid
+  assign item_count = cart.item_count
+  assign tier_two_qty = section.settings.tier_two_qty | default: 2
+  assign tier_three_qty = section.settings.tier_three_qty | default: 3
+  assign progress = 33
+  assign message = section.settings.message_tier_one
+  assign badge = section.settings.badge_tier_one
+
+  if item_count >= tier_three_qty
+    assign progress = 100
+    assign message = section.settings.message_tier_three
+    assign badge = section.settings.badge_tier_three
+  elsif item_count >= tier_two_qty
+    assign progress = 66
+    assign message = section.settings.message_tier_two
+    assign badge = section.settings.badge_tier_two
+  elsif item_count == 1
+    assign progress = 45
+    assign remaining = tier_two_qty | minus: item_count
+    assign message = section.settings.message_need_one | replace: '[count]', remaining
+  elsif item_count == 0
+    assign progress = 12
+    assign message = section.settings.message_empty
+  endif
+-%}
+
+<div class="kg-cart-tier" style="max-width:var(--page-width,1200px);margin:0 auto;padding:1rem 1.25rem 0;">
+  <div style="background:#0f172a;color:#fff;border-radius:0.75rem;padding:1.15rem 1.25rem;box-shadow:0 12px 28px -18px rgba(0,0,0,.45);font-family:'Sora','Avenir Next','Segoe UI',sans-serif;">
+    <div style="display:flex;justify-content:space-between;gap:1rem;align-items:center;flex-wrap:wrap;">
+      <p style="margin:0;font-size:0.875rem;font-weight:700;color:#fbbf24;">{{ message | escape }}</p>
+      <span style="display:inline-flex;align-items:center;min-height:1.75rem;padding:0.2rem 0.55rem;border-radius:0.25rem;background:#047857;font-size:0.625rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;">{{ badge | escape }}</span>
+    </div>
+    <div style="margin-top:0.75rem;width:100%;height:0.65rem;border-radius:999px;background:#1e293b;overflow:hidden;border:1px solid #334155;">
+      <div style="width:{{ progress }}%;height:100%;background:linear-gradient(90deg,#fbbf24,#10b981);transition:width .4s ease;"></div>
+    </div>
+    {%- if section.settings.helper_text != blank -%}
+      <p style="margin:0.55rem 0 0;font-size:0.75rem;color:#cbd5e1;">{{ section.settings.helper_text | escape }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cart tier progress",
+  "tag": "section",
+  "class": "section-cart-tier-progress",
+  "enabled_on": {
+    "templates": ["cart"]
+  },
+  "settings": [
+    {
+      "type": "range",
+      "id": "tier_two_qty",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "label": "Tier 2 quantity",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "tier_three_qty",
+      "min": 3,
+      "max": 20,
+      "step": 1,
+      "label": "Tier 3 quantity",
+      "default": 3
+    },
+    {
+      "type": "text",
+      "id": "message_empty",
+      "label": "Empty cart message",
+      "default": "Add products to unlock multi-item discounts"
+    },
+    {
+      "type": "text",
+      "id": "message_need_one",
+      "label": "Need more for tier 2",
+      "default": "Add [count] more product to unlock 5% OFF!",
+      "info": "Use [count] for remaining items"
+    },
+    {
+      "type": "text",
+      "id": "message_tier_one",
+      "label": "Tier 1 message",
+      "default": "Add more items to unlock savings"
+    },
+    {
+      "type": "text",
+      "id": "message_tier_two",
+      "label": "Tier 2 unlocked message",
+      "default": "5% OFF unlocked! Add 1 more for FREE shipping"
+    },
+    {
+      "type": "text",
+      "id": "message_tier_three",
+      "label": "Tier 3 unlocked message",
+      "default": "Best value unlocked: FREE shipping + 5% OFF"
+    },
+    {
+      "type": "text",
+      "id": "badge_tier_one",
+      "label": "Tier 1 badge",
+      "default": "Tier 1"
+    },
+    {
+      "type": "text",
+      "id": "badge_tier_two",
+      "label": "Tier 2 badge",
+      "default": "Tier 2 · 5% OFF"
+    },
+    {
+      "type": "text",
+      "id": "badge_tier_three",
+      "label": "Tier 3 badge",
+      "default": "Tier 3 · Best value"
+    },
+    {
+      "type": "text",
+      "id": "helper_text",
+      "label": "Helper text",
+      "default": "Buy 2 = 5% OFF | Buy 3+ = FREE Delivery + 5% OFF!"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cart tier progress"
+    }
+  ]
+}
+{% endschema %}

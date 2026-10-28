@@ -1,0 +1,150 @@
+{{ 'section-khyber-trust-bar.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #TrustBar-{{ section.id }} {
+    --kg-trust-pad-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    --kg-trust-pad-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    #TrustBar-{{ section.id }} {
+      --kg-trust-pad-top: {{ section.settings.padding_top }}px;
+      --kg-trust-pad-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section id="TrustBar-{{ section.id }}" class="kg-trust" aria-label="{{ section.settings.accessibility_label | escape }}">
+  <div class="kg-trust__inner">
+    <div class="kg-trust__grid">
+      {%- for block in section.blocks -%}
+        <div class="kg-trust__item" {{ block.shopify_attributes }}>
+          <div class="kg-trust__icon" aria-hidden="true">
+            {%- case block.settings.icon -%}
+              {%- when 'truck' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+              {%- when 'cod' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M7 8h7a3 3 0 0 1 0 6H9a3 3 0 0 0 0 6h8"/></svg>
+              {%- when 'shield' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg>
+              {%- else -%}
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.139-1.633-.807-1.886-.9-.253-.093-.437-.139-.62.14-.184.278-.713.899-.872 1.084-.16.185-.319.208-.591.07-.272-.139-1.15-.424-2.19-1.352-.81-.722-1.357-1.613-1.516-1.886-.16-.272-.017-.42.122-.558.125-.124.278-.323.417-.485.139-.161.185-.278.278-.463.093-.185.046-.347-.023-.485-.07-.139-.62-1.495-.85-2.048-.224-.538-.451-.465-.62-.474l-.528-.01c-.185 0-.485.07-.739.347-.253.278-.966.944-.966 2.303 0 1.36.99 2.672 1.127 2.857.139.185 1.95 2.978 4.725 4.176.66.286 1.176.457 1.578.586.663.212 1.266.182 1.743.11.532-.08 1.633-.668 1.865-1.313.23-.645.23-1.197.161-1.313-.07-.116-.254-.185-.53-.323z"/><path d="M12.004 2.003a9.94 9.94 0 0 0-8.58 14.9L2 22l5.23-1.37A9.95 9.95 0 1 0 12.004 2.003z"/></svg>
+            {%- endcase -%}
+          </div>
+          {%- if block.settings.title != blank -%}
+            <h3 class="kg-trust__title">{{ block.settings.title | escape }}</h3>
+          {%- endif -%}
+          {%- if block.settings.text != blank -%}
+            <p class="kg-trust__text">{{ block.settings.text | escape }}</p>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Khyber trust bar",
+  "tag": "section",
+  "class": "section-khyber-trust-bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "accessibility_label",
+      "label": "Accessibility label",
+      "default": "Why buy from us"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "trust_item",
+      "name": "Trust point",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "truck", "label": "Delivery" },
+            { "value": "cod", "label": "Cash on delivery" },
+            { "value": "shield", "label": "Guarantee" },
+            { "value": "whatsapp", "label": "WhatsApp" }
+          ],
+          "default": "truck"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Markaz Courier Delivery"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Dispatched via Leopard, TCS, Trax & PostEx"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Khyber trust bar",
+      "blocks": [
+        {
+          "type": "trust_item",
+          "settings": {
+            "icon": "truck",
+            "title": "Markaz Courier Delivery",
+            "text": "Dispatched via Leopard, TCS, Trax & PostEx"
+          }
+        },
+        {
+          "type": "trust_item",
+          "settings": {
+            "icon": "cod",
+            "title": "100% Cash On Delivery",
+            "text": "No advance card needed. Pay at doorstep"
+          }
+        },
+        {
+          "type": "trust_item",
+          "settings": {
+            "icon": "shield",
+            "title": "7-Day Replacement",
+            "text": "Instant support if parcel arrives damaged"
+          }
+        },
+        {
+          "type": "trust_item",
+          "settings": {
+            "icon": "whatsapp",
+            "title": "WhatsApp Order Tracking",
+            "text": "Real-time update on dispatch & delivery"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

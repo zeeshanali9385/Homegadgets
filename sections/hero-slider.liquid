@@ -1,0 +1,457 @@
+{{ 'section-hero-slider.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign fetch_priority = 'auto'
+  if section.index == 1
+    assign fetch_priority = 'high'
+  endif
+  assign slide_count = 0
+  for block in section.blocks
+    if block.type == 'slide'
+      assign slide_count = slide_count | plus: 1
+    endif
+  endfor
+-%}
+
+<section
+  id="HeroSlider-{{ section.id }}"
+  class="kg-hero"
+  data-section-id="{{ section.id }}"
+  data-autoplay="{{ section.settings.autoplay }}"
+  data-autoplay-speed="{{ section.settings.autoplay_speed }}"
+  aria-label="{{ section.settings.accessibility_label | escape }}"
+>
+  {%- if section.settings.background_image != blank -%}
+    <div class="kg-hero__media" aria-hidden="true">
+      {{
+        section.settings.background_image
+        | image_url: width: 2400
+        | image_tag:
+          loading: 'eager',
+          fetchpriority: fetch_priority,
+          decoding: 'async',
+          widths: '750, 1100, 1500, 1780, 2000, 2400',
+          sizes: '100vw',
+          class: 'kg-hero__bg-image',
+          alt: ''
+      }}
+    </div>
+  {%- endif -%}
+  <div class="kg-hero__overlay" aria-hidden="true"></div>
+
+  <div class="kg-hero__inner">
+    <div class="kg-hero__content">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="kg-hero__eyebrow">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="color:#fbbf24">
+            <path d="M3 7h13l1 3h4v2h-1.2l-1.5 6H6.7L4.2 7H3V5h2.3l.5 2H3zm4.3 10a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm9 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
+          </svg>
+          {{ section.settings.eyebrow | escape }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h1 class="kg-hero__heading">{{ section.settings.heading | escape }}</h1>
+      {%- endif -%}
+
+      {%- if section.settings.text != blank -%}
+        <p class="kg-hero__text">{{ section.settings.text | escape }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.show_offer_box -%}
+        <div class="kg-hero__offer">
+          <div class="kg-hero__offer-icon" aria-hidden="true">%</div>
+          <div>
+            {%- if section.settings.offer_label != blank -%}
+              <span class="kg-hero__offer-label">{{ section.settings.offer_label | escape }}</span>
+            {%- endif -%}
+            {%- if section.settings.offer_text != blank -%}
+              <p class="kg-hero__offer-copy">{{ section.settings.offer_text | escape }}</p>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      <div class="kg-hero__actions">
+        {%- if section.settings.button_label_1 != blank -%}
+          <a
+            class="kg-hero__btn kg-hero__btn--primary"
+            {% if section.settings.button_link_1 != blank %}
+              href="{{ section.settings.button_link_1 }}"
+            {% else %}
+              role="link" aria-disabled="true"
+            {% endif %}
+          >
+            {{ section.settings.button_label_1 | escape }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.button_label_2 != blank -%}
+          <a
+            class="kg-hero__btn kg-hero__btn--secondary"
+            {% if section.settings.button_link_2 != blank %}
+              href="{{ section.settings.button_link_2 }}"
+            {% else %}
+              role="link" aria-disabled="true"
+            {% endif %}
+          >
+            {{ section.settings.button_label_2 | escape }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="kg-hero__showcase">
+      {%- if slide_count > 0 -%}
+        <div class="kg-hero__slides" data-kg-hero-slides>
+          {%- assign slide_index = 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'slide' -%}
+              {%- assign slide_index = slide_index | plus: 1 -%}
+              <article
+                class="kg-hero__slide{% if slide_index == 1 %} is-active{% endif %}"
+                data-kg-hero-slide
+                {{ block.shopify_attributes }}
+                {% if slide_index != 1 %}hidden{% endif %}
+              >
+                <div class="kg-hero__card">
+                  {%- if block.settings.badge != blank -%}
+                    <span class="kg-hero__card-badge">{{ block.settings.badge | escape }}</span>
+                  {%- endif -%}
+
+                  <div class="kg-hero__card-media">
+                    {%- if block.settings.image != blank -%}
+                      {%- assign slide_alt = block.settings.heading | default: block.settings.image.alt -%}
+                      {{
+                        block.settings.image
+                        | image_url: width: 900
+                        | image_tag:
+                          loading: 'lazy',
+                          decoding: 'async',
+                          widths: '360, 540, 720, 900',
+                          sizes: '(min-width: 990px) 420px, 90vw',
+                          alt: slide_alt
+                      }}
+                    {%- else -%}
+                      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                    {%- endif -%}
+                  </div>
+
+                  {%- if block.settings.heading != blank -%}
+                    <h3 class="kg-hero__card-title">{{ block.settings.heading | escape }}</h3>
+                  {%- endif -%}
+                  {%- if block.settings.description != blank -%}
+                    <p class="kg-hero__card-desc">{{ block.settings.description | escape }}</p>
+                  {%- endif -%}
+
+                  <div class="kg-hero__card-footer">
+                    <div class="kg-hero__price">
+                      {%- if block.settings.price != blank -%}
+                        <span class="kg-hero__price-current">{{ block.settings.price | escape }}</span>
+                      {%- endif -%}
+                      {%- if block.settings.compare_price != blank -%}
+                        <span class="kg-hero__price-compare">{{ block.settings.compare_price | escape }}</span>
+                      {%- endif -%}
+                    </div>
+                    {%- if block.settings.button_label != blank -%}
+                      <a
+                        class="kg-hero__card-cta"
+                        {% if block.settings.button_link != blank %}
+                          href="{{ block.settings.button_link }}"
+                        {% elsif block.settings.product != blank %}
+                          href="{{ block.settings.product.url }}"
+                        {% else %}
+                          role="link" aria-disabled="true"
+                        {% endif %}
+                      >
+                        {{ block.settings.button_label | escape }}
+                      </a>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+        {%- if slide_count > 1 -%}
+          <div class="kg-hero__dots" role="tablist" aria-label="Hero slides">
+            {%- for i in (1..slide_count) -%}
+              <button
+                type="button"
+                class="kg-hero__dot{% if i == 1 %} is-active{% endif %}"
+                data-kg-hero-dot
+                aria-label="Show slide {{ i }}"
+                {% if i == 1 %}aria-current="true"{% endif %}
+              ></button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      {%- else -%}
+        <div class="kg-hero__card">
+          <span class="kg-hero__card-badge">{{ section.settings.fallback_badge | escape }}</span>
+          <div class="kg-hero__card-media">
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+          <h3 class="kg-hero__card-title">{{ section.settings.fallback_heading | escape }}</h3>
+          <p class="kg-hero__card-desc">{{ section.settings.fallback_text | escape }}</p>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    const root = document.getElementById('HeroSlider-{{ section.id }}');
+    if (!root) return;
+    const slides = Array.from(root.querySelectorAll('[data-kg-hero-slide]'));
+    const dots = Array.from(root.querySelectorAll('[data-kg-hero-dot]'));
+    if (slides.length < 2) return;
+
+    let index = 0;
+    let timer;
+    const autoplay = root.dataset.autoplay === 'true';
+    const speed = Math.max(3000, Number(root.dataset.autoplaySpeed || 6) * 1000);
+
+    const goTo = (next) => {
+      slides[index].classList.remove('is-active');
+      slides[index].hidden = true;
+      if (dots[index]) {
+        dots[index].classList.remove('is-active');
+        dots[index].removeAttribute('aria-current');
+      }
+      index = (next + slides.length) % slides.length;
+      slides[index].classList.add('is-active');
+      slides[index].hidden = false;
+      if (dots[index]) {
+        dots[index].classList.add('is-active');
+        dots[index].setAttribute('aria-current', 'true');
+      }
+    };
+
+    const start = () => {
+      if (!autoplay || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      stop();
+      timer = window.setInterval(() => goTo(index + 1), speed);
+    };
+    const stop = () => {
+      if (timer) window.clearInterval(timer);
+    };
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        goTo(i);
+        start();
+      });
+    });
+
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', start);
+    start();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Hero slider",
+  "tag": "section",
+  "class": "section-hero-slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "accessibility_label",
+      "label": "Accessibility label",
+      "default": "Homepage hero"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow badge",
+      "default": "Cash on delivery all over Pakistan"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Smart Viral Kitchen & Home Gadgets That Save Time."
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Supporting text",
+      "default": "Upgrade your home with Pakistan’s top-selling rechargeable choppers, juicers, organizers, and gadgets. Direct supplier pricing with 100% Cash on Delivery protection."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_offer_box",
+      "label": "Show bundle offer box",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "offer_label",
+      "label": "Offer label",
+      "default": "Bundle & Save Special Offer:"
+    },
+    {
+      "type": "textarea",
+      "id": "offer_text",
+      "label": "Offer text",
+      "default": "Buy 2 Items = 5% OFF | Buy 3+ Items = FREE Shipping + 5% OFF!"
+    },
+    {
+      "type": "text",
+      "id": "button_label_1",
+      "label": "Primary button label",
+      "default": "Shop All Gadgets"
+    },
+    {
+      "type": "url",
+      "id": "button_link_1",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Secondary button label",
+      "default": "View Trending Deals"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay showcase slides",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "unit": "s",
+      "label": "Autoplay speed",
+      "default": 6
+    },
+    {
+      "type": "header",
+      "content": "Empty state fallback"
+    },
+    {
+      "type": "text",
+      "id": "fallback_badge",
+      "label": "Fallback badge",
+      "default": "#1 Top Seller in Pakistan"
+    },
+    {
+      "type": "text",
+      "id": "fallback_heading",
+      "label": "Fallback heading",
+      "default": "Rechargeable Electric Mini Food Chopper"
+    },
+    {
+      "type": "textarea",
+      "id": "fallback_text",
+      "label": "Fallback text",
+      "default": "Add showcase slides in the theme editor to feature your best sellers."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Showcase slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Product image"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Linked product"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge",
+          "default": "#1 Top Seller in Pakistan"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Rechargeable Electric Mini Food Chopper"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Chops garlic, ginger, meat, and vegetables in 10 seconds. USB charging."
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price label",
+          "default": "Rs. 1,799"
+        },
+        {
+          "type": "text",
+          "id": "compare_price",
+          "label": "Compare-at price label",
+          "default": "Rs. 2,600"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Quick Buy"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero slider",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "badge": "#1 Top Seller in Pakistan",
+            "heading": "Rechargeable Electric Mini Food Chopper",
+            "description": "Chops garlic, ginger, meat, and vegetables in 10 seconds. USB charging.",
+            "price": "Rs. 1,799",
+            "compare_price": "Rs. 2,600",
+            "button_label": "Quick Buy"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "badge": "Viral Product",
+            "heading": "Portable USB Electric Juicer Blender",
+            "description": "Fresh juice blender bottle for milkshakes and fruit juices on the go.",
+            "price": "Rs. 2,499",
+            "compare_price": "Rs. 3,800",
+            "button_label": "Shop Now"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

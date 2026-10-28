@@ -1,0 +1,66 @@
+{%- if section.settings.whatsapp_url != blank -%}
+  <a
+    class="kg-wa-float"
+    href="{{ section.settings.whatsapp_url }}"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="{{ section.settings.accessibility_label | escape }}"
+    style="
+      position:fixed;right:1.25rem;bottom:1.25rem;z-index:35;
+      display:inline-flex;align-items:center;justify-content:center;
+      width:3.5rem;height:3.5rem;min-width:3rem;min-height:3rem;
+      border-radius:999px;background:{{ section.settings.button_color }};color:#fff;
+      box-shadow:0 14px 30px -12px rgba(16,185,129,.7);text-decoration:none;
+      transition:transform .2s ease, background .2s ease;
+    "
+  >
+    <span class="visually-hidden">{{ section.settings.accessibility_label | escape }}</span>
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.139-1.633-.807-1.886-.9-.253-.093-.437-.139-.62.14-.184.278-.713.899-.872 1.084-.16.185-.319.208-.591.07-.272-.139-1.15-.424-2.19-1.352-.81-.722-1.357-1.613-1.516-1.886-.16-.272-.017-.42.122-.558.125-.124.278-.323.417-.485.139-.161.185-.278.278-.463.093-.185.046-.347-.023-.485-.07-.139-.62-1.495-.85-2.048-.224-.538-.451-.465-.62-.474l-.528-.01c-.185 0-.485.07-.739.347-.253.278-.966.944-.966 2.303 0 1.36.99 2.672 1.127 2.857.139.185 1.95 2.978 4.725 4.176.66.286 1.176.457 1.578.586.663.212 1.266.182 1.743.11.532-.08 1.633-.668 1.865-1.313.23-.645.23-1.197.161-1.313-.07-.116-.254-.185-.53-.323z"/>
+      <path d="M12.004 2.003a9.94 9.94 0 0 0-8.58 14.9L2 22l5.23-1.37A9.95 9.95 0 1 0 12.004 2.003zm0 18.16a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.1.81.83-3.02-.2-.31a8.22 8.22 0 1 1 6.95 3.85z"/>
+    </svg>
+  </a>
+  <style>
+    .kg-wa-float:hover { transform: scale(1.06); }
+    @media (prefers-reduced-motion: reduce) {
+      .kg-wa-float:hover { transform: none; }
+    }
+    @media screen and (max-width: 989px) {
+      .kg-wa-float { bottom: 5.5rem; }
+      body:not(:has(.kg-pdp--has-sticky)) .kg-wa-float { bottom: 1.25rem; }
+    }
+  </style>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "WhatsApp float",
+  "tag": "section",
+  "class": "section-whatsapp-float",
+  "settings": [
+    {
+      "type": "url",
+      "id": "whatsapp_url",
+      "label": "WhatsApp URL",
+      "info": "Example: https://wa.me/923001234567"
+    },
+    {
+      "type": "text",
+      "id": "accessibility_label",
+      "label": "Accessibility label",
+      "default": "Order via WhatsApp"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button color",
+      "default": "#22c55e"
+    }
+  ],
+  "presets": [
+    {
+      "name": "WhatsApp float"
+    }
+  ]
+}
+{% endschema %}

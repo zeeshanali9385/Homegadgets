@@ -1,0 +1,60 @@
+.kg-trust {
+  font-family: 'Sora', 'Avenir Next', 'Segoe UI', sans-serif;
+  background: #fff;
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.kg-trust__inner {
+  max-width: var(--page-width, 1200px);
+  margin: 0 auto;
+  padding: var(--kg-trust-pad-top, 48px) 1.25rem var(--kg-trust-pad-bottom, 48px);
+}
+
+.kg-trust__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  text-align: center;
+}
+
+@media screen and (min-width: 990px) {
+  .kg-trust__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+.kg-trust__item {
+  padding: 0.75rem 0.5rem;
+}
+
+.kg-trust__icon {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  margin: 0 auto 0.65rem;
+  border-radius: 999px;
+  background: #e6f4ea;
+  color: #005c29;
+}
+
+.kg-trust__icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.kg-trust__title {
+  margin: 0;
+  font-size: clamp(0.8125rem, 1.5vw, 0.9375rem);
+  font-weight: 700;
+  color: #111827;
+}
+
+.kg-trust__text {
+  margin: 0.35rem 0 0;
+  color: #6b7280;
+  font-size: 0.75rem;
+  line-height: 1.45;
+}

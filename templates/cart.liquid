@@ -1,0 +1,76 @@
+{% comment %}
+  Minimalist cart fallback (classic Liquid template).
+  Dawn Online Store 2.0 also ships templates/cart.json — if both exist,
+  Shopify prefers the JSON template. Use this file when you need a
+  lightweight Liquid-only cart without section groups.
+{% endcomment %}
+
+<div class="page-width" style="padding:2rem 1.25rem 3rem;font-family:'Sora','Avenir Next','Segoe UI',sans-serif;">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;border-bottom:1px solid #e5e7eb;padding-bottom:1rem;margin-bottom:1.5rem;">
+    <h1 style="margin:0;font-size:clamp(1.75rem,3vw,2.25rem);font-weight:800;">{{ 'sections.cart.title' | t | default: 'Your Shopping Cart' }}</h1>
+    <a href="{{ routes.all_products_collection_url }}" style="font-size:0.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#065f46;text-decoration:none;">
+      {{ 'general.continue_shopping' | t | default: 'Continue shopping' }}
+    </a>
+  </div>
+
+  {% section 'cart-tier-progress' %}
+
+  {%- if cart.item_count == 0 -%}
+    <p style="color:#6b7280;">{{ 'sections.cart.empty' | t | default: 'Your cart is currently empty.' }}</p>
+    <a href="{{ routes.all_products_collection_url }}" style="display:inline-flex;align-items:center;justify-content:center;min-height:3rem;margin-top:1rem;padding:0.75rem 1.25rem;border-radius:0.4rem;background:#005c29;color:#fff;font-size:0.75rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;">
+      {{ 'general.continue_shopping' | t | default: 'Continue shopping' }}
+    </a>
+  {%- else -%}
+    <form action="{{ routes.cart_url }}" method="post" id="cart" novalidate>
+      <div style="display:grid;gap:1.5rem;">
+        {%- for item in cart.items -%}
+          <div style="display:grid;grid-template-columns:5rem 1fr auto;gap:1rem;align-items:center;padding:1rem;border:1px solid #e5e7eb;border-radius:0.75rem;background:#fff;">
+            {%- if item.image -%}
+              <a href="{{ item.url }}">
+                {{
+                  item.image
+                  | image_url: width: 160
+                  | image_tag:
+                    loading: 'lazy',
+                    decoding: 'async',
+                    widths: '80, 160',
+                    sizes: '80px',
+                    alt: item.image.alt | default: item.product.title | escape
+                }}
+              </a>
+            {%- endif -%}
+            <div>
+              <a href="{{ item.url }}" style="color:#111827;font-weight:700;text-decoration:none;">{{ item.product.title | escape }}</a>
+              {%- unless item.product.has_only_default_variant -%}
+                <p style="margin:0.25rem 0 0;color:#6b7280;font-size:0.8125rem;">{{ item.variant.title | escape }}</p>
+              {%- endunless -%}
+              <label style="display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.65rem;font-size:0.75rem;">
+                Qty
+                <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" style="width:4rem;min-height:2.75rem;padding:0.35rem;border:1px solid #d1d5db;border-radius:0.35rem;">
+              </label>
+            </div>
+            <div style="text-align:right;">
+              <p style="margin:0;font-weight:800;color:#065f46;">{{ item.final_line_price | money }}</p>
+              <a href="{{ item.url_to_remove }}" style="display:inline-flex;align-items:center;min-height:2.75rem;color:#6b7280;font-size:0.75rem;">Remove</a>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <div style="margin-top:1.5rem;padding:1.25rem;border:1px solid #e5e7eb;border-radius:0.75rem;background:#fff;max-width:28rem;margin-left:auto;">
+        <div style="display:flex;justify-content:space-between;font-weight:800;font-size:1.1rem;">
+          <span>{{ 'sections.cart.headings.total' | t | default: 'Estimated total' }}</span>
+          <span style="color:#065f46;">{{ cart.total_price | money }}</span>
+        </div>
+
+        <button type="submit" name="update" style="display:inline-flex;width:100%;align-items:center;justify-content:center;min-height:3rem;margin-top:0.85rem;border:1px solid #111827;border-radius:0.4rem;background:transparent;font-size:0.75rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;">
+          Update cart
+        </button>
+
+        <button type="submit" name="checkout" style="display:inline-flex;width:100%;align-items:center;justify-content:center;min-height:3rem;margin-top:0.55rem;border:0;border-radius:0.4rem;background:#005c29;color:#fff;font-size:0.75rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;">
+          {{ 'sections.cart.checkout' | t | default: 'Checkout' }}
+        </button>
+      </div>
+    </form>
+  {%- endif -%}
+</div>

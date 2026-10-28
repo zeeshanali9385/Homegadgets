@@ -1,0 +1,47 @@
+{
+  "sections": {
+    "cart-tier": {
+      "type": "cart-tier-progress",
+      "settings": {
+        "tier_two_qty": 2,
+        "tier_three_qty": 3,
+        "message_empty": "Add products to unlock multi-item discounts",
+        "message_need_one": "Add [count] more product to unlock 5% OFF!",
+        "message_tier_two": "5% OFF unlocked! Add 1 more for FREE shipping",
+        "message_tier_three": "Best value unlocked: FREE shipping + 5% OFF",
+        "badge_tier_one": "Tier 1",
+        "badge_tier_two": "Tier 2 · 5% OFF",
+        "badge_tier_three": "Tier 3 · Best value",
+        "helper_text": "Buy 2 = 5% OFF | Buy 3+ = FREE Delivery + 5% OFF!"
+      }
+    },
+    "cart-items": {
+      "type": "main-cart-items",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "cart-footer": {
+      "type": "main-cart-footer",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "padding_top": 20,
+        "padding_bottom": 40
+      },
+      "blocks": {
+        "subtotal": {
+          "type": "subtotal",
+          "settings": {}
+        },
+        "buttons": {
+          "type": "buttons",
+          "settings": {}
+        }
+      },
+      "block_order": ["subtotal", "buttons"]
+    }
+  },
+  "order": ["cart-tier", "cart-items", "cart-footer"]
+}

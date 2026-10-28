@@ -1,0 +1,465 @@
+{{ 'section-featured-collection-tier.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign collection = collections[section.settings.collection]
+  assign products_to_show = section.settings.products_to_show
+  assign columns_desktop = section.settings.columns_desktop
+  assign swipe_on_mobile = section.settings.swipe_on_mobile
+  assign discount_two = section.settings.discount_percent_two | default: 5 | plus: 0
+  assign discount_three = section.settings.discount_percent_three | default: 5 | plus: 0
+-%}
+
+{%- style -%}
+  .section-{{ section.id }}-pad {
+    --kg-tier-pad-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    --kg-tier-pad-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-pad {
+      --kg-tier-pad-top: {{ section.settings.padding_top }}px;
+      --kg-tier-pad-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section
+  id="FeaturedTier-{{ section.id }}"
+  class="kg-tier kg-tier__pad section-{{ section.id }}-pad"
+>
+  <div class="kg-tier__inner">
+    {%- if section.settings.show_tier_panel -%}
+      <div class="kg-tier__panel">
+        {%- if section.settings.panel_eyebrow != blank -%}
+          <span class="kg-tier__panel-eyebrow">{{ section.settings.panel_eyebrow | escape }}</span>
+        {%- endif -%}
+        {%- if section.settings.panel_heading != blank -%}
+          <h2 class="kg-tier__panel-title">{{ section.settings.panel_heading | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.panel_text != blank -%}
+          <p class="kg-tier__panel-text">{{ section.settings.panel_text | escape }}</p>
+        {%- endif -%}
+
+        <div class="kg-tier__cards">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'tier' -%}
+              <div
+                class="kg-tier__card{% if block.settings.style == 'popular' %} kg-tier__card--popular{% elsif block.settings.style == 'best' %} kg-tier__card--best{% endif %}"
+                {{ block.shopify_attributes }}
+              >
+                {%- if block.settings.badge != blank -%}
+                  <span class="kg-tier__card-badge {% if block.settings.style == 'best' %}kg-tier__card-badge--green{% else %}kg-tier__card-badge--amber{% endif %}">
+                    {{ block.settings.badge | escape }}
+                  </span>
+                {%- endif -%}
+                <div class="kg-tier__card-num">{{ block.settings.quantity_label | escape }}</div>
+                <h3 class="kg-tier__card-title">{{ block.settings.title | escape }}</h3>
+                <p class="kg-tier__card-text">{{ block.settings.text | escape }}</p>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    <div class="kg-tier__head" id="featured-products">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="kg-tier__eyebrow">{{ section.settings.eyebrow | escape }}</span>
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}
+          <h2 class="kg-tier__title">{{ section.settings.title | escape }}</h2>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.show_view_all and section.settings.collection != blank -%}
+        <a class="kg-tier__view-all" href="{{ collection.url | default: routes.all_products_collection_url }}">
+          {{ section.settings.view_all_label | escape }}
+          <span aria-hidden="true">→</span>
+        </a>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.collection != blank and collection != empty and collection.products_count > 0 -%}
+      <div class="kg-tier__grid kg-tier__grid--{{ columns_desktop }}{% if swipe_on_mobile %} kg-tier__grid--swipe{% endif %}">
+        {%- for product in collection.products limit: products_to_show -%}
+          {%- liquid
+            assign current_variant = product.selected_or_first_available_variant
+            assign price = current_variant.price
+            assign compare = current_variant.compare_at_price
+            assign price_two_off = price | times: discount_two | divided_by: 100
+            assign price_two = price | minus: price_two_off
+            assign price_three_off = price | times: discount_three | divided_by: 100
+            assign price_three = price | minus: price_three_off
+          -%}
+          <article class="kg-product">
+            <a class="kg-product__media" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+              {%- if product.featured_media -%}
+                {{
+                  product.featured_media
+                  | image_url: width: 800
+                  | image_tag:
+                    loading: 'lazy',
+                    decoding: 'async',
+                    widths: '280, 360, 540, 720, 800',
+                    sizes: '(min-width: 990px) 25vw, (min-width: 750px) 33vw, 50vw',
+                    alt: product.featured_media.alt | default: product.title | escape
+                }}
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+              {%- if product.tags contains 'top-seller' or product.metafields.custom.badge != blank -%}
+                <span class="kg-product__badge">
+                  {{ product.metafields.custom.badge.value | default: section.settings.default_badge | escape }}
+                </span>
+              {%- elsif section.settings.show_sale_badge and compare > price -%}
+                <span class="kg-product__badge">{{ section.settings.sale_badge_label | escape }}</span>
+              {%- endif -%}
+            </a>
+
+            <div class="kg-product__body">
+              <h3 class="kg-product__title">
+                <a href="{{ product.url }}">{{ product.title | escape }}</a>
+              </h3>
+
+              <div class="kg-product__price">
+                <span class="kg-product__price-current">{{ price | money }}</span>
+                {%- if compare > price -%}
+                  <span class="kg-product__price-compare">{{ compare | money }}</span>
+                {%- endif -%}
+              </div>
+
+              {%- if section.settings.show_tier_pricing -%}
+                <div class="kg-product__tiers" aria-label="Volume pricing tiers">
+                  <div class="kg-product__tier-row">
+                    <span>{{ section.settings.tier_one_label | escape }}</span>
+                    <strong>{{ price | money }}</strong>
+                  </div>
+                  <div class="kg-product__tier-row">
+                    <span>{{ section.settings.tier_two_label | escape }}</span>
+                    <strong>{{ price_two | money }}</strong>
+                  </div>
+                  <div class="kg-product__tier-row">
+                    <span>{{ section.settings.tier_three_label | escape }}</span>
+                    <strong>{{ price_three | money }}{% if section.settings.tier_three_extra != blank %} · {{ section.settings.tier_three_extra | escape }}{% endif %}</strong>
+                  </div>
+                </div>
+              {%- endif -%}
+
+              <div class="kg-product__actions">
+                {%- if current_variant.available -%}
+                  {%- form 'product', product -%}
+                    <input type="hidden" name="id" value="{{ current_variant.id }}">
+                    <button type="submit" name="add" class="kg-product__btn kg-product__btn--cart">
+                      {{ section.settings.add_to_cart_label | escape }}
+                    </button>
+                  {%- endform -%}
+                {%- else -%}
+                  <span class="kg-product__btn kg-product__btn--cart" aria-disabled="true">
+                    {{ section.settings.sold_out_label | escape }}
+                  </span>
+                {%- endif -%}
+                <a class="kg-product__btn kg-product__btn--view" href="{{ product.url }}">
+                  {{ section.settings.view_product_label | escape }}
+                </a>
+              </div>
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <div class="kg-tier__empty">
+        <p>{{ section.settings.empty_state_text | escape }}</p>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured collection tier",
+  "tag": "section",
+  "class": "section-featured-collection-tier",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_tier_panel",
+      "label": "Show volume discount panel",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "panel_eyebrow",
+      "label": "Panel eyebrow",
+      "default": "Automatic Volume Savings"
+    },
+    {
+      "type": "text",
+      "id": "panel_heading",
+      "label": "Panel heading",
+      "default": "How Our Multi-Item Discount Works"
+    },
+    {
+      "type": "textarea",
+      "id": "panel_text",
+      "label": "Panel text",
+      "default": "Add items to your cart to automatically unlock tiers without any coupon code!"
+    },
+    {
+      "type": "header",
+      "content": "Collection"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Collection eyebrow",
+      "default": "Handpicked Solutions"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Trending Home & Kitchen Gadgets"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 16,
+      "step": 1,
+      "label": "Products to show",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Desktop columns",
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "swipe_on_mobile",
+      "label": "Enable mobile swipe cards",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show view all link",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View all label",
+      "default": "View All Products"
+    },
+    {
+      "type": "header",
+      "content": "Tier pricing on cards"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tier_pricing",
+      "label": "Show per-product tier pricing",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "discount_percent_two",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "label": "Buy 2 discount",
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "discount_percent_three",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "label": "Buy 3+ discount",
+      "default": 5
+    },
+    {
+      "type": "text",
+      "id": "tier_one_label",
+      "label": "Buy 1 label",
+      "default": "Buy 1"
+    },
+    {
+      "type": "text",
+      "id": "tier_two_label",
+      "label": "Buy 2 label",
+      "default": "Buy 2 (−5%)"
+    },
+    {
+      "type": "text",
+      "id": "tier_three_label",
+      "label": "Buy 3+ label",
+      "default": "Buy 3+"
+    },
+    {
+      "type": "text",
+      "id": "tier_three_extra",
+      "label": "Buy 3+ extra note",
+      "default": "Free ship"
+    },
+    {
+      "type": "header",
+      "content": "Buttons & badges"
+    },
+    {
+      "type": "text",
+      "id": "add_to_cart_label",
+      "label": "Add to cart label",
+      "default": "Add to cart"
+    },
+    {
+      "type": "text",
+      "id": "view_product_label",
+      "label": "View product label",
+      "default": "View details"
+    },
+    {
+      "type": "text",
+      "id": "sold_out_label",
+      "label": "Sold out label",
+      "default": "Sold out"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sale_badge",
+      "label": "Show sale badge when compare-at exists",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "sale_badge_label",
+      "label": "Sale badge label",
+      "default": "Hot deal"
+    },
+    {
+      "type": "text",
+      "id": "default_badge",
+      "label": "Default product badge",
+      "default": "Top seller"
+    },
+    {
+      "type": "textarea",
+      "id": "empty_state_text",
+      "label": "Empty state text",
+      "default": "Select a collection in the theme editor to show trending gadgets."
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tier",
+      "name": "Discount tier",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Card style",
+          "options": [
+            { "value": "default", "label": "Default" },
+            { "value": "popular", "label": "Popular" },
+            { "value": "best", "label": "Best value" }
+          ],
+          "default": "default"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge"
+        },
+        {
+          "type": "text",
+          "id": "quantity_label",
+          "label": "Quantity label",
+          "default": "1"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Buy 1 Item"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Standard Nationwide Delivery (Rs. 150)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured collection tier",
+      "blocks": [
+        {
+          "type": "tier",
+          "settings": {
+            "style": "default",
+            "quantity_label": "1",
+            "title": "Buy 1 Item",
+            "text": "Standard Nationwide Delivery (Rs. 150)"
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "style": "popular",
+            "badge": "Popular",
+            "quantity_label": "2",
+            "title": "Buy 2 Items",
+            "text": "Get 5% Flat Discount On Entire Order"
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "style": "best",
+            "badge": "Best value",
+            "quantity_label": "3+",
+            "title": "Buy 3 Or More Items",
+            "text": "FREE Shipping + 5% Flat Discount!"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

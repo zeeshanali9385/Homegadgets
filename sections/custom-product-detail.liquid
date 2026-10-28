@@ -1,0 +1,725 @@
+{{ 'section-custom-product-detail.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'custom-product-detail.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign product_form_id = 'KgProductForm-' | append: section.id
+  assign checkout_form_id = product_form_id | append: '-checkout'
+  assign compare = current_variant.compare_at_price
+  assign price = current_variant.price
+  assign save_amount = 0
+  assign save_percent = 0
+  if compare > price
+    assign save_amount = compare | minus: price
+    assign save_percent = save_amount | times: 100.0 | divided_by: compare | round
+  endif
+  assign media_count = product.media.size
+-%}
+
+{%- style -%}
+  #CustomPDP-{{ section.id }} {
+    --kg-pdp-pad-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    --kg-pdp-pad-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    #CustomPDP-{{ section.id }} {
+      --kg-pdp-pad-top: {{ section.settings.padding_top }}px;
+      --kg-pdp-pad-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<khyber-product-detail
+  id="CustomPDP-{{ section.id }}"
+  class="kg-pdp{% if section.settings.enable_sticky_mobile_cta %} kg-pdp--has-sticky{% endif %}"
+  data-section="{{ section.id }}"
+>
+  <div class="kg-pdp__inner">
+    {%- if section.settings.show_back_link -%}
+      <a class="kg-pdp__back" href="{{ section.settings.back_link | default: routes.all_products_collection_url }}">
+        ← {{ section.settings.back_label | escape }}
+      </a>
+    {%- endif -%}
+
+    <div class="kg-pdp__layout">
+      <div class="kg-pdp__gallery">
+        <div class="kg-pdp__main-media">
+          {%- if product.selected_or_first_available_variant.featured_media != blank -%}
+            {%- assign featured = product.selected_or_first_available_variant.featured_media -%}
+          {%- else -%}
+            {%- assign featured = product.featured_media -%}
+          {%- endif -%}
+
+          {%- if featured != blank -%}
+            {%- assign main_image_id = 'KgMainImage-' | append: section.id -%}
+            {%- assign main_image_alt = featured.alt | default: product.title -%}
+            {{
+              featured
+              | image_url: width: 1500
+              | image_tag:
+                loading: 'eager',
+                fetchpriority: 'high',
+                decoding: 'async',
+                widths: '375, 550, 750, 1100, 1500',
+                sizes: '(min-width: 990px) 45vw, 100vw',
+                class: 'kg-pdp__image',
+                id: main_image_id,
+                data-kg-main-image: 'true',
+                alt: main_image_alt
+            }}
+          {%- else -%}
+            {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+
+        {%- if media_count > 1 -%}
+          <div class="kg-pdp__thumbs" role="list">
+            {%- for media in product.media -%}
+              {%- if media.media_type == 'image' -%}
+                <button
+                  type="button"
+                  class="kg-pdp__thumb{% if forloop.first %} is-active{% endif %}"
+                  data-kg-thumb
+                  data-full-src="{{ media | image_url: width: 1500 }}"
+                  data-full-srcset="
+                    {%- if media.width >= 375 -%}{{ media | image_url: width: 375 }} 375w,{%- endif -%}
+                    {%- if media.width >= 550 -%}{{ media | image_url: width: 550 }} 550w,{%- endif -%}
+                    {%- if media.width >= 750 -%}{{ media | image_url: width: 750 }} 750w,{%- endif -%}
+                    {%- if media.width >= 1100 -%}{{ media | image_url: width: 1100 }} 1100w,{%- endif -%}
+                    {{ media | image_url: width: 1500 }} 1500w
+                  "
+                  aria-label="{{ 'products.product.media.gallery_viewer' | t | default: 'View image' }} {{ forloop.index }}"
+                  {% if forloop.first %}aria-current="true"{% endif %}
+                >
+                  {{
+                    media
+                    | image_url: width: 180
+                    | image_tag:
+                      loading: 'lazy',
+                      decoding: 'async',
+                      widths: '90, 180',
+                      sizes: '72px',
+                      alt: media.alt | default: product.title | escape
+                  }}
+                </button>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="kg-pdp__info">
+        {%- if section.settings.category_badge != blank -%}
+          <span class="kg-pdp__badge">{{ section.settings.category_badge | escape }}</span>
+        {%- elsif product.type != blank -%}
+          <span class="kg-pdp__badge">{{ product.type | escape }}</span>
+        {%- endif -%}
+
+        <h1 class="kg-pdp__title">{{ product.title | escape }}</h1>
+
+        <div class="kg-pdp__meta">
+          {%- if section.settings.show_rating -%}
+            <div class="kg-pdp__rating" aria-label="{{ section.settings.rating_value }} out of 5">
+              ★ <span>{{ section.settings.rating_value | escape }}</span>
+            </div>
+            <span aria-hidden="true">|</span>
+            <span>{{ section.settings.reviews_count_label | escape }}</span>
+          {%- endif -%}
+          {%- if section.settings.show_stock_label and current_variant.available -%}
+            <span aria-hidden="true">|</span>
+            <span class="kg-pdp__stock">{{ section.settings.in_stock_label | escape }}</span>
+          {%- endif -%}
+        </div>
+
+        <div class="kg-pdp__price-box">
+          <div class="kg-pdp__price-row">
+            <span class="kg-pdp__price">{{ price | money }}</span>
+            {%- if compare > price -%}
+              <span class="kg-pdp__compare">{{ compare | money }}</span>
+              {%- if section.settings.show_save_badge -%}
+                <span class="kg-pdp__save">
+                  {{ section.settings.save_badge_prefix | escape }} {{ save_percent }}%
+                </span>
+              {%- endif -%}
+            {%- endif -%}
+          </div>
+          {%- if section.settings.price_note != blank -%}
+            <p class="kg-pdp__price-note">{{ section.settings.price_note | escape }}</p>
+          {%- endif -%}
+        </div>
+
+        <script type="application/json" data-kg-variant-json>
+          {{ product.variants | json }}
+        </script>
+
+        {%- form 'product', product, id: product_form_id, class: 'kg-pdp__form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+          <input type="hidden" name="id" value="{{ current_variant.id }}" data-kg-variant-id {% if current_variant.available == false %}disabled{% endif %}>
+
+          {%- unless product.has_only_default_variant -%}
+            <div class="product-form__input" style="margin-top:1rem" data-kg-variant-options>
+              {%- for option in product.options_with_values -%}
+                <fieldset data-option-index="{{ forloop.index0 }}">
+                  <legend class="kg-pdp__qty-label">{{ option.name }}</legend>
+                  <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+                    {%- for value in option.values -%}
+                      <label style="display:inline-flex;align-items:center;min-height:2.75rem;padding:0.45rem 0.85rem;border:1px solid #d1d5db;border-radius:0.4rem;cursor:pointer;">
+                        <input
+                          type="radio"
+                          name="options[{{ option.name | escape }}]"
+                          value="{{ value | escape }}"
+                          data-kg-option-input
+                          {% if option.selected_value == value %}checked{% endif %}
+                          style="margin-right:0.4rem;"
+                        >
+                        {{ value }}
+                      </label>
+                    {%- endfor -%}
+                  </div>
+                </fieldset>
+              {%- endfor -%}
+            </div>
+          {%- endunless -%}
+
+          <label class="kg-pdp__qty-label" for="KgQuantity-{{ section.id }}">{{ section.settings.quantity_label | escape }}</label>
+          <div class="kg-pdp__buy-row" data-kg-buy-anchor>
+            <div class="kg-pdp__qty">
+              <button type="button" data-kg-qty-minus aria-label="{{ 'products.product.quantity.decrease' | t | default: 'Decrease quantity' }}">−</button>
+              <input
+                id="KgQuantity-{{ section.id }}"
+                data-kg-qty-input
+                type="number"
+                name="quantity"
+                min="1"
+                max="99"
+                value="1"
+                inputmode="numeric"
+              >
+              <button type="button" data-kg-qty-plus aria-label="{{ 'products.product.quantity.increase' | t | default: 'Increase quantity' }}">+</button>
+            </div>
+
+            <button
+              type="submit"
+              name="add"
+              class="kg-pdp__add"
+              {% if current_variant.available == false %}disabled{% endif %}
+            >
+              {%- if current_variant.available -%}
+                {{ section.settings.add_to_cart_label | escape }}
+              {%- else -%}
+                {{ section.settings.sold_out_label | escape }}
+              {%- endif -%}
+            </button>
+          </div>
+        {%- endform -%}
+
+        <div class="kg-pdp__checkout-actions">
+          {%- if section.settings.show_buy_now_button -%}
+            {%- form 'product', product, id: checkout_form_id, class: 'kg-pdp__buy-now-form' -%}
+              <input type="hidden" name="id" value="{{ current_variant.id }}" data-kg-checkout-variant-id {% if current_variant.available == false %}disabled{% endif %}>
+              <input type="hidden" name="quantity" value="1" data-kg-buy-now-qty>
+              <input type="hidden" name="return_to" value="{{ routes.root_url }}checkout">
+              <button
+                type="submit"
+                name="add"
+                class="kg-pdp__buy-now"
+                data-kg-buy-now
+                {% if current_variant.available == false %}disabled{% endif %}
+              >
+                {{ section.settings.buy_now_label | escape }}
+              </button>
+            {%- endform -%}
+          {%- endif -%}
+
+          {%- for block in section.blocks -%}
+            {%- if block.type == '@app' -%}
+              <div class="kg-pdp__app-slot" {{ block.shopify_attributes }}>
+                {% render block %}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+        {%- if product.description != blank and section.settings.show_description_features -%}
+          <div class="kg-pdp__features">
+            <h2 class="kg-pdp__features-title">{{ section.settings.features_heading | escape }}</h2>
+            <div class="rte">{{ product.description }}</div>
+          </div>
+        {%- endif -%}
+
+        {%- assign feature_blocks = section.blocks | where: 'type', 'feature_item' -%}
+        {%- if feature_blocks.size > 0 -%}
+          <div class="kg-pdp__features">
+            <h2 class="kg-pdp__features-title">{{ section.settings.features_heading | escape }}</h2>
+            <ul>
+              {%- for block in feature_blocks -%}
+                {%- if block.settings.text != blank -%}
+                  <li {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="kg-pdp__below">
+      {%- assign value_blocks = section.blocks | where: 'type', 'value_point' -%}
+      {%- if value_blocks.size > 0 -%}
+        <section class="kg-pdp__block" aria-labelledby="KgValues-{{ section.id }}">
+          <h2 class="kg-pdp__block-title" id="KgValues-{{ section.id }}">
+            {{ section.settings.values_heading | escape }}
+          </h2>
+          <div class="kg-pdp__values">
+            {%- for block in value_blocks -%}
+              <div class="kg-pdp__value" {{ block.shopify_attributes }}>
+                <div class="kg-pdp__value-icon" aria-hidden="true">
+                  {{ block.settings.icon_text | default: '✓' | escape }}
+                </div>
+                <div>
+                  {%- if block.settings.title != blank -%}
+                    <h3 class="kg-pdp__value-title">{{ block.settings.title | escape }}</h3>
+                  {%- endif -%}
+                  {%- if block.settings.text != blank -%}
+                    <p class="kg-pdp__value-text">{{ block.settings.text | escape }}</p>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+        </section>
+      {%- endif -%}
+
+      {%- assign faq_blocks = section.blocks | where: 'type', 'faq_item' -%}
+      {%- if faq_blocks.size > 0 -%}
+        <section class="kg-pdp__block kg-pdp__faq" aria-labelledby="KgFaq-{{ section.id }}">
+          <h2 class="kg-pdp__block-title" id="KgFaq-{{ section.id }}">
+            {{ section.settings.faq_heading | escape }}
+          </h2>
+          {%- for block in faq_blocks -%}
+            <details {{ block.shopify_attributes }}{% if forloop.first and section.settings.open_first_faq %} open{% endif %}>
+              <summary>{{ block.settings.question | escape }}</summary>
+              <div class="kg-pdp__faq-answer">{{ block.settings.answer | escape | newline_to_br }}</div>
+            </details>
+          {%- endfor -%}
+        </section>
+      {%- endif -%}
+
+      {%- assign review_blocks = section.blocks | where: 'type', 'review' -%}
+      {%- if review_blocks.size > 0 -%}
+        <section class="kg-pdp__block" aria-labelledby="KgReviews-{{ section.id }}">
+          <h2 class="kg-pdp__block-title" id="KgReviews-{{ section.id }}">
+            {{ section.settings.reviews_heading | escape }}
+          </h2>
+          <div class="kg-pdp__reviews">
+            {%- for block in review_blocks -%}
+              <article class="kg-pdp__review" {{ block.shopify_attributes }}>
+                <div class="kg-pdp__review-top">
+                  <h3 class="kg-pdp__review-name">{{ block.settings.author | escape }}</h3>
+                  {%- if block.settings.verified -%}
+                    <span class="kg-pdp__review-verified">{{ section.settings.verified_label | escape }}</span>
+                  {%- endif -%}
+                </div>
+                <div class="kg-pdp__review-stars" aria-label="{{ block.settings.rating }} out of 5">
+                  {%- assign rating_int = block.settings.rating | plus: 0 -%}
+                  {%- for i in (1..5) -%}
+                    {%- if i <= rating_int -%}★{%- else -%}☆{%- endif -%}
+                  {%- endfor -%}
+                </div>
+                {%- if block.settings.text != blank -%}
+                  <p class="kg-pdp__review-text">{{ block.settings.text | escape }}</p>
+                {%- endif -%}
+              </article>
+            {%- endfor -%}
+          </div>
+        </section>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- if section.settings.enable_sticky_mobile_cta -%}
+    <div class="kg-pdp__sticky" data-kg-sticky-cta>
+      <button
+        type="submit"
+        form="{{ product_form_id }}"
+        class="kg-pdp__add"
+        {% if current_variant.available == false %}disabled{% endif %}
+      >
+        {{ section.settings.add_to_cart_label | escape }}
+      </button>
+      <button
+        type="submit"
+        form="{{ checkout_form_id }}"
+        class="kg-pdp__buy-now"
+        data-kg-buy-now
+        {% if current_variant.available == false %}disabled{% endif %}
+      >
+        {{ section.settings.sticky_buy_label | default: section.settings.buy_now_label | escape }}
+      </button>
+    </div>
+  {%- endif -%}
+</khyber-product-detail>
+
+{% schema %}
+{
+  "name": "Custom product detail",
+  "tag": "section",
+  "class": "section-custom-product-detail",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_back_link",
+      "label": "Show back to catalog link",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "back_label",
+      "label": "Back link label",
+      "default": "Back to catalog"
+    },
+    {
+      "type": "url",
+      "id": "back_link",
+      "label": "Back link URL"
+    },
+    {
+      "type": "text",
+      "id": "category_badge",
+      "label": "Category badge override",
+      "info": "Leave blank to use product type"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show rating row",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "rating_value",
+      "label": "Rating value",
+      "default": "4.9"
+    },
+    {
+      "type": "text",
+      "id": "reviews_count_label",
+      "label": "Reviews count label",
+      "default": "128 Verified Reviews"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stock_label",
+      "label": "Show in-stock label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "in_stock_label",
+      "label": "In-stock label",
+      "default": "In Stock (Fast Courier)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_save_badge",
+      "label": "Show save percentage badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "save_badge_prefix",
+      "label": "Save badge prefix",
+      "default": "Save"
+    },
+    {
+      "type": "textarea",
+      "id": "price_note",
+      "label": "Price note",
+      "default": "Includes all taxes. Free delivery unlocks if total order has 3+ items."
+    },
+    {
+      "type": "text",
+      "id": "quantity_label",
+      "label": "Quantity label",
+      "default": "Quantity"
+    },
+    {
+      "type": "text",
+      "id": "add_to_cart_label",
+      "label": "Add to cart label",
+      "default": "Add to cart"
+    },
+    {
+      "type": "text",
+      "id": "sold_out_label",
+      "label": "Sold out label",
+      "default": "Sold out"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_buy_now_button",
+      "label": "Show Buy Now button",
+      "default": true,
+      "info": "Adds the item and sends customers to Shopify Checkout (/checkout)"
+    },
+    {
+      "type": "text",
+      "id": "buy_now_label",
+      "label": "Buy now label",
+      "default": "Buy now"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sticky_mobile_cta",
+      "label": "Enable sticky mobile CTAs",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "sticky_buy_label",
+      "label": "Sticky buy label",
+      "default": "Checkout"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description_features",
+      "label": "Show product description under buy box",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "features_heading",
+      "label": "Features heading",
+      "default": "Product Features & Specifications"
+    },
+    {
+      "type": "text",
+      "id": "values_heading",
+      "label": "Value points heading",
+      "default": "Why customers love this"
+    },
+    {
+      "type": "text",
+      "id": "faq_heading",
+      "label": "FAQ heading",
+      "default": "Frequently asked questions"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first_faq",
+      "label": "Open first FAQ by default",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "reviews_heading",
+      "label": "Reviews heading",
+      "default": "Verified customer reviews"
+    },
+    {
+      "type": "text",
+      "id": "verified_label",
+      "label": "Verified review label",
+      "default": "Verified purchase"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "feature_item",
+      "name": "Feature bullet",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Feature text",
+          "default": "USB Rechargeable battery"
+        }
+      ]
+    },
+    {
+      "type": "value_point",
+      "name": "Value point",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon_text",
+          "label": "Icon text",
+          "default": "✓"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Cash on delivery"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Pay at your doorstep across Pakistan"
+        }
+      ]
+    },
+    {
+      "type": "faq_item",
+      "name": "FAQ item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Do you offer Cash on Delivery?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "Yes. 100% Cash on Delivery is available nationwide through TCS, Leopards, Trax, and PostEx."
+        }
+      ]
+    },
+    {
+      "type": "review",
+      "name": "Customer review",
+      "settings": [
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author name",
+          "default": "Ayesha K."
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Star rating",
+          "default": 5
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Verified purchase",
+          "default": true
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Review text",
+          "default": "Chopper quality is excellent and delivery to Lahore was fast. Highly recommended!"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom product detail",
+      "blocks": [
+        {
+          "type": "feature_item",
+          "settings": { "text": "USB Rechargeable battery" }
+        },
+        {
+          "type": "feature_item",
+          "settings": { "text": "Stainless steel sharp blades" }
+        },
+        {
+          "type": "feature_item",
+          "settings": { "text": "Safe one-touch operation" }
+        },
+        {
+          "type": "value_point",
+          "settings": {
+            "icon_text": "COD",
+            "title": "100% Cash On Delivery",
+            "text": "No advance payment required across Pakistan"
+          }
+        },
+        {
+          "type": "value_point",
+          "settings": {
+            "icon_text": "7D",
+            "title": "7-Day Replacement",
+            "text": "Support if the parcel arrives damaged"
+          }
+        },
+        {
+          "type": "value_point",
+          "settings": {
+            "icon_text": "WA",
+            "title": "WhatsApp Tracking",
+            "text": "Get dispatch updates on WhatsApp"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you offer Cash on Delivery?",
+            "answer": "Yes. 100% Cash on Delivery is available nationwide through verified couriers."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long does delivery take?",
+            "answer": "Major cities usually receive parcels in 2–4 working days. Other areas take 3–5 working days."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is the return policy?",
+            "answer": "We offer a 7-day replacement guarantee for damaged or non-working items."
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "author": "Ayesha K.",
+            "rating": 5,
+            "verified": true,
+            "text": "Chopper quality is excellent and delivery to Lahore was fast. Highly recommended!"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "author": "Bilal R.",
+            "rating": 5,
+            "verified": true,
+            "text": "Ordered 3 gadgets, got free shipping automatically. Packaging was secure."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

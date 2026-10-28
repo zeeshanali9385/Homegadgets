@@ -1,0 +1,230 @@
+{{ 'section-header-banner.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign enable_scroll = section.settings.enable_scroll
+  assign whatsapp_url = section.settings.whatsapp_url
+-%}
+
+<div
+  id="HeaderBanner-{{ section.id }}"
+  class="kg-banner"
+  role="region"
+  aria-label="{{ section.settings.accessibility_label | escape }}"
+  style="
+    --kg-banner-bg: {{ section.settings.background_color }};
+    --kg-banner-text: {{ section.settings.text_color }};
+    --kg-banner-accent: {{ section.settings.accent_color }};
+    --kg-banner-muted: {{ section.settings.muted_color }};
+  "
+>
+  <div class="kg-banner__inner">
+    {%- if section.settings.show_verified_badge -%}
+      <div class="kg-banner__side">
+        <span class="kg-banner__pulse" aria-hidden="true"></span>
+        <span>{{ section.settings.verified_text | escape }}</span>
+      </div>
+    {%- else -%}
+      <div class="kg-banner__side" aria-hidden="true"></div>
+    {%- endif -%}
+
+    <div class="{% if enable_scroll %}kg-banner__marquee{% endif %}">
+      {%- if enable_scroll -%}
+        <div class="kg-banner__marquee-track">
+          {%- for i in (1..2) -%}
+            <p class="kg-banner__promo">
+              {%- if section.settings.promo_prefix != blank -%}
+                <span aria-hidden="true">{{ section.settings.promo_prefix }}</span>
+              {%- endif -%}
+              <span class="kg-banner__promo-accent">{{ section.settings.tier_two_text | escape }}</span>
+              <span> | </span>
+              <span class="kg-banner__promo-strong">{{ section.settings.tier_three_text | escape }}</span>
+              {%- if section.settings.promo_suffix != blank -%}
+                <span aria-hidden="true"> {{ section.settings.promo_suffix }}</span>
+              {%- endif -%}
+            </p>
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        <p class="kg-banner__promo">
+          {%- if section.settings.promo_prefix != blank -%}
+            <span aria-hidden="true">{{ section.settings.promo_prefix }}</span>
+          {%- endif -%}
+          <span class="kg-banner__promo-accent">{{ section.settings.tier_two_text | escape }}</span>
+          <span> | </span>
+          <span class="kg-banner__promo-strong">{{ section.settings.tier_three_text | escape }}</span>
+          {%- if section.settings.promo_suffix != blank -%}
+            <span aria-hidden="true"> {{ section.settings.promo_suffix }}</span>
+          {%- endif -%}
+        </p>
+      {%- endif -%}
+    </div>
+
+    <div class="kg-banner__side kg-banner__side--end">
+      {%- if section.settings.show_cod_badge -%}
+        <span class="kg-banner__badge">{{ section.settings.cod_badge_text | escape }}</span>
+      {%- endif -%}
+      {%- if whatsapp_url != blank -%}
+        <a
+          class="kg-banner__link"
+          href="{{ whatsapp_url }}"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="{{ section.settings.whatsapp_label | escape }}"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.139-1.633-.807-1.886-.9-.253-.093-.437-.139-.62.14-.184.278-.713.899-.872 1.084-.16.185-.319.208-.591.07-.272-.139-1.15-.424-2.19-1.352-.81-.722-1.357-1.613-1.516-1.886-.16-.272-.017-.42.122-.558.125-.124.278-.323.417-.485.139-.161.185-.278.278-.463.093-.185.046-.347-.023-.485-.07-.139-.62-1.495-.85-2.048-.224-.538-.451-.465-.62-.474l-.528-.01c-.185 0-.485.07-.739.347-.253.278-.966.944-.966 2.303 0 1.36.99 2.672 1.127 2.857.139.185 1.95 2.978 4.725 4.176.66.286 1.176.457 1.578.586.663.212 1.266.182 1.743.11.532-.08 1.633-.668 1.865-1.313.23-.645.23-1.197.161-1.313-.07-.116-.254-.185-.53-.323z"/>
+            <path d="M12.004 2.003a9.94 9.94 0 0 0-8.58 14.9L2 22l5.23-1.37A9.95 9.95 0 1 0 12.004 2.003zm0 18.16a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.1.81.83-3.02-.2-.31a8.22 8.22 0 1 1 6.95 3.85z"/>
+          </svg>
+          <span>{{ section.settings.whatsapp_label | escape }}</span>
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="visually-hidden">
+      {%- for block in section.blocks -%}
+        <span {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</span>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Header banner",
+  "tag": "section",
+  "class": "section-header-banner",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "accessibility_label",
+      "label": "Accessibility label",
+      "default": "Store announcements and promotions"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_scroll",
+      "label": "Enable scrolling promo text",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "promo_prefix",
+      "label": "Promo prefix emoji/icon",
+      "default": "🎁"
+    },
+    {
+      "type": "text",
+      "id": "tier_two_text",
+      "label": "Tier 2 promo text",
+      "default": "BUY 2 GET 5% OFF"
+    },
+    {
+      "type": "text",
+      "id": "tier_three_text",
+      "label": "Tier 3 promo text",
+      "default": "BUY 3+ GET FREE SHIPPING + 5% OFF!"
+    },
+    {
+      "type": "text",
+      "id": "promo_suffix",
+      "label": "Promo suffix emoji/icon",
+      "default": "🚚"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_verified_badge",
+      "label": "Show verified store label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "verified_text",
+      "label": "Verified store label",
+      "default": "Verified Markaz Dispatch Store"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cod_badge",
+      "label": "Show COD badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cod_badge_text",
+      "label": "COD badge text",
+      "default": "COD PAKISTAN"
+    },
+    {
+      "type": "url",
+      "id": "whatsapp_url",
+      "label": "WhatsApp help URL"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_label",
+      "label": "WhatsApp link label",
+      "default": "Help"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#022c22"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#ecfdf5"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent (tier 2)",
+      "default": "#fbbf24"
+    },
+    {
+      "type": "color",
+      "id": "muted_color",
+      "label": "Muted / tier 3",
+      "default": "#6ee7b7"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "extra_message",
+      "name": "Extra SEO message",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Hidden SEO / screen-reader message",
+          "default": "Cash on delivery available across Pakistan"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header banner",
+      "settings": {
+        "tier_two_text": "BUY 2 GET 5% OFF",
+        "tier_three_text": "BUY 3+ GET FREE SHIPPING + 5% OFF!",
+        "verified_text": "Verified Markaz Dispatch Store",
+        "cod_badge_text": "COD PAKISTAN",
+        "whatsapp_label": "Help"
+      }
+    }
+  ]
+}
+{% endschema %}

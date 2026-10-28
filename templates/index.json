@@ -1,0 +1,156 @@
+{
+  "sections": {
+    "hero_slider": {
+      "type": "hero-slider",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "badge": "#1 Top Seller in Pakistan",
+            "heading": "Rechargeable Electric Mini Food Chopper",
+            "description": "Chops garlic, ginger, meat, and vegetables in 10 seconds. USB charging.",
+            "price": "Rs. 1,799",
+            "compare_price": "Rs. 2,600",
+            "button_label": "Quick Buy"
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "badge": "Viral Product",
+            "heading": "Portable USB Electric Juicer Blender",
+            "description": "Fresh juice blender bottle for milkshakes and fruit juices on the go.",
+            "price": "Rs. 2,499",
+            "compare_price": "Rs. 3,800",
+            "button_label": "Shop Now"
+          }
+        }
+      },
+      "block_order": ["slide_1", "slide_2"],
+      "settings": {
+        "eyebrow": "Cash on delivery all over Pakistan",
+        "heading": "Smart Viral Kitchen & Home Gadgets That Save Time.",
+        "text": "Upgrade your home with Pakistan’s top-selling rechargeable choppers, juicers, organizers, and gadgets. Direct supplier pricing with 100% Cash on Delivery protection.",
+        "show_offer_box": true,
+        "offer_label": "Bundle & Save Special Offer:",
+        "offer_text": "Buy 2 Items = 5% OFF | Buy 3+ Items = FREE Shipping + 5% OFF!",
+        "button_label_1": "Shop All Gadgets",
+        "button_link_1": "shopify://collections/all",
+        "button_label_2": "View Trending Deals",
+        "button_link_2": "shopify://collections/all",
+        "autoplay": true,
+        "autoplay_speed": 6
+      }
+    },
+    "featured_collection_tier": {
+      "type": "featured-collection-tier",
+      "blocks": {
+        "tier_1": {
+          "type": "tier",
+          "settings": {
+            "style": "default",
+            "quantity_label": "1",
+            "title": "Buy 1 Item",
+            "text": "Standard Nationwide Delivery (Rs. 150)"
+          }
+        },
+        "tier_2": {
+          "type": "tier",
+          "settings": {
+            "style": "popular",
+            "badge": "Popular",
+            "quantity_label": "2",
+            "title": "Buy 2 Items",
+            "text": "Get 5% Flat Discount On Entire Order"
+          }
+        },
+        "tier_3": {
+          "type": "tier",
+          "settings": {
+            "style": "best",
+            "badge": "Best value",
+            "quantity_label": "3+",
+            "title": "Buy 3 Or More Items",
+            "text": "FREE Shipping + 5% Flat Discount!"
+          }
+        }
+      },
+      "block_order": ["tier_1", "tier_2", "tier_3"],
+      "settings": {
+        "show_tier_panel": true,
+        "panel_eyebrow": "Automatic Volume Savings",
+        "panel_heading": "How Our Multi-Item Discount Works",
+        "panel_text": "Add items to your cart to automatically unlock tiers without any coupon code!",
+        "eyebrow": "Handpicked Solutions",
+        "title": "Trending Home & Kitchen Gadgets",
+        "collection": "all",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "swipe_on_mobile": true,
+        "show_view_all": true,
+        "view_all_label": "View All Products",
+        "show_tier_pricing": true,
+        "discount_percent_two": 5,
+        "discount_percent_three": 5,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "khyber_trust_bar": {
+      "type": "khyber-trust-bar",
+      "blocks": {
+        "trust_1": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "truck",
+            "title": "Markaz Courier Delivery",
+            "text": "Dispatched via Leopard, TCS, Trax & PostEx"
+          }
+        },
+        "trust_2": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "cod",
+            "title": "100% Cash On Delivery",
+            "text": "No advance card needed. Pay at doorstep"
+          }
+        },
+        "trust_3": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "shield",
+            "title": "7-Day Replacement",
+            "text": "Instant support if parcel arrives damaged"
+          }
+        },
+        "trust_4": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "whatsapp",
+            "title": "WhatsApp Order Tracking",
+            "text": "Real-time update on dispatch & delivery"
+          }
+        }
+      },
+      "block_order": ["trust_1", "trust_2", "trust_3", "trust_4"],
+      "settings": {
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "whatsapp_float": {
+      "type": "whatsapp-float",
+      "settings": {
+        "whatsapp_url": "",
+        "accessibility_label": "Order via WhatsApp",
+        "button_color": "#22c55e"
+      }
+    }
+  },
+  "order": [
+    "hero_slider",
+    "featured_collection_tier",
+    "khyber_trust_bar",
+    "whatsapp_float"
+  ]
+}
