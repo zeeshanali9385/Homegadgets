@@ -1,0 +1,89 @@
+{{ 'hz-testimonials.css' | asset_url | stylesheet_tag }}
+
+<section class="hz-reviews" aria-labelledby="HzReviews-{{ section.id }}">
+  <div class="hz-reviews__head">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="hz-reviews__title" id="HzReviews-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subheading != blank -%}
+      <p class="hz-reviews__sub">{{ section.settings.subheading | escape }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="hz-reviews__track">
+    {%- for block in section.blocks -%}
+      <article class="hz-reviews__card" {{ block.shopify_attributes }}>
+        <div class="hz-reviews__stars" aria-label="{{ block.settings.rating }} out of 5">
+          {%- assign rating_int = block.settings.rating | plus: 0 -%}
+          {%- for i in (1..5) -%}
+            {%- if i <= rating_int -%}★{%- else -%}☆{%- endif -%}
+          {%- endfor -%}
+        </div>
+        {%- if block.settings.text != blank -%}
+          <p class="hz-reviews__text">“{{ block.settings.text | escape }}”</p>
+        {%- endif -%}
+        <div class="hz-reviews__meta">
+          {%- if block.settings.image != blank -%}
+            {{
+              block.settings.image
+              | image_url: width: 96
+              | image_tag:
+                class: 'hz-reviews__avatar',
+                loading: 'lazy',
+                decoding: 'async',
+                widths: '64, 96',
+                sizes: '48px',
+                alt: block.settings.author
+            }}
+          {%- endif -%}
+          <div>
+            <p class="hz-reviews__author">{{ block.settings.author | escape }}</p>
+            {%- if block.settings.city != blank -%}
+              <p class="hz-reviews__city">{{ block.settings.city | escape }}</p>
+            {%- endif -%}
+          </div>
+          {%- if block.settings.verified -%}
+            <span class="hz-reviews__verified">{{ section.settings.verified_label | escape }}</span>
+          {%- endif -%}
+        </div>
+      </article>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HZ testimonials",
+  "tag": "section",
+  "class": "section-hz-testimonials",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Loved across Pakistan" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Verified feedback from HORIZON customers" },
+    { "type": "text", "id": "verified_label", "label": "Verified label", "default": "Verified buyer" }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        { "type": "text", "id": "author", "label": "Author", "default": "Ayesha K." },
+        { "type": "text", "id": "city", "label": "City", "default": "Lahore" },
+        { "type": "range", "id": "rating", "min": 1, "max": 5, "step": 1, "label": "Rating", "default": 5 },
+        { "type": "checkbox", "id": "verified", "label": "Verified", "default": true },
+        { "type": "textarea", "id": "text", "label": "Review", "default": "Beautiful finish and fast COD delivery. Looks premium on the wrist." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "HZ testimonials",
+      "blocks": [
+        { "type": "review", "settings": { "author": "Ayesha K.", "city": "Lahore", "rating": 5, "text": "Beautiful finish and fast COD delivery. Looks premium on the wrist." } },
+        { "type": "review", "settings": { "author": "Bilal R.", "city": "Karachi", "rating": 5, "text": "Ordered a couple set — packaging was excellent and courier was on time." } },
+        { "type": "review", "settings": { "author": "Sana M.", "city": "Islamabad", "rating": 5, "text": "Great daily wear watch. Warranty support replied on WhatsApp quickly." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
