@@ -1,10 +1,13 @@
 :root {
-  --hz-navy: #0b1f33;
-  --hz-champagne: #c4a574;
-  --hz-ivory: #f7f5f0;
-  --hz-sale: #c45c26;
-  --hz-text: #1a1a1a;
-  --hz-muted: #6b7280;
+  --hz-navy: #3d2e1e;
+  --hz-wood: #d4b483;
+  --hz-wood-deep: #c9a227;
+  --hz-champagne: #d4b26a;
+  --hz-ivory: #fff9f0;
+  --hz-cream: #fbf6eb;
+  --hz-sale: #c9892e;
+  --hz-text: #3d2e1e;
+  --hz-muted: #7a6a55;
   --hz-radius: 0.5rem;
   --hz-page: var(--page-width, 1200px);
 }
@@ -33,14 +36,14 @@
 }
 
 .hz-btn--primary {
-  background: var(--hz-champagne);
-  color: var(--hz-navy);
-  border: 1px solid var(--hz-champagne);
+  background: var(--hz-wood-deep);
+  color: #fff9f0;
+  border: 1px solid var(--hz-wood-deep);
 }
 
 .hz-btn--primary:hover {
-  background: #b8945f;
-  color: var(--hz-navy);
+  background: #b8921f;
+  color: #fff9f0;
 }
 
 .hz-btn--ghost {

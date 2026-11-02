@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "name": "t:sections.footer.name",
   "type": "footer",
@@ -35,14 +44,14 @@
         "text": {
           "type": "text",
           "settings": {
-            "heading": "Promise",
-            "subtext": "<p>1-year warranty · 30-day returns · Free delivery · Cash on delivery across Pakistan.</p>"
+            "heading": "Payments & promise",
+            "subtext": "<p><strong>COD</strong> · Bank Transfer · 1-year warranty · 7-day exchanges · Free shipping on eligible orders (PKR 3,000+).</p><p>Email: support@horizon.pk · WhatsApp support available.</p>"
           }
         }
       },
       "block_order": ["brand", "footer_shop", "footer_care", "footer_about", "text"],
       "settings": {
-        "color_scheme": "scheme-3",
+        "color_scheme": "scheme-2",
         "newsletter_enable": true,
         "newsletter_heading": "Subscribe for offers & new arrivals",
         "enable_follow_on_shop": false,
