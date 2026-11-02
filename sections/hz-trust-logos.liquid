@@ -1,0 +1,105 @@
+{{ 'hz-theme.css' | asset_url | stylesheet_tag }}
+
+<section class="hz-trust-logos" aria-labelledby="HzTrustLogos-{{ section.id }}">
+  <div class="hz-trust-logos__inner hz-page">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="hz-trust-logos__heading" id="HzTrustLogos-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+    <ul class="hz-trust-logos__grid" role="list">
+      {%- for block in section.blocks -%}
+        <li class="hz-trust-logos__item" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            {%- assign logo_alt = block.settings.label | default: block.settings.image.alt -%}
+            {{
+              block.settings.image
+              | image_url: width: 240
+              | image_tag:
+                loading: 'lazy',
+                decoding: 'async',
+                widths: '120, 180, 240',
+                sizes: '120px',
+                alt: logo_alt
+            }}
+          {%- endif -%}
+          {%- if block.settings.label != blank -%}
+            <span class="hz-trust-logos__label">{{ block.settings.label | escape }}</span>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .hz-trust-logos {
+    background: var(--hz-cream, #fbf6eb);
+    padding: 2rem 0 2.5rem;
+    border-top: 1px solid rgba(61, 46, 30, 0.08);
+    border-bottom: 1px solid rgba(61, 46, 30, 0.08);
+  }
+  .hz-trust-logos__heading {
+    margin: 0 0 1.25rem;
+    text-align: center;
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    color: var(--hz-text, #3d2e1e);
+    letter-spacing: 0.04em;
+  }
+  .hz-trust-logos__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+    align-items: center;
+  }
+  @media screen and (min-width: 750px) {
+    .hz-trust-logos__grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  .hz-trust-logos__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
+  }
+  .hz-trust-logos__item img {
+    width: 4.5rem;
+    height: 4.5rem;
+    object-fit: cover;
+    border-radius: 999px;
+    border: 2px solid #d4b26a;
+    background: #fff;
+  }
+  .hz-trust-logos__label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--hz-muted, #7a6a55);
+  }
+</style>
+
+{% schema %}
+{
+  "name": "HZ trust logos",
+  "tag": "section",
+  "class": "section-hz-trust-logos",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Trusted shopping in Pakistan" }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Cash on Delivery" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "HZ trust logos", "blocks": [{ "type": "logo" }, { "type": "logo" }, { "type": "logo" }, { "type": "logo" }] }]
+}
+{% endschema %}

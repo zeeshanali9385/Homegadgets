@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "main": {
+      "type": "hz-policy-content",
+      "settings": {
+        "heading": "Shipping Policy",
+        "intro": "Clear delivery timelines and fees for orders across Pakistan.",
+        "body": "<h2>Delivery timelines</h2><p>Most orders are dispatched within 24–48 hours after COD verification and arrive in <strong>3–5 working days</strong> via partners such as TCS, CallCourier, Leopards, or PostEx.</p><h2>Shipping fees</h2><ul><li>Standard flat rate: <strong>PKR 200</strong> (unless a free-shipping promo applies)</li><li>Free shipping on orders above <strong>PKR 3,000</strong> when the promotion is active</li></ul><h2>Order processing</h2><ol><li>Place your order and select Cash on Delivery at Shopify Checkout.</li><li>Our team may confirm your phone number on WhatsApp.</li><li>Parcel is packed, labeled, and handed to the courier.</li><li>You receive tracking updates until doorstep delivery.</li></ol><p>Remote areas may take additional working days. Public holidays can extend timelines.</p>",
+        "cta_label": "Track your order",
+        "cta_link": "shopify://pages/track-order",
+        "show_whatsapp": true,
+        "whatsapp_label": "Ask about delivery"
+      }
+    }
+  },
+  "order": ["main"]
+}

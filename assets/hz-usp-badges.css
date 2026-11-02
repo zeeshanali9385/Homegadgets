@@ -1,0 +1,51 @@
+.hz-usp {
+  padding: 2.5rem 0;
+  background: #fff;
+  border-top: 1px solid rgba(11, 31, 51, 0.06);
+  border-bottom: 1px solid rgba(11, 31, 51, 0.06);
+}
+
+.hz-usp__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  max-width: var(--page-width, 1200px);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  text-align: center;
+}
+
+@media screen and (min-width: 990px) {
+  .hz-usp__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+.hz-usp__icon {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  margin: 0 auto 0.65rem;
+  border-radius: 999px;
+  background: #f7f5f0;
+  color: #0b1f33;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.hz-usp__title {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.hz-usp__text {
+  margin: 0.35rem 0 0;
+  color: #6b7280;
+  font-size: 0.75rem;
+  line-height: 1.45;
+}

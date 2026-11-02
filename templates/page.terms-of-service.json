@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "hz-policy-content",
+      "settings": {
+        "heading": "Terms of Service",
+        "intro": "Terms governing use of the HORIZON PK online store.",
+        "body": "<p>By placing an order on this website, you agree to provide accurate COD delivery details and accept our shipping, refund, and privacy policies.</p><h2>Products & pricing</h2><p>Prices are listed in PKR and may change without notice. Promotional discounts apply only while advertised.</p><h2>COD orders</h2><p>We may call or WhatsApp to verify high-value or suspicious orders. Unreachable or repeatedly cancelled COD orders may be restricted.</p><h2>Intellectual property</h2><p>Site content, branding, and product imagery remain the property of HORIZON PK or respective licensors.</p><h2>Limitation</h2><p>To the extent permitted by law, liability is limited to the value of the purchased product.</p>",
+        "show_whatsapp": false
+      }
+    }
+  },
+  "order": ["main"]
+}

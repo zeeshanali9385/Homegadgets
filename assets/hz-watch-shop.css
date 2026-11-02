@@ -1,7 +1,7 @@
 .hz-watch {
   padding: 3rem 0;
-  background: #0b1f33;
-  color: #fff;
+  background: #f3e6d0;
+  color: #3d2e1e;
 }
 
 .hz-watch__head {
@@ -12,7 +12,7 @@
 
 .hz-watch__eyebrow {
   margin: 0;
-  color: #c4a574;
+  color: #d4b26a;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -72,7 +72,7 @@
 .hz-watch__shade {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 35%, rgba(11, 31, 51, 0.85) 100%);
+  background: linear-gradient(180deg, transparent 35%, rgba(61, 46, 30, 0.85) 100%);
 }
 
 .hz-watch__content {
@@ -97,8 +97,8 @@
   min-height: 2.75rem;
   padding: 0.55rem 1rem;
   border-radius: 0.25rem;
-  background: #c4a574;
-  color: #0b1f33;
+  background: #d4b26a;
+  color: #3d2e1e;
   font-size: 0.6875rem;
   font-weight: 800;
   letter-spacing: 0.06em;
@@ -107,6 +107,6 @@
 }
 
 .hz-watch__cta:hover {
-  color: #0b1f33;
+  color: #3d2e1e;
   filter: brightness(1.05);
 }

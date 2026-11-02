@@ -6,9 +6,10 @@
         "slide_1": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/photo-1524592094714-0f0654e20314.jpg",
             "eyebrow": "HORIZON PK",
             "heading": "Luxury watches for every moment",
-            "text": "Discover formal, sports, smart, and couple collections with free delivery across Pakistan.",
+            "text": "Discover formal, sports, smart, and couple collections with Cash on Delivery across Pakistan.",
             "button_label": "Shop Now",
             "button_link": "shopify://collections/all"
           }
@@ -16,30 +17,116 @@
         "slide_2": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/photo-1522312346375-d1a52e2b99b3.jpg",
             "eyebrow": "Limited sale",
             "heading": "Up to 50% off selected styles",
-            "text": "Upgrade your wrist game with HORIZON bestsellers — COD available nationwide.",
+            "text": "Free shipping across Pakistan on orders above PKR 3,000 when the promo is active.",
             "button_label": "Shop Sale",
             "button_link": "shopify://collections/sale"
           }
         }
       },
       "block_order": ["slide_1", "slide_2"],
-      "settings": {
-        "autoplay": true,
-        "autoplay_speed": 6
-      }
+      "settings": { "autoplay": true, "autoplay_speed": 6 }
+    },
+    "hz_fcols": {
+      "type": "hz-featured-collections",
+      "blocks": {
+        "fc1": {
+          "type": "collection_card",
+          "settings": {
+            "image": "shopify://shop_images/photo-1547996160-81dfa63595aa.jpg",
+            "title": "Men's Watches",
+            "link": "shopify://collections/men"
+          }
+        },
+        "fc2": {
+          "type": "collection_card",
+          "settings": {
+            "image": "shopify://shop_images/photo-1611652022419-a9419f74343d.jpg",
+            "title": "Women's Watches",
+            "link": "shopify://collections/women"
+          }
+        },
+        "fc3": {
+          "type": "collection_card",
+          "settings": {
+            "image": "shopify://shop_images/photo-1600003014755-ba31aa59c4b6.jpg",
+            "title": "Couple Watches",
+            "link": "shopify://collections/couples"
+          }
+        },
+        "fc4": {
+          "type": "collection_card",
+          "settings": {
+            "image": "shopify://shop_images/photo-1523170335258-f5ed11844a49.jpg",
+            "title": "Gift Sets",
+            "link": "shopify://collections/best-sellers"
+          }
+        }
+      },
+      "block_order": ["fc1", "fc2", "fc3", "fc4"],
+      "settings": { "heading": "Shop by category" }
     },
     "hz_cats": {
       "type": "hz-category-strip",
       "blocks": {
-        "c1": { "type": "category", "settings": { "title": "Sale", "link": "shopify://collections/sale" } },
-        "c2": { "type": "category", "settings": { "title": "Men Formal", "link": "shopify://collections/men-formal" } },
-        "c3": { "type": "category", "settings": { "title": "Men Sports", "link": "shopify://collections/men-sports" } },
-        "c4": { "type": "category", "settings": { "title": "Women Fancy", "link": "shopify://collections/women" } },
-        "c5": { "type": "category", "settings": { "title": "Bracelets", "link": "shopify://collections/women-bracelet" } },
-        "c6": { "type": "category", "settings": { "title": "Smart Watches", "link": "shopify://collections/smart-watches" } },
-        "c7": { "type": "category", "settings": { "title": "Couples", "link": "shopify://collections/couples" } }
+        "c1": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/photo-1508685096489-7aacd43bd3b1.jpg",
+            "title": "Sale",
+            "link": "shopify://collections/sale"
+          }
+        },
+        "c2": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/photo-1533139502658-0198f920d8e8.jpg",
+            "title": "Men Formal",
+            "link": "shopify://collections/men-formal"
+          }
+        },
+        "c3": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/photo-1579586337278-3befd40fd17a.jpg",
+            "title": "Men Sports",
+            "link": "shopify://collections/men-sports"
+          }
+        },
+        "c4": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/photo-1612817159949-195b6eb9e31a.jpg",
+            "title": "Women",
+            "link": "shopify://collections/women"
+          }
+        },
+        "c5": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/photo-1599643478518-a784e5dc4c8f.jpg",
+            "title": "Bracelets",
+            "link": "shopify://collections/women-bracelet"
+          }
+        },
+        "c6": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/photo-1434494878577-86c23bcb06b9.jpg",
+            "title": "Smart Watches",
+            "link": "shopify://collections/smart-watches"
+          }
+        },
+        "c7": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/photo-1600003014755-ba31aa59c4b6.jpg",
+            "title": "Couples",
+            "link": "shopify://collections/couples"
+          }
+        }
       },
       "block_order": ["c1", "c2", "c3", "c4", "c5", "c6", "c7"],
       "settings": {}
@@ -82,42 +169,233 @@
       },
       "block_order": ["tab_men", "tab_women", "tab_best", "tab_couple"],
       "settings": {
-        "heading": "Featured Products",
+        "heading": "Best Sellers / Trending",
         "subheading": "Discover the collection",
         "products_to_show": 4,
         "show_fallback_rating": true,
-        "fallback_rating": "4.9"
+        "fallback_rating": "4.9",
+        "add_to_cart_label": "Quick buy"
+      }
+    },
+    "hz_video": {
+      "type": "video",
+      "settings": {
+        "heading": "See HORIZON on the wrist",
+        "cover_image": "shopify://shop_images/photo-1508685096489-7aacd43bd3b1.jpg",
+        "video_url": "https://www.youtube.com/watch?v=ScMzIvxBSi4",
+        "description": "Lifestyle look at everyday luxury watches — COD delivery across Pakistan.",
+        "full_width": true,
+        "color_scheme": "scheme-2",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "hz_usp": {
+      "type": "hz-usp-badges",
+      "blocks": {
+        "u1": {
+          "type": "usp",
+          "settings": {
+            "icon_text": "100%",
+            "title": "100% Original Quality",
+            "text": "Authentic timepieces, quality-checked before dispatch"
+          }
+        },
+        "u2": {
+          "type": "usp",
+          "settings": {
+            "icon_text": "1Y",
+            "title": "1-Year Warranty",
+            "text": "International warranty on movement & craftsmanship"
+          }
+        },
+        "u3": {
+          "type": "usp",
+          "settings": {
+            "icon_text": "COD",
+            "title": "Cash on Delivery",
+            "text": "Pay at your doorstep across Pakistan"
+          }
+        },
+        "u4": {
+          "type": "usp",
+          "settings": {
+            "icon_text": "7D",
+            "title": "Easy 7-Day Returns",
+            "text": "Hassle-free exchange for damaged or wrong items"
+          }
+        }
+      },
+      "block_order": ["u1", "u2", "u3", "u4"],
+      "settings": {}
+    },
+    "hz_trust": {
+      "type": "hz-trust-logos",
+      "blocks": {
+        "l1": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/photo-1508685096489-7aacd43bd3b1.jpg",
+            "label": "Cash on Delivery"
+          }
+        },
+        "l2": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/photo-1547996160-81dfa63595aa.jpg",
+            "label": "Nationwide Shipping"
+          }
+        },
+        "l3": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/photo-1522312346375-d1a52e2b99b3.jpg",
+            "label": "Secure Checkout"
+          }
+        },
+        "l4": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/photo-1523170335258-f5ed11844a49.jpg",
+            "label": "1-Year Warranty"
+          }
+        }
+      },
+      "block_order": ["l1", "l2", "l3", "l4"],
+      "settings": { "heading": "Trusted shopping in Pakistan" }
+    },
+    "hz_reviews": {
+      "type": "hz-testimonials",
+      "blocks": {
+        "r1": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/hz-review-1_340c2872-6edb-4701-8dd7-48a59e09b914.jpg",
+            "author": "Ayesha K.",
+            "city": "Lahore",
+            "rating": 5,
+            "verified": true,
+            "text": "Beautiful finish and fast COD delivery. Looks premium on the wrist."
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/hz-review-2_0403d467-87b2-4301-9f4a-520f4d8230f5.jpg",
+            "author": "Bilal R.",
+            "city": "Karachi",
+            "rating": 5,
+            "verified": true,
+            "text": "Ordered a couple set — packaging was excellent and courier was on time."
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/hz-review-3_3e6f134c-f2e9-4dcb-bd77-e6bb427aeddf.jpg",
+            "author": "Sana M.",
+            "city": "Islamabad",
+            "rating": 5,
+            "verified": true,
+            "text": "Great daily wear watch. Warranty support replied on WhatsApp quickly."
+          }
+        }
+      },
+      "block_order": ["r1", "r2", "r3"],
+      "settings": {
+        "heading": "Loved across Pakistan",
+        "subheading": "Verified feedback from HORIZON customers"
       }
     },
     "hz_watch": {
       "type": "hz-watch-shop-grid",
       "blocks": {
-        "w1": { "type": "tile", "settings": { "title": "Classic Quartz", "button_label": "Shop Quartz", "button_link": "shopify://collections/men-formal" } },
-        "w2": { "type": "tile", "settings": { "title": "Men's Quartz", "button_label": "Shop Men", "button_link": "shopify://collections/men" } },
-        "w3": { "type": "tile", "settings": { "title": "Elite Quartz", "button_label": "Shop Elite", "button_link": "shopify://collections/best-sellers" } },
-        "w4": { "type": "tile", "settings": { "title": "Shop Smart", "button_label": "Shop Smart", "button_link": "shopify://collections/smart-watches" } },
-        "w5": { "type": "tile", "settings": { "title": "Women's Quartz", "button_label": "Shop Women", "button_link": "shopify://collections/women" } },
-        "w6": { "type": "tile", "settings": { "title": "Couple Sets", "button_label": "Shop Couples", "button_link": "shopify://collections/couples" } }
+        "w1": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/photo-1524592094714-0f0654e20314.jpg",
+            "title": "Classic Quartz",
+            "button_label": "Shop Quartz",
+            "button_link": "shopify://collections/men-formal"
+          }
+        },
+        "w2": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/photo-1547996160-81dfa63595aa.jpg",
+            "title": "Men's Quartz",
+            "button_label": "Shop Men",
+            "button_link": "shopify://collections/men"
+          }
+        },
+        "w3": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/photo-1522312346375-d1a52e2b99b3.jpg",
+            "title": "Elite Quartz",
+            "button_label": "Shop Elite",
+            "button_link": "shopify://collections/best-sellers"
+          }
+        },
+        "w4": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/photo-1579586337278-3befd40fd17a.jpg",
+            "title": "Shop Smart",
+            "button_label": "Shop Smart",
+            "button_link": "shopify://collections/smart-watches"
+          }
+        },
+        "w5": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/photo-1614164185128-e4ec99c436d7.jpg",
+            "title": "Women's Quartz",
+            "button_label": "Shop Women",
+            "button_link": "shopify://collections/women"
+          }
+        },
+        "w6": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/photo-1600003014755-ba31aa59c4b6.jpg",
+            "title": "Couple Sets",
+            "button_label": "Shop Couples",
+            "button_link": "shopify://collections/couples"
+          }
+        }
       },
       "block_order": ["w1", "w2", "w3", "w4", "w5", "w6"],
-      "settings": {
-        "eyebrow": "MEN · WOMEN · SMART",
-        "heading": "Watch & Shop"
-      }
+      "settings": { "eyebrow": "MEN · WOMEN · SMART", "heading": "Watch & Shop" }
     },
     "hz_seo": {
       "type": "hz-seo-about",
       "blocks": {
-        "l1": { "type": "collection_link", "settings": { "label": "Mens Watches", "link": "shopify://collections/men" } },
-        "l2": { "type": "collection_link", "settings": { "label": "Ladies Watches", "link": "shopify://collections/women" } },
-        "l3": { "type": "collection_link", "settings": { "label": "Couple Watches", "link": "shopify://collections/couples" } },
-        "l4": { "type": "collection_link", "settings": { "label": "Sports Watches", "link": "shopify://collections/men-sports" } },
-        "l5": { "type": "collection_link", "settings": { "label": "Smart Watches", "link": "shopify://collections/smart-watches" } }
+        "l1": {
+          "type": "collection_link",
+          "settings": { "label": "Mens Watches", "link": "shopify://collections/men" }
+        },
+        "l2": {
+          "type": "collection_link",
+          "settings": { "label": "Ladies Watches", "link": "shopify://collections/women" }
+        },
+        "l3": {
+          "type": "collection_link",
+          "settings": { "label": "Couple Watches", "link": "shopify://collections/couples" }
+        },
+        "l4": {
+          "type": "collection_link",
+          "settings": { "label": "Sports Watches", "link": "shopify://collections/men-sports" }
+        },
+        "l5": {
+          "type": "collection_link",
+          "settings": { "label": "Smart Watches", "link": "shopify://collections/smart-watches" }
+        }
       },
       "block_order": ["l1", "l2", "l3", "l4", "l5"],
       "settings": {
-        "heading": "HORIZON PK | Online shopping for wrist watches in Pakistan",
-        "body": "<p>Welcome to HORIZON PK — an affordable luxury watch brand for Pakistan. Shop formal, sports, smart, and couple watches with free home delivery, cash on delivery, and a 1-year warranty.</p><p>Buy wrist watches online and pay on delivery in Lahore, Karachi, Islamabad, Multan, Rawalpindi, Faisalabad, and across the country.</p>",
+        "heading": "HORIZON PK | Buy luxury watches online in Pakistan",
+        "body": "<p>Shop HORIZON PK wrist watches with Cash on Delivery, free shipping on eligible orders, and a 1-year warranty. Formal, sports, smart, and couple collections ship nationwide to Lahore, Karachi, Islamabad, and beyond.</p>",
         "cta_label": "Shop HORIZON",
         "cta_link": "shopify://collections/all"
       }
@@ -131,5 +409,17 @@
       }
     }
   },
-  "order": ["hz_hero", "hz_cats", "hz_tabs", "hz_watch", "hz_seo", "whatsapp_float"]
+  "order": [
+    "hz_hero",
+    "hz_fcols",
+    "hz_cats",
+    "hz_tabs",
+    "hz_video",
+    "hz_usp",
+    "hz_trust",
+    "hz_reviews",
+    "hz_watch",
+    "hz_seo",
+    "whatsapp_float"
+  ]
 }

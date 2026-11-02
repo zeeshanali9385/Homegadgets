@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "main": {
+      "type": "hz-track-order",
+      "settings": {
+        "heading": "Track your order",
+        "intro": "Enter your order number and WhatsApp/phone used at checkout. Most parcels arrive in 3–5 working days via TCS / CallCourier / Leopards.",
+        "order_label": "Order ID / Tracking number",
+        "order_placeholder": "e.g. #1042 or CN123456",
+        "phone_label": "Phone / WhatsApp",
+        "phone_placeholder": "03XXXXXXXXX",
+        "button_label": "Track order",
+        "help_text": "Didn’t receive a tracking SMS? Message us on WhatsApp with your order ID — we verify COD orders before dispatch.",
+        "whatsapp_label": "Track via WhatsApp"
+      }
+    }
+  },
+  "order": ["main"]
+}

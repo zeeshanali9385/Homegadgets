@@ -1,0 +1,142 @@
+.hz-policy {
+  padding: 2.5rem 0 3.5rem;
+  background: #fff;
+  color: #1a1a1a;
+}
+
+.hz-policy__inner {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.hz-policy__title {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-heading-family), Cormorant Garamond, serif;
+  font-size: clamp(1.85rem, 3vw, 2.5rem);
+  font-weight: 600;
+}
+
+.hz-policy__intro {
+  margin: 0 0 1.5rem;
+  color: #4b5563;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.hz-policy__body {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: #374151;
+}
+
+.hz-policy__body h2,
+.hz-policy__body h3 {
+  color: #0b1f33;
+  margin-top: 1.5rem;
+}
+
+.hz-policy__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+.hz-policy__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.hz-policy__btn--primary {
+  background: #0b1f33;
+  color: #fff;
+}
+
+.hz-policy__btn--wa {
+  background: #22c55e;
+  color: #fff;
+}
+
+.hz-track__form {
+  display: grid;
+  gap: 0.85rem;
+  margin-top: 1.25rem;
+  padding: 1.25rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  background: #f7f5f0;
+}
+
+.hz-track__form label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.hz-track__form input {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.35rem;
+  font-size: 1rem;
+}
+
+.hz-track__form button {
+  min-height: 3rem;
+  border: 0;
+  border-radius: 0.35rem;
+  background: #0b1f33;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.hz-contact-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media screen and (min-width: 750px) {
+  .hz-contact-grid {
+    grid-template-columns: 1fr 1.1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+}
+
+.hz-contact-card {
+  padding: 1.15rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  background: #f7f5f0;
+}
+
+.hz-contact-card h3 {
+  margin: 0 0 0.35rem;
+  font-size: 0.95rem;
+}
+
+.hz-contact-card p,
+.hz-contact-card a {
+  margin: 0;
+  color: #4b5563;
+  font-size: 0.875rem;
+  text-decoration: none;
+}

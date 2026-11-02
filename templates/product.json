@@ -19,6 +19,27 @@
           "type": "feature_item",
           "settings": { "text": "1-year HORIZON international warranty" }
         },
+        "acc_specs": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "Product specifications",
+            "body": "Movement, case size, water resistance, strap/dial options, and materials are listed for this HORIZON model. Check the product title and description for exact specs."
+          }
+        },
+        "acc_ship": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "Shipping info",
+            "body": "Nationwide COD delivery in 3–5 working days via TCS / CallCourier / Leopards. Flat shipping PKR 200 unless free-shipping promo applies (e.g. orders above PKR 3,000)."
+          }
+        },
+        "acc_warranty": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "Warranty details",
+            "body": "1-year international warranty covering manufacturing defects. Keep your order ID and contact WhatsApp support for claims."
+          }
+        },
         "value_1": {
           "type": "value_point",
           "settings": {
@@ -97,6 +118,9 @@
         "feature_2",
         "feature_3",
         "feature_4",
+        "acc_specs",
+        "acc_ship",
+        "acc_warranty",
         "value_1",
         "value_2",
         "value_3",

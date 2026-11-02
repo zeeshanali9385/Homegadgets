@@ -1,0 +1,73 @@
+{{ 'hz-featured-collections.css' | asset_url | stylesheet_tag }}
+
+<section class="hz-fcols" aria-labelledby="HzFcols-{{ section.id }}">
+  <div class="hz-fcols__head">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="hz-fcols__title" id="HzFcols-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+  </div>
+  <div class="hz-fcols__grid">
+    {%- for block in section.blocks -%}
+      <a
+        class="hz-fcols__card"
+        {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% else %}role="link" aria-disabled="true"{% endif %}
+        {{ block.shopify_attributes }}
+      >
+        <div class="hz-fcols__media">
+          {%- if block.settings.image != blank -%}
+            {%- assign alt = block.settings.title | default: block.settings.image.alt -%}
+            {{
+              block.settings.image
+              | image_url: width: 900
+              | image_tag:
+                loading: 'lazy',
+                decoding: 'async',
+                widths: '360, 540, 720, 900',
+                sizes: '(min-width: 990px) 22vw, (min-width: 750px) 45vw, 100vw',
+                alt: alt
+            }}
+          {%- else -%}
+            {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+        <div class="hz-fcols__shade" aria-hidden="true"></div>
+        {%- if block.settings.title != blank -%}
+          <h3 class="hz-fcols__label">{{ block.settings.title | escape }}</h3>
+        {%- endif -%}
+      </a>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HZ featured collections",
+  "tag": "section",
+  "class": "section-hz-featured-collections",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Shop by category" }
+  ],
+  "blocks": [
+    {
+      "type": "collection_card",
+      "name": "Collection card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Men's Watches" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "HZ featured collections",
+      "blocks": [
+        { "type": "collection_card", "settings": { "title": "Men's Watches" } },
+        { "type": "collection_card", "settings": { "title": "Women's Watches" } },
+        { "type": "collection_card", "settings": { "title": "Couple Watches" } },
+        { "type": "collection_card", "settings": { "title": "Gift Sets" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

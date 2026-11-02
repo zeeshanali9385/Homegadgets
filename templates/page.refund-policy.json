@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "main": {
+      "type": "hz-policy-content",
+      "settings": {
+        "heading": "Refund & Exchange Policy",
+        "intro": "7-day hassle-free exchange/return support for damaged or incorrect items.",
+        "body": "<h2>Eligible claims (within 7 days of delivery)</h2><ul><li>Item arrived damaged or non-functional</li><li>Wrong model/color delivered vs your order</li><li>Manufacturing defect discovered on first use</li></ul><h2>How to request an exchange</h2><ol><li>Keep original packaging and tags.</li><li>Send a short unboxing video/photos on WhatsApp with your Order ID.</li><li>Our team confirms eligibility and arranges replacement or refund as applicable.</li></ol><h2>Not covered</h2><p>Change of mind after successful delivery, normal wear, scratches after use, or missing accessories due to customer mishandling may not qualify.</p><p>Refunds (when approved) are processed after the returned item is inspected.</p>",
+        "cta_label": "Contact support",
+        "cta_link": "shopify://pages/contact",
+        "show_whatsapp": true,
+        "whatsapp_label": "Start a claim on WhatsApp"
+      }
+    }
+  },
+  "order": ["main"]
+}

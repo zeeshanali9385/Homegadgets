@@ -1,5 +1,5 @@
 .hz-countdown {
-  background: var(--hz-cd-bg, #0b1f33);
+  background: var(--hz-cd-bg, #3d2e1e);
   color: var(--hz-cd-text, #fff);
   font-family: var(--font-body-family), Manrope, sans-serif;
 }
@@ -24,7 +24,7 @@
 }
 
 .hz-countdown__label strong {
-  color: var(--hz-cd-accent, #c4a574);
+  color: var(--hz-cd-accent, #d4b26a);
 }
 
 .hz-countdown__timer {
@@ -66,8 +66,8 @@
   min-height: 2.75rem;
   padding: 0.4rem 0.9rem;
   border-radius: 999px;
-  background: var(--hz-cd-accent, #c4a574);
-  color: #0b1f33;
+  background: var(--hz-cd-accent, #d4b26a);
+  color: #3d2e1e;
   font-size: 0.6875rem;
   font-weight: 800;
   letter-spacing: 0.06em;
@@ -77,5 +77,5 @@
 
 .hz-countdown__cta:hover {
   filter: brightness(1.05);
-  color: #0b1f33;
+  color: #3d2e1e;
 }

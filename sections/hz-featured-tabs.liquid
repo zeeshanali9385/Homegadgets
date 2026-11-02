@@ -55,10 +55,10 @@
                 endif
                 assign rating = product.metafields.reviews.rating.value
               -%}
-              <a class="hz-card" href="{{ product.url }}">
-                <div class="hz-card__media">
+              <article class="hz-card">
+                <a class="hz-card__media" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
                   {%- if product.featured_media -%}
-                    {%- assign card_alt = product.featured_media.alt | default: product.title -%}
+                    {%- assign card_alt = product.featured_media.alt | default: product.title | append: ' | HORIZON PK' -%}
                     {{
                       product.featured_media
                       | image_url: width: 800
@@ -67,8 +67,29 @@
                         decoding: 'async',
                         widths: '280, 360, 540, 720, 800',
                         sizes: '(min-width: 750px) 22vw, 70vw',
-                        alt: card_alt
+                        class: 'hz-card__img hz-card__img--primary',
+                        alt: card_alt,
+                        width: product.featured_media.width,
+                        height: product.featured_media.height
                     }}
+                    {%- if product.media.size > 1 -%}
+                      {%- assign secondary = product.media[1] -%}
+                      {%- if secondary.media_type == 'image' -%}
+                        {{
+                          secondary
+                          | image_url: width: 800
+                          | image_tag:
+                            loading: 'lazy',
+                            decoding: 'async',
+                            widths: '280, 360, 540, 720, 800',
+                            sizes: '(min-width: 750px) 22vw, 70vw',
+                            class: 'hz-card__img hz-card__img--secondary',
+                            alt: card_alt,
+                            width: secondary.width,
+                            height: secondary.height
+                        }}
+                      {%- endif -%}
+                    {%- endif -%}
                   {%- else -%}
                     {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
                   {%- endif -%}
@@ -80,9 +101,9 @@
                   {%- elsif section.settings.show_fallback_rating -%}
                     <span class="hz-card__rating">★ {{ section.settings.fallback_rating | escape }}</span>
                   {%- endif -%}
-                </div>
+                </a>
                 <div class="hz-card__body">
-                  <h3 class="hz-card__title">{{ product.title | escape }}</h3>
+                  <h3 class="hz-card__title"><a href="{{ product.url }}">{{ product.title | escape }}</a></h3>
                   {%- if product.type != blank -%}
                     <p class="hz-card__meta">{{ product.type | escape }}</p>
                   {%- endif -%}
@@ -92,8 +113,16 @@
                       <span class="hz-card__price-compare">{{ compare | money }}</span>
                     {%- endif -%}
                   </div>
+                  {%- if variant.available -%}
+                    {%- form 'product', product -%}
+                      <input type="hidden" name="id" value="{{ variant.id }}">
+                      <button type="submit" name="add" class="hz-card__atc">
+                        {{ section.settings.add_to_cart_label | default: 'Quick buy' | escape }}
+                      </button>
+                    {%- endform -%}
+                  {%- endif -%}
                 </div>
-              </a>
+              </article>
             {%- endfor -%}
           {%- else -%}
             {%- for i in (1..4) -%}
@@ -157,7 +186,8 @@
     { "type": "range", "id": "products_to_show", "min": 4, "max": 12, "step": 1, "label": "Products per tab", "default": 4 },
     { "type": "checkbox", "id": "show_fallback_rating", "label": "Show fallback rating badge", "default": true },
     { "type": "text", "id": "fallback_rating", "label": "Fallback rating", "default": "4.9" },
-    { "type": "text", "id": "placeholder_title", "label": "Placeholder product title", "default": "HORIZON Watch" }
+    { "type": "text", "id": "placeholder_title", "label": "Placeholder product title", "default": "HORIZON Watch" },
+    { "type": "text", "id": "add_to_cart_label", "label": "Quick buy label", "default": "Quick buy" }
   ],
   "blocks": [
     {

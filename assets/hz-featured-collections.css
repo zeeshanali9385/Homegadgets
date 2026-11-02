@@ -1,0 +1,82 @@
+.hz-fcols {
+  padding: 2.5rem 0 1rem;
+  background: #fff;
+}
+
+.hz-fcols__head {
+  text-align: center;
+  margin-bottom: 1.25rem;
+  padding: 0 1.25rem;
+}
+
+.hz-fcols__title {
+  margin: 0;
+  font-family: var(--font-heading-family), Cormorant Garamond, serif;
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 600;
+}
+
+.hz-fcols__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  max-width: var(--page-width, 1200px);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+@media screen and (min-width: 750px) {
+  .hz-fcols__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .hz-fcols__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.hz-fcols__card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  aspect-ratio: 3 / 4;
+  text-decoration: none;
+  color: #fff;
+  background: #0b1f33;
+}
+
+.hz-fcols__media,
+.hz-fcols__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hz-fcols__media img {
+  transition: transform 0.35s ease;
+}
+
+.hz-fcols__card:hover .hz-fcols__media img {
+  transform: scale(1.05);
+}
+
+.hz-fcols__shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(11, 31, 51, 0.85) 100%);
+}
+
+.hz-fcols__label {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 1;
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+}

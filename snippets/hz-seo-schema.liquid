@@ -1,0 +1,61 @@
+{% doc %}
+  Organization + WebSite JSON-LD for SEO.
+{% enddoc %}
+{%- liquid
+  assign same_as = ''
+  if settings.social_facebook_link != blank
+    assign same_as = same_as | append: settings.social_facebook_link | append: '||'
+  endif
+  if settings.social_instagram_link != blank
+    assign same_as = same_as | append: settings.social_instagram_link | append: '||'
+  endif
+  if settings.social_tiktok_link != blank
+    assign same_as = same_as | append: settings.social_tiktok_link | append: '||'
+  endif
+  if settings.social_youtube_link != blank
+    assign same_as = same_as | append: settings.social_youtube_link | append: '||'
+  endif
+  assign same_as_list = same_as | split: '||' | compact
+-%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": {{ shop.name | json }},
+  "url": {{ request.origin | json }},
+  {% if settings.logo %}
+  "logo": {{ settings.logo | image_url: width: 512 | prepend: 'https:' | json }},
+  {% endif %}
+  "sameAs": [
+    {%- for link in same_as_list -%}
+      {%- unless link == blank -%}{{ link | json }}{%- unless forloop.last -%},{%- endunless -%}{%- endunless -%}
+    {%- endfor -%}
+  ],
+  "areaServed": "PK",
+  "brand": { "@type": "Brand", "name": "HORIZON PK" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": {{ shop.name | json }},
+  "url": {{ request.origin | json }},
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {% capture hz_search_target %}{{ request.origin }}{{ routes.search_url }}?q={search_term_string}{% endcapture %}{{ hz_search_target | json }},
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+{%- if request.page_type == 'collection' and collection != blank -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": {{ collection.title | json }},
+  "description": {{ collection.description | strip_html | truncate: 300 | json }},
+  "url": {{ request.origin | append: collection.url | json }}
+}
+</script>
+{%- endif -%}
