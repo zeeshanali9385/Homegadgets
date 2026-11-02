@@ -1,0 +1,58 @@
+{{ 'hz-policy-page.css' | asset_url | stylesheet_tag }}
+{{ 'hz-theme.css' | asset_url | stylesheet_tag }}
+
+<section class="hz-policy">
+  <div class="hz-policy__inner">
+    <h1 class="hz-policy__title">
+      {{ section.settings.heading | default: page.title | escape }}
+    </h1>
+    {%- if section.settings.intro != blank -%}
+      <p class="hz-policy__intro">{{ section.settings.intro | escape }}</p>
+    {%- endif -%}
+
+    <div class="hz-policy__body rte">
+      {%- if section.settings.body != blank -%}
+        {{ section.settings.body }}
+      {%- elsif page.content != blank -%}
+        {{ page.content }}
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.show_whatsapp or section.settings.cta_label != blank -%}
+      <div class="hz-policy__cta">
+        {%- if section.settings.cta_label != blank -%}
+          <a
+            class="hz-policy__btn hz-policy__btn--primary"
+            {% if section.settings.cta_link != blank %}href="{{ section.settings.cta_link }}"{% else %}role="link" aria-disabled="true"{% endif %}
+          >
+            {{ section.settings.cta_label | escape }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.show_whatsapp and section.settings.whatsapp_url != blank -%}
+          <a class="hz-policy__btn hz-policy__btn--wa" href="{{ section.settings.whatsapp_url }}" target="_blank" rel="noopener noreferrer">
+            {{ section.settings.whatsapp_label | escape }}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HZ policy content",
+  "tag": "section",
+  "class": "section-hz-policy-content",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading override" },
+    { "type": "textarea", "id": "intro", "label": "Intro" },
+    { "type": "richtext", "id": "body", "label": "Body (overrides page content if set)" },
+    { "type": "text", "id": "cta_label", "label": "CTA label" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" },
+    { "type": "checkbox", "id": "show_whatsapp", "label": "Show WhatsApp button", "default": true },
+    { "type": "url", "id": "whatsapp_url", "label": "WhatsApp URL" },
+    { "type": "text", "id": "whatsapp_label", "label": "WhatsApp label", "default": "Chat on WhatsApp" }
+  ],
+  "presets": [{ "name": "HZ policy content" }]
+}
+{% endschema %}

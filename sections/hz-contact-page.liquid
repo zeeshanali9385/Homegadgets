@@ -1,0 +1,90 @@
+{{ 'hz-policy-page.css' | asset_url | stylesheet_tag }}
+{{ 'hz-theme.css' | asset_url | stylesheet_tag }}
+{{ 'section-contact-form.css' | asset_url | stylesheet_tag }}
+
+<section class="hz-policy" aria-labelledby="HzContact-{{ section.id }}">
+  <div class="hz-policy__inner" style="max-width:56rem">
+    <h1 class="hz-policy__title" id="HzContact-{{ section.id }}">{{ section.settings.heading | escape }}</h1>
+    {%- if section.settings.intro != blank -%}
+      <p class="hz-policy__intro">{{ section.settings.intro | escape }}</p>
+    {%- endif -%}
+
+    <div class="hz-contact-grid">
+      <div>
+        <div class="hz-contact-card" style="margin-bottom:1rem">
+          <h3>{{ section.settings.whatsapp_heading | escape }}</h3>
+          {%- if section.settings.whatsapp_url != blank -%}
+            <a href="{{ section.settings.whatsapp_url }}" target="_blank" rel="noopener noreferrer">{{ section.settings.whatsapp_display | escape }}</a>
+          {%- endif -%}
+        </div>
+        <div class="hz-contact-card" style="margin-bottom:1rem">
+          <h3>{{ section.settings.email_heading | escape }}</h3>
+          {%- if section.settings.email != blank -%}
+            <a href="mailto:{{ section.settings.email }}">{{ section.settings.email | escape }}</a>
+          {%- endif -%}
+        </div>
+        <div class="hz-contact-card">
+          <h3>{{ section.settings.location_heading | escape }}</h3>
+          <p>{{ section.settings.location_text | escape }}</p>
+        </div>
+      </div>
+
+      <div>
+        {%- form 'contact', id: 'HzContactForm', class: 'isolate' -%}
+          {%- if form.posted_successfully? -%}
+            <p class="hz-policy__intro" role="status">{{ section.settings.success_message | escape }}</p>
+          {%- endif -%}
+          {%- if form.errors -%}
+            <div role="alert">{{ form.errors | default_errors }}</div>
+          {%- endif -%}
+
+          <div class="hz-track__form" style="background:#fff">
+            <div>
+              <label for="HzContactName-{{ section.id }}">{{ section.settings.name_label | escape }}</label>
+              <input id="HzContactName-{{ section.id }}" type="text" name="contact[name]" required autocomplete="name">
+            </div>
+            <div>
+              <label for="HzContactEmail-{{ section.id }}">{{ section.settings.email_label | escape }}</label>
+              <input id="HzContactEmail-{{ section.id }}" type="email" name="contact[email]" required autocomplete="email">
+            </div>
+            <div>
+              <label for="HzContactPhone-{{ section.id }}">{{ section.settings.phone_label | escape }}</label>
+              <input id="HzContactPhone-{{ section.id }}" type="tel" name="contact[phone]" required autocomplete="tel" inputmode="tel">
+            </div>
+            <div>
+              <label for="HzContactMsg-{{ section.id }}">{{ section.settings.message_label | escape }}</label>
+              <textarea id="HzContactMsg-{{ section.id }}" name="contact[body]" rows="5" required style="width:100%;padding:0.75rem;border:1px solid #d1d5db;border-radius:0.35rem;font:inherit"></textarea>
+            </div>
+            <button type="submit">{{ section.settings.button_label | escape }}</button>
+          </div>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HZ contact page",
+  "tag": "section",
+  "class": "section-hz-contact-page",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Contact HORIZON PK" },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "Questions about COD, sizing, or delivery? Our Pakistan support team replies on WhatsApp and email." },
+    { "type": "text", "id": "whatsapp_heading", "label": "WhatsApp heading", "default": "WhatsApp support" },
+    { "type": "url", "id": "whatsapp_url", "label": "WhatsApp URL" },
+    { "type": "text", "id": "whatsapp_display", "label": "WhatsApp display", "default": "+92 300 0000000" },
+    { "type": "text", "id": "email_heading", "label": "Email heading", "default": "Email" },
+    { "type": "text", "id": "email", "label": "Support email", "default": "support@horizon.pk" },
+    { "type": "text", "id": "location_heading", "label": "Location heading", "default": "Fulfillment" },
+    { "type": "textarea", "id": "location_text", "label": "Location text", "default": "Lahore & Karachi, Pakistan — nationwide COD dispatch" },
+    { "type": "text", "id": "name_label", "label": "Name label", "default": "Full name" },
+    { "type": "text", "id": "email_label", "label": "Email label", "default": "Email" },
+    { "type": "text", "id": "phone_label", "label": "Phone label", "default": "Phone / WhatsApp" },
+    { "type": "text", "id": "message_label", "label": "Message label", "default": "Message" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Send message" },
+    { "type": "text", "id": "success_message", "label": "Success message", "default": "Thanks — we will reply shortly." }
+  ],
+  "presets": [{ "name": "HZ contact page" }]
+}
+{% endschema %}

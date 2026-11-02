@@ -1,0 +1,50 @@
+{{ 'hz-usp-badges.css' | asset_url | stylesheet_tag }}
+
+<section class="hz-usp" aria-label="{{ section.settings.accessibility_label | escape }}">
+  <div class="hz-usp__grid">
+    {%- for block in section.blocks -%}
+      <div class="hz-usp__item" {{ block.shopify_attributes }}>
+        <div class="hz-usp__icon" aria-hidden="true">{{ block.settings.icon_text | default: '✓' | escape }}</div>
+        {%- if block.settings.title != blank -%}
+          <h3 class="hz-usp__title">{{ block.settings.title | escape }}</h3>
+        {%- endif -%}
+        {%- if block.settings.text != blank -%}
+          <p class="hz-usp__text">{{ block.settings.text | escape }}</p>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HZ USP badges",
+  "tag": "section",
+  "class": "section-hz-usp-badges",
+  "settings": [
+    { "type": "text", "id": "accessibility_label", "label": "Accessibility label", "default": "Why shop with us" }
+  ],
+  "blocks": [
+    {
+      "type": "usp",
+      "name": "USP",
+      "settings": [
+        { "type": "text", "id": "icon_text", "label": "Icon text", "default": "100%" },
+        { "type": "text", "id": "title", "label": "Title", "default": "100% Original Quality" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Authentic timepieces, quality-checked before dispatch" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "HZ USP badges",
+      "blocks": [
+        { "type": "usp", "settings": { "icon_text": "100%", "title": "100% Original Quality", "text": "Authentic timepieces, quality-checked before dispatch" } },
+        { "type": "usp", "settings": { "icon_text": "1Y", "title": "1-Year Warranty", "text": "International warranty on movement & craftsmanship" } },
+        { "type": "usp", "settings": { "icon_text": "COD", "title": "Cash on Delivery", "text": "Pay at your doorstep across Pakistan" } },
+        { "type": "usp", "settings": { "icon_text": "7D", "title": "Easy 7-Day Returns", "text": "Hassle-free exchange for damaged or wrong items" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
