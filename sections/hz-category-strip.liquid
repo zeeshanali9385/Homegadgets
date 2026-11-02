@@ -1,0 +1,70 @@
+{{ 'hz-category-strip.css' | asset_url | stylesheet_tag }}
+
+<section class="hz-cats" aria-label="{{ section.settings.accessibility_label | escape }}">
+  <div class="hz-cats__track">
+    {%- for block in section.blocks -%}
+      <a
+        class="hz-cats__card"
+        {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% else %}role="link" aria-disabled="true"{% endif %}
+        {{ block.shopify_attributes }}
+      >
+        <div class="hz-cats__media">
+          {%- if block.settings.image != blank -%}
+            {%- assign cat_alt = block.settings.title | default: block.settings.image.alt -%}
+            {{
+              block.settings.image
+              | image_url: width: 400
+              | image_tag:
+                loading: 'lazy',
+                decoding: 'async',
+                widths: '160, 240, 320, 400',
+                sizes: '(min-width: 990px) 12vw, 30vw',
+                alt: cat_alt
+            }}
+          {%- else -%}
+            {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+        {%- if block.settings.title != blank -%}
+          <h3 class="hz-cats__title">{{ block.settings.title | escape }}</h3>
+        {%- endif -%}
+      </a>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HZ category strip",
+  "tag": "section",
+  "class": "section-hz-category-strip",
+  "settings": [
+    { "type": "text", "id": "accessibility_label", "label": "Accessibility label", "default": "Shop by category" }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Men Formal" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "HZ category strip",
+      "blocks": [
+        { "type": "category", "settings": { "title": "Sale" } },
+        { "type": "category", "settings": { "title": "Men Formal" } },
+        { "type": "category", "settings": { "title": "Men Sports" } },
+        { "type": "category", "settings": { "title": "Women Fancy" } },
+        { "type": "category", "settings": { "title": "Bracelets" } },
+        { "type": "category", "settings": { "title": "Smart Watches" } },
+        { "type": "category", "settings": { "title": "Couples" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

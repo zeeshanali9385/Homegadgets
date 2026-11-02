@@ -1,0 +1,50 @@
+{{ 'hz-trust-ticker.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="hz-trust"
+  style="--hz-trust-bg: {{ section.settings.background_color }}; --hz-trust-text: {{ section.settings.text_color }}; --hz-trust-accent: {{ section.settings.accent_color }};"
+  aria-label="{{ section.settings.accessibility_label | escape }}"
+>
+  <div class="hz-trust__inner">
+    {%- for block in section.blocks -%}
+      <div class="hz-trust__item" {{ block.shopify_attributes }}>
+        <span class="hz-trust__dot" aria-hidden="true"></span>
+        <span>{{ block.settings.text | escape }}</span>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Trust ticker",
+  "tag": "section",
+  "class": "section-trust-ticker",
+  "enabled_on": { "groups": ["header"] },
+  "settings": [
+    { "type": "text", "id": "accessibility_label", "label": "Accessibility label", "default": "Store promises" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#F7F5F0" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#1A1A1A" },
+    { "type": "color", "id": "accent_color", "label": "Accent dot", "default": "#C4A574" }
+  ],
+  "blocks": [
+    {
+      "type": "trust_item",
+      "name": "Trust item",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "30 Days Hassle-free Returns" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust ticker",
+      "blocks": [
+        { "type": "trust_item", "settings": { "text": "30 Days Hassle-free Returns" } },
+        { "type": "trust_item", "settings": { "text": "1 Year International Warranty" } },
+        { "type": "trust_item", "settings": { "text": "Free Delivery Across Pakistan" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

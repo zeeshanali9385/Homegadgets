@@ -1,1 +1,61 @@
-{"name":"t:sections.footer.name","type":"footer","sections":{"footer":{"type":"footer","settings":{"color_scheme":"scheme-1","newsletter_enable":true,"newsletter_heading":"Subscribe to our emails","enable_follow_on_shop":true,"show_social":true,"enable_country_selector":true,"enable_language_selector":true,"payment_enable":true,"show_policy":true,"margin_top":0,"padding_top":36,"padding_bottom":36}}},"order":["footer"]}
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "brand": {
+          "type": "brand_information",
+          "settings": {
+            "show_social": true
+          }
+        },
+        "footer_shop": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Shop",
+            "menu": "footer-shop"
+          }
+        },
+        "footer_care": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Customer Care",
+            "menu": "footer-care"
+          }
+        },
+        "footer_about": {
+          "type": "link_list",
+          "settings": {
+            "heading": "About Us",
+            "menu": "footer"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "heading": "Promise",
+            "subtext": "<p>1-year warranty · 30-day returns · Free delivery · Cash on delivery across Pakistan.</p>"
+          }
+        }
+      },
+      "block_order": ["brand", "footer_shop", "footer_care", "footer_about", "text"],
+      "settings": {
+        "color_scheme": "scheme-3",
+        "newsletter_enable": true,
+        "newsletter_heading": "Subscribe for offers & new arrivals",
+        "enable_follow_on_shop": false,
+        "show_social": true,
+        "enable_country_selector": false,
+        "enable_language_selector": false,
+        "payment_enable": true,
+        "show_policy": true,
+        "margin_top": 0,
+        "padding_top": 48,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": ["footer"]
+}

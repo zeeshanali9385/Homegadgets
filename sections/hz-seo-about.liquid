@@ -1,0 +1,88 @@
+{{ 'hz-seo-about.css' | asset_url | stylesheet_tag }}
+{{ 'hz-theme.css' | asset_url | stylesheet_tag }}
+
+<section class="hz-seo" aria-labelledby="HzSeoTitle-{{ section.id }}">
+  <div class="hz-seo__inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="hz-seo__title" id="HzSeoTitle-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.body != blank -%}
+      <div class="hz-seo__body rte">{{ section.settings.body }}</div>
+    {%- endif -%}
+
+    {%- assign link_blocks = section.blocks | where: 'type', 'collection_link' -%}
+    {%- if link_blocks.size > 0 -%}
+      <div class="hz-seo__links">
+        {%- for block in link_blocks -%}
+          {%- if block.settings.label != blank -%}
+            <a
+              class="hz-seo__link"
+              {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% else %}role="link" aria-disabled="true"{% endif %}
+              {{ block.shopify_attributes }}
+            >
+              {{ block.settings.label | escape }}
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.cta_label != blank -%}
+      <div class="hz-seo__cta-wrap">
+        <a
+          class="hz-btn hz-btn--primary"
+          {% if section.settings.cta_link != blank %}href="{{ section.settings.cta_link }}"{% else %}role="link" aria-disabled="true"{% endif %}
+        >
+          {{ section.settings.cta_label | escape }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HZ SEO about",
+  "tag": "section",
+  "class": "section-hz-seo-about",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "HORIZON PK | Online shopping for wrist watches in Pakistan"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>Welcome to HORIZON PK — an affordable luxury watch brand for Pakistan. Shop formal, sports, smart, and couple watches with free home delivery, cash on delivery, and a 1-year warranty.</p><p>Buy wrist watches online and pay on delivery in Lahore, Karachi, Islamabad, Multan, Rawalpindi, Faisalabad, and across the country.</p>"
+    },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Shop HORIZON" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" }
+  ],
+  "blocks": [
+    {
+      "type": "collection_link",
+      "name": "Collection link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Mens Watches" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "HZ SEO about",
+      "blocks": [
+        { "type": "collection_link", "settings": { "label": "Mens Watches" } },
+        { "type": "collection_link", "settings": { "label": "Ladies Watches" } },
+        { "type": "collection_link", "settings": { "label": "Couple Watches" } },
+        { "type": "collection_link", "settings": { "label": "Sports Watches" } },
+        { "type": "collection_link", "settings": { "label": "Smart Watches" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

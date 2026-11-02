@@ -1,0 +1,67 @@
+:root {
+  --hz-navy: #0b1f33;
+  --hz-champagne: #c4a574;
+  --hz-ivory: #f7f5f0;
+  --hz-sale: #c45c26;
+  --hz-text: #1a1a1a;
+  --hz-muted: #6b7280;
+  --hz-radius: 0.5rem;
+  --hz-page: var(--page-width, 1200px);
+}
+
+.hz-page {
+  max-width: var(--hz-page);
+  margin: 0 auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.hz-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  min-width: 3rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.hz-btn--primary {
+  background: var(--hz-champagne);
+  color: var(--hz-navy);
+  border: 1px solid var(--hz-champagne);
+}
+
+.hz-btn--primary:hover {
+  background: #b8945f;
+  color: var(--hz-navy);
+}
+
+.hz-btn--ghost {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+}
+
+.hz-btn--ghost:hover {
+  background: #fff;
+  color: var(--hz-navy);
+}
+
+.hz-sale-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.45rem;
+  border-radius: 0.25rem;
+  background: var(--hz-sale);
+  color: #fff;
+  font-size: 0.625rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}

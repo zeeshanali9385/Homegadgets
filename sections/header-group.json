@@ -2,34 +2,44 @@
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
-    "header-banner": {
-      "type": "header-banner",
+    "sale-countdown-bar": {
+      "type": "sale-countdown-bar",
+      "settings": {
+        "accessibility_label": "Limited time sale",
+        "sale_label": "Limited Time <strong>Sale</strong>",
+        "end_datetime": "2026-12-31T23:59:59+05:00",
+        "label_days": "Days",
+        "label_hours": "Hrs",
+        "label_mins": "Min",
+        "label_secs": "Sec",
+        "cta_label": "Up to 50% off →",
+        "cta_link": "shopify://collections/sale",
+        "background_color": "#0B1F33",
+        "text_color": "#FFFFFF",
+        "accent_color": "#C4A574"
+      }
+    },
+    "trust-ticker": {
+      "type": "trust-ticker",
       "blocks": {
-        "extra_1": {
-          "type": "extra_message",
-          "settings": {
-            "text": "Cash on delivery available across Pakistan"
-          }
+        "t1": {
+          "type": "trust_item",
+          "settings": { "text": "30 Days Hassle-free Returns" }
+        },
+        "t2": {
+          "type": "trust_item",
+          "settings": { "text": "1 Year International Warranty" }
+        },
+        "t3": {
+          "type": "trust_item",
+          "settings": { "text": "Free Delivery Across Pakistan" }
         }
       },
-      "block_order": ["extra_1"],
+      "block_order": ["t1", "t2", "t3"],
       "settings": {
-        "accessibility_label": "Store announcements and promotions",
-        "enable_scroll": false,
-        "promo_prefix": "🎁",
-        "tier_two_text": "BUY 2 GET 5% OFF",
-        "tier_three_text": "BUY 3+ GET FREE SHIPPING + 5% OFF!",
-        "promo_suffix": "🚚",
-        "show_verified_badge": true,
-        "verified_text": "Verified Markaz Dispatch Store",
-        "show_cod_badge": true,
-        "cod_badge_text": "COD PAKISTAN",
-        "whatsapp_url": "",
-        "whatsapp_label": "Help",
-        "background_color": "#022c22",
-        "text_color": "#ecfdf5",
-        "accent_color": "#fbbf24",
-        "muted_color": "#6ee7b7"
+        "background_color": "#F7F5F0",
+        "text_color": "#1A1A1A",
+        "accent_color": "#C4A574"
       }
     },
     "header": {
@@ -38,7 +48,7 @@
         "logo_position": "middle-left",
         "mobile_logo_position": "center",
         "menu": "main-menu",
-        "menu_type_desktop": "dropdown",
+        "menu_type_desktop": "mega",
         "sticky_header_type": "on-scroll-up",
         "show_line_separator": true,
         "color_scheme": "scheme-1",
@@ -46,10 +56,10 @@
         "enable_country_selector": false,
         "enable_language_selector": false,
         "margin_bottom": 0,
-        "padding_top": 16,
-        "padding_bottom": 16
+        "padding_top": 12,
+        "padding_bottom": 12
       }
     }
   },
-  "order": ["header-banner", "header"]
+  "order": ["sale-countdown-bar", "trust-ticker", "header"]
 }

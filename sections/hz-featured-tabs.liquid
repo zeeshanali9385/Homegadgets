@@ -1,0 +1,185 @@
+{{ 'hz-featured-tabs.css' | asset_url | stylesheet_tag }}
+{{ 'hz-theme.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+
+{%- assign products_to_show = section.settings.products_to_show -%}
+
+<section id="HzTabs-{{ section.id }}" class="hz-tabs" aria-label="{{ section.settings.heading | escape }}">
+  <div class="hz-tabs__head">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="hz-tabs__title">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subheading != blank -%}
+      <p class="hz-tabs__sub">{{ section.settings.subheading | escape }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="hz-tabs__nav" role="tablist">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'tab' -%}
+        <button
+          type="button"
+          class="hz-tabs__tab{% if forloop.first %} is-active{% endif %}"
+          role="tab"
+          aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+          data-hz-tab
+          data-panel="HzPanel-{{ section.id }}-{{ block.id }}"
+          {{ block.shopify_attributes }}
+        >
+          {{ block.settings.title | escape }}
+        </button>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'tab' -%}
+      {%- assign collection = collections[block.settings.collection] -%}
+      <div
+        id="HzPanel-{{ section.id }}-{{ block.id }}"
+        class="hz-tabs__panel{% if forloop.first %} is-active{% endif %}"
+        role="tabpanel"
+        data-hz-panel
+        {% unless forloop.first %}hidden{% endunless %}
+      >
+        <div class="hz-tabs__grid">
+          {%- if collection != blank and collection.products_count > 0 -%}
+            {%- for product in collection.products limit: products_to_show -%}
+              {%- liquid
+                assign variant = product.selected_or_first_available_variant
+                assign price = variant.price
+                assign compare = variant.compare_at_price
+                assign save_pct = 0
+                if compare > price
+                  assign save_pct = compare | minus: price | times: 100.0 | divided_by: compare | round
+                endif
+                assign rating = product.metafields.reviews.rating.value
+              -%}
+              <a class="hz-card" href="{{ product.url }}">
+                <div class="hz-card__media">
+                  {%- if product.featured_media -%}
+                    {%- assign card_alt = product.featured_media.alt | default: product.title -%}
+                    {{
+                      product.featured_media
+                      | image_url: width: 800
+                      | image_tag:
+                        loading: 'lazy',
+                        decoding: 'async',
+                        widths: '280, 360, 540, 720, 800',
+                        sizes: '(min-width: 750px) 22vw, 70vw',
+                        alt: card_alt
+                    }}
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                  {%- if save_pct > 0 -%}
+                    <span class="hz-card__badge hz-sale-badge">-{{ save_pct }}%</span>
+                  {%- endif -%}
+                  {%- if rating != blank -%}
+                    <span class="hz-card__rating">★ {{ rating }}</span>
+                  {%- elsif section.settings.show_fallback_rating -%}
+                    <span class="hz-card__rating">★ {{ section.settings.fallback_rating | escape }}</span>
+                  {%- endif -%}
+                </div>
+                <div class="hz-card__body">
+                  <h3 class="hz-card__title">{{ product.title | escape }}</h3>
+                  {%- if product.type != blank -%}
+                    <p class="hz-card__meta">{{ product.type | escape }}</p>
+                  {%- endif -%}
+                  <div class="hz-card__price">
+                    <span class="hz-card__price-current">{{ price | money }}</span>
+                    {%- if compare > price -%}
+                      <span class="hz-card__price-compare">{{ compare | money }}</span>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </a>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for i in (1..4) -%}
+              <div class="hz-card">
+                <div class="hz-card__media">{{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+                <div class="hz-card__body">
+                  <h3 class="hz-card__title">{{ section.settings.placeholder_title | escape }}</h3>
+                  <p class="hz-card__meta">{{ block.settings.title | escape }}</p>
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+
+        {%- if block.settings.view_all_label != blank -%}
+          <div class="hz-tabs__footer">
+            <a
+              class="hz-tabs__view-all"
+              href="{{ collection.url | default: routes.all_products_collection_url }}"
+            >
+              {{ block.settings.view_all_label | escape }}
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById('HzTabs-{{ section.id }}');
+    if (!root) return;
+    var tabs = Array.prototype.slice.call(root.querySelectorAll('[data-hz-tab]'));
+    var panels = Array.prototype.slice.call(root.querySelectorAll('[data-hz-panel]'));
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var id = tab.getAttribute('data-panel');
+        tabs.forEach(function (t) {
+          t.classList.toggle('is-active', t === tab);
+          t.setAttribute('aria-selected', t === tab ? 'true' : 'false');
+        });
+        panels.forEach(function (p) {
+          var on = p.id === id;
+          p.classList.toggle('is-active', on);
+          p.hidden = !on;
+        });
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "HZ featured tabs",
+  "tag": "section",
+  "class": "section-hz-featured-tabs",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Featured Products" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Discover the collection" },
+    { "type": "range", "id": "products_to_show", "min": 4, "max": 12, "step": 1, "label": "Products per tab", "default": 4 },
+    { "type": "checkbox", "id": "show_fallback_rating", "label": "Show fallback rating badge", "default": true },
+    { "type": "text", "id": "fallback_rating", "label": "Fallback rating", "default": "4.9" },
+    { "type": "text", "id": "placeholder_title", "label": "Placeholder product title", "default": "HORIZON Watch" }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Tab title", "default": "MEN" },
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "view_all_label", "label": "View all label", "default": "View all" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "HZ featured tabs",
+      "blocks": [
+        { "type": "tab", "settings": { "title": "MEN", "view_all_label": "View all MEN" } },
+        { "type": "tab", "settings": { "title": "WOMEN", "view_all_label": "View all WOMEN" } },
+        { "type": "tab", "settings": { "title": "BEST SELLER", "view_all_label": "View all BEST SELLER" } },
+        { "type": "tab", "settings": { "title": "COUPLE", "view_all_label": "View all COUPLE" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
