@@ -1,0 +1,77 @@
+{{ 'hz-policy-page.css' | asset_url | stylesheet_tag }}
+{{ 'hz-theme.css' | asset_url | stylesheet_tag }}
+
+<section class="hz-policy" aria-labelledby="HzTrack-{{ section.id }}">
+  <div class="hz-policy__inner">
+    <h1 class="hz-policy__title" id="HzTrack-{{ section.id }}">
+      {{ section.settings.heading | escape }}
+    </h1>
+    {%- if section.settings.intro != blank -%}
+      <p class="hz-policy__intro">{{ section.settings.intro | escape }}</p>
+    {%- endif -%}
+
+    <form class="hz-track__form" action="{{ section.settings.tracking_action_url | default: '#' }}" method="get" id="HzTrackForm-{{ section.id }}">
+      <div>
+        <label for="HzOrderId-{{ section.id }}">{{ section.settings.order_label | escape }}</label>
+        <input
+          id="HzOrderId-{{ section.id }}"
+          name="{{ section.settings.order_param | default: 'order' }}"
+          type="text"
+          required
+          autocomplete="off"
+          placeholder="{{ section.settings.order_placeholder | escape }}"
+        >
+      </div>
+      <div>
+        <label for="HzPhone-{{ section.id }}">{{ section.settings.phone_label | escape }}</label>
+        <input
+          id="HzPhone-{{ section.id }}"
+          name="{{ section.settings.phone_param | default: 'phone' }}"
+          type="tel"
+          required
+          inputmode="tel"
+          placeholder="{{ section.settings.phone_placeholder | escape }}"
+        >
+      </div>
+      <button type="submit">{{ section.settings.button_label | escape }}</button>
+    </form>
+
+    {%- if section.settings.help_text != blank -%}
+      <div class="hz-policy__body" style="margin-top:1.25rem">
+        <p>{{ section.settings.help_text | escape }}</p>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.whatsapp_url != blank -%}
+      <div class="hz-policy__cta">
+        <a class="hz-policy__btn hz-policy__btn--wa" href="{{ section.settings.whatsapp_url }}" target="_blank" rel="noopener noreferrer">
+          {{ section.settings.whatsapp_label | escape }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HZ track order",
+  "tag": "section",
+  "class": "section-hz-track-order",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Track your order" },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "Enter your order number and WhatsApp/phone used at checkout. Most parcels arrive in 3–5 working days via TCS / CallCourier / Leopards." },
+    { "type": "text", "id": "order_label", "label": "Order ID label", "default": "Order ID / Tracking number" },
+    { "type": "text", "id": "order_placeholder", "label": "Order placeholder", "default": "e.g. #1042 or CN123456" },
+    { "type": "text", "id": "order_param", "label": "Order query param", "default": "order" },
+    { "type": "text", "id": "phone_label", "label": "Phone label", "default": "Phone / WhatsApp" },
+    { "type": "text", "id": "phone_placeholder", "label": "Phone placeholder", "default": "03XXXXXXXXX" },
+    { "type": "text", "id": "phone_param", "label": "Phone query param", "default": "phone" },
+    { "type": "url", "id": "tracking_action_url", "label": "Form action URL", "info": "Optional courier tracking URL. Leave blank to use WhatsApp help CTA." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Track order" },
+    { "type": "textarea", "id": "help_text", "label": "Help text", "default": "Didn’t receive a tracking SMS? Message us on WhatsApp with your order ID — we verify COD orders before dispatch." },
+    { "type": "url", "id": "whatsapp_url", "label": "WhatsApp URL" },
+    { "type": "text", "id": "whatsapp_label", "label": "WhatsApp label", "default": "Track via WhatsApp" }
+  ],
+  "presets": [{ "name": "HZ track order" }]
+}
+{% endschema %}
