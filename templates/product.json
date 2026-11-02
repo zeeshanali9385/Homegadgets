@@ -5,71 +5,63 @@
       "blocks": {
         "feature_1": {
           "type": "feature_item",
-          "settings": {
-            "text": "USB Rechargeable battery"
-          }
+          "settings": { "text": "Japanese quartz movement" }
         },
         "feature_2": {
           "type": "feature_item",
-          "settings": {
-            "text": "Stainless steel sharp blades"
-          }
+          "settings": { "text": "Stainless steel case & bracelet options" }
         },
         "feature_3": {
           "type": "feature_item",
-          "settings": {
-            "text": "Safe one-touch operation"
-          }
+          "settings": { "text": "Water resistant for daily wear" }
         },
         "feature_4": {
           "type": "feature_item",
-          "settings": {
-            "text": "Easy to wash container"
-          }
+          "settings": { "text": "1-year HORIZON international warranty" }
         },
         "value_1": {
           "type": "value_point",
           "settings": {
             "icon_text": "COD",
-            "title": "100% Cash On Delivery",
-            "text": "No advance payment required across Pakistan"
+            "title": "Cash On Delivery",
+            "text": "Pay at your doorstep across Pakistan"
           }
         },
         "value_2": {
           "type": "value_point",
           "settings": {
-            "icon_text": "7D",
-            "title": "7-Day Replacement",
-            "text": "Support if the parcel arrives damaged"
+            "icon_text": "30D",
+            "title": "30-Day Returns",
+            "text": "Hassle-free returns on eligible orders"
           }
         },
         "value_3": {
           "type": "value_point",
           "settings": {
-            "icon_text": "WA",
-            "title": "WhatsApp Tracking",
-            "text": "Get dispatch updates on WhatsApp"
+            "icon_text": "1Y",
+            "title": "1-Year Warranty",
+            "text": "International warranty on movement & craftsmanship"
           }
         },
         "faq_1": {
           "type": "faq_item",
           "settings": {
             "question": "Do you offer Cash on Delivery?",
-            "answer": "Yes. 100% Cash on Delivery is available nationwide through TCS, Leopards, Trax, and PostEx."
+            "answer": "Yes. COD is available nationwide through verified couriers."
           }
         },
         "faq_2": {
           "type": "faq_item",
           "settings": {
             "question": "How long does delivery take?",
-            "answer": "Major cities usually receive parcels in 2–4 working days. Other areas take 3–5 working days."
+            "answer": "Major cities usually receive parcels in 3–5 working days."
           }
         },
         "faq_3": {
           "type": "faq_item",
           "settings": {
-            "question": "What is the return policy?",
-            "answer": "We offer a 7-day replacement guarantee for damaged or non-working items. Contact WhatsApp support with your Order ID."
+            "question": "What is the warranty policy?",
+            "answer": "Every HORIZON watch includes a 1-year international warranty covering manufacturing defects."
           }
         },
         "review_1": {
@@ -78,7 +70,7 @@
             "author": "Ayesha K.",
             "rating": 5,
             "verified": true,
-            "text": "Chopper quality is excellent and delivery to Lahore was fast. Highly recommended!"
+            "text": "Beautiful finish and fast delivery to Lahore. Looks more expensive than the price."
           }
         },
         "review_2": {
@@ -87,7 +79,7 @@
             "author": "Bilal R.",
             "rating": 5,
             "verified": true,
-            "text": "Ordered 3 gadgets, got free shipping automatically. Packaging was secure."
+            "text": "Bought a couple set — packaging was premium and COD was smooth."
           }
         },
         "review_3": {
@@ -96,7 +88,7 @@
             "author": "Sana M.",
             "rating": 4,
             "verified": true,
-            "text": "Great value for money. Battery lasts longer than expected."
+            "text": "Great daily wear watch. Battery life and clasp quality are solid."
           }
         }
       },
@@ -117,16 +109,16 @@
       ],
       "settings": {
         "show_back_link": true,
-        "back_label": "Back to catalog",
+        "back_label": "Back to collection",
         "back_link": "shopify://collections/all",
         "show_rating": true,
         "rating_value": "4.9",
         "reviews_count_label": "128 Verified Reviews",
         "show_stock_label": true,
-        "in_stock_label": "In Stock (Fast Courier)",
+        "in_stock_label": "In Stock · Fast Courier",
         "show_save_badge": true,
         "save_badge_prefix": "Save",
-        "price_note": "Includes all taxes. Free delivery unlocks if total order has 3+ items.",
+        "price_note": "Taxes included. Free delivery on eligible orders. Checkout via Shopify.",
         "quantity_label": "Quantity",
         "add_to_cart_label": "Add to cart",
         "sold_out_label": "Sold out",
@@ -135,8 +127,8 @@
         "enable_sticky_mobile_cta": true,
         "sticky_buy_label": "Checkout",
         "show_description_features": false,
-        "features_heading": "Product Features & Specifications",
-        "values_heading": "Why customers love this",
+        "features_heading": "Specifications",
+        "values_heading": "Why shop HORIZON",
         "faq_heading": "Frequently asked questions",
         "open_first_faq": true,
         "reviews_heading": "Verified customer reviews",

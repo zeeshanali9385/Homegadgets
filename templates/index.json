@@ -1,141 +1,125 @@
 {
   "sections": {
-    "hero_slider": {
-      "type": "hero-slider",
+    "hz_hero": {
+      "type": "hz-hero-slideshow",
       "blocks": {
         "slide_1": {
           "type": "slide",
           "settings": {
-            "badge": "#1 Top Seller in Pakistan",
-            "heading": "Rechargeable Electric Mini Food Chopper",
-            "description": "Chops garlic, ginger, meat, and vegetables in 10 seconds. USB charging.",
-            "price": "Rs. 1,799",
-            "compare_price": "Rs. 2,600",
-            "button_label": "Quick Buy"
+            "eyebrow": "HORIZON PK",
+            "heading": "Luxury watches for every moment",
+            "text": "Discover formal, sports, smart, and couple collections with free delivery across Pakistan.",
+            "button_label": "Shop Now",
+            "button_link": "shopify://collections/all"
           }
         },
         "slide_2": {
           "type": "slide",
           "settings": {
-            "badge": "Viral Product",
-            "heading": "Portable USB Electric Juicer Blender",
-            "description": "Fresh juice blender bottle for milkshakes and fruit juices on the go.",
-            "price": "Rs. 2,499",
-            "compare_price": "Rs. 3,800",
-            "button_label": "Shop Now"
+            "eyebrow": "Limited sale",
+            "heading": "Up to 50% off selected styles",
+            "text": "Upgrade your wrist game with HORIZON bestsellers — COD available nationwide.",
+            "button_label": "Shop Sale",
+            "button_link": "shopify://collections/sale"
           }
         }
       },
       "block_order": ["slide_1", "slide_2"],
       "settings": {
-        "eyebrow": "Cash on delivery all over Pakistan",
-        "heading": "Smart Viral Kitchen & Home Gadgets That Save Time.",
-        "text": "Upgrade your home with Pakistan’s top-selling rechargeable choppers, juicers, organizers, and gadgets. Direct supplier pricing with 100% Cash on Delivery protection.",
-        "show_offer_box": true,
-        "offer_label": "Bundle & Save Special Offer:",
-        "offer_text": "Buy 2 Items = 5% OFF | Buy 3+ Items = FREE Shipping + 5% OFF!",
-        "button_label_1": "Shop All Gadgets",
-        "button_link_1": "shopify://collections/all",
-        "button_label_2": "View Trending Deals",
-        "button_link_2": "shopify://collections/all",
         "autoplay": true,
         "autoplay_speed": 6
       }
     },
-    "featured_collection_tier": {
-      "type": "featured-collection-tier",
+    "hz_cats": {
+      "type": "hz-category-strip",
       "blocks": {
-        "tier_1": {
-          "type": "tier",
+        "c1": { "type": "category", "settings": { "title": "Sale", "link": "shopify://collections/sale" } },
+        "c2": { "type": "category", "settings": { "title": "Men Formal", "link": "shopify://collections/men-formal" } },
+        "c3": { "type": "category", "settings": { "title": "Men Sports", "link": "shopify://collections/men-sports" } },
+        "c4": { "type": "category", "settings": { "title": "Women Fancy", "link": "shopify://collections/women" } },
+        "c5": { "type": "category", "settings": { "title": "Bracelets", "link": "shopify://collections/women-bracelet" } },
+        "c6": { "type": "category", "settings": { "title": "Smart Watches", "link": "shopify://collections/smart-watches" } },
+        "c7": { "type": "category", "settings": { "title": "Couples", "link": "shopify://collections/couples" } }
+      },
+      "block_order": ["c1", "c2", "c3", "c4", "c5", "c6", "c7"],
+      "settings": {}
+    },
+    "hz_tabs": {
+      "type": "hz-featured-tabs",
+      "blocks": {
+        "tab_men": {
+          "type": "tab",
           "settings": {
-            "style": "default",
-            "quantity_label": "1",
-            "title": "Buy 1 Item",
-            "text": "Standard Nationwide Delivery (Rs. 150)"
+            "title": "MEN",
+            "collection": "men",
+            "view_all_label": "View all MEN"
           }
         },
-        "tier_2": {
-          "type": "tier",
+        "tab_women": {
+          "type": "tab",
           "settings": {
-            "style": "popular",
-            "badge": "Popular",
-            "quantity_label": "2",
-            "title": "Buy 2 Items",
-            "text": "Get 5% Flat Discount On Entire Order"
+            "title": "WOMEN",
+            "collection": "women",
+            "view_all_label": "View all WOMEN"
           }
         },
-        "tier_3": {
-          "type": "tier",
+        "tab_best": {
+          "type": "tab",
           "settings": {
-            "style": "best",
-            "badge": "Best value",
-            "quantity_label": "3+",
-            "title": "Buy 3 Or More Items",
-            "text": "FREE Shipping + 5% Flat Discount!"
+            "title": "BEST SELLER",
+            "collection": "best-sellers",
+            "view_all_label": "View all BEST SELLER"
+          }
+        },
+        "tab_couple": {
+          "type": "tab",
+          "settings": {
+            "title": "COUPLE",
+            "collection": "couples",
+            "view_all_label": "View all COUPLE"
           }
         }
       },
-      "block_order": ["tier_1", "tier_2", "tier_3"],
+      "block_order": ["tab_men", "tab_women", "tab_best", "tab_couple"],
       "settings": {
-        "show_tier_panel": true,
-        "panel_eyebrow": "Automatic Volume Savings",
-        "panel_heading": "How Our Multi-Item Discount Works",
-        "panel_text": "Add items to your cart to automatically unlock tiers without any coupon code!",
-        "eyebrow": "Handpicked Solutions",
-        "title": "Trending Home & Kitchen Gadgets",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "swipe_on_mobile": true,
-        "show_view_all": true,
-        "view_all_label": "View All Products",
-        "show_tier_pricing": true,
-        "discount_percent_two": 5,
-        "discount_percent_three": 5,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "heading": "Featured Products",
+        "subheading": "Discover the collection",
+        "products_to_show": 4,
+        "show_fallback_rating": true,
+        "fallback_rating": "4.9"
       }
     },
-    "khyber_trust_bar": {
-      "type": "khyber-trust-bar",
+    "hz_watch": {
+      "type": "hz-watch-shop-grid",
       "blocks": {
-        "trust_1": {
-          "type": "trust_item",
-          "settings": {
-            "icon": "truck",
-            "title": "Markaz Courier Delivery",
-            "text": "Dispatched via Leopard, TCS, Trax & PostEx"
-          }
-        },
-        "trust_2": {
-          "type": "trust_item",
-          "settings": {
-            "icon": "cod",
-            "title": "100% Cash On Delivery",
-            "text": "No advance card needed. Pay at doorstep"
-          }
-        },
-        "trust_3": {
-          "type": "trust_item",
-          "settings": {
-            "icon": "shield",
-            "title": "7-Day Replacement",
-            "text": "Instant support if parcel arrives damaged"
-          }
-        },
-        "trust_4": {
-          "type": "trust_item",
-          "settings": {
-            "icon": "whatsapp",
-            "title": "WhatsApp Order Tracking",
-            "text": "Real-time update on dispatch & delivery"
-          }
-        }
+        "w1": { "type": "tile", "settings": { "title": "Classic Quartz", "button_label": "Shop Quartz", "button_link": "shopify://collections/men-formal" } },
+        "w2": { "type": "tile", "settings": { "title": "Men's Quartz", "button_label": "Shop Men", "button_link": "shopify://collections/men" } },
+        "w3": { "type": "tile", "settings": { "title": "Elite Quartz", "button_label": "Shop Elite", "button_link": "shopify://collections/best-sellers" } },
+        "w4": { "type": "tile", "settings": { "title": "Shop Smart", "button_label": "Shop Smart", "button_link": "shopify://collections/smart-watches" } },
+        "w5": { "type": "tile", "settings": { "title": "Women's Quartz", "button_label": "Shop Women", "button_link": "shopify://collections/women" } },
+        "w6": { "type": "tile", "settings": { "title": "Couple Sets", "button_label": "Shop Couples", "button_link": "shopify://collections/couples" } }
       },
-      "block_order": ["trust_1", "trust_2", "trust_3", "trust_4"],
+      "block_order": ["w1", "w2", "w3", "w4", "w5", "w6"],
       "settings": {
-        "padding_top": 48,
-        "padding_bottom": 48
+        "eyebrow": "MEN · WOMEN · SMART",
+        "heading": "Watch & Shop"
+      }
+    },
+    "hz_seo": {
+      "type": "hz-seo-about",
+      "blocks": {
+        "l1": { "type": "collection_link", "settings": { "label": "Mens Watches", "link": "shopify://collections/men" } },
+        "l2": { "type": "collection_link", "settings": { "label": "Ladies Watches", "link": "shopify://collections/women" } },
+        "l3": { "type": "collection_link", "settings": { "label": "Couple Watches", "link": "shopify://collections/couples" } },
+        "l4": { "type": "collection_link", "settings": { "label": "Sports Watches", "link": "shopify://collections/men-sports" } },
+        "l5": { "type": "collection_link", "settings": { "label": "Smart Watches", "link": "shopify://collections/smart-watches" } }
+      },
+      "block_order": ["l1", "l2", "l3", "l4", "l5"],
+      "settings": {
+        "heading": "HORIZON PK | Online shopping for wrist watches in Pakistan",
+        "body": "<p>Welcome to HORIZON PK — an affordable luxury watch brand for Pakistan. Shop formal, sports, smart, and couple watches with free home delivery, cash on delivery, and a 1-year warranty.</p><p>Buy wrist watches online and pay on delivery in Lahore, Karachi, Islamabad, Multan, Rawalpindi, Faisalabad, and across the country.</p>",
+        "cta_label": "Shop HORIZON",
+        "cta_link": "shopify://collections/all"
       }
     },
     "whatsapp_float": {
@@ -147,10 +131,5 @@
       }
     }
   },
-  "order": [
-    "hero_slider",
-    "featured_collection_tier",
-    "khyber_trust_bar",
-    "whatsapp_float"
-  ]
+  "order": ["hz_hero", "hz_cats", "hz_tabs", "hz_watch", "hz_seo", "whatsapp_float"]
 }

@@ -1,0 +1,92 @@
+{{ 'hz-sale-countdown.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign end_iso = section.settings.end_datetime | default: ''
+-%}
+
+<div
+  id="SaleCountdown-{{ section.id }}"
+  class="hz-countdown"
+  style="--hz-cd-bg: {{ section.settings.background_color }}; --hz-cd-text: {{ section.settings.text_color }}; --hz-cd-accent: {{ section.settings.accent_color }};"
+  data-end="{{ end_iso | escape }}"
+  role="region"
+  aria-label="{{ section.settings.accessibility_label | escape }}"
+>
+  <div class="hz-countdown__inner">
+    {%- if section.settings.sale_label != blank -%}
+      <p class="hz-countdown__label">{{ section.settings.sale_label }}</p>
+    {%- endif -%}
+
+    <div class="hz-countdown__timer" data-hz-timer aria-live="polite">
+      <div class="hz-countdown__unit"><span class="hz-countdown__num" data-days>00</span><span class="hz-countdown__suffix">{{ section.settings.label_days | escape }}</span></div>
+      <span class="hz-countdown__sep">:</span>
+      <div class="hz-countdown__unit"><span class="hz-countdown__num" data-hours>00</span><span class="hz-countdown__suffix">{{ section.settings.label_hours | escape }}</span></div>
+      <span class="hz-countdown__sep">:</span>
+      <div class="hz-countdown__unit"><span class="hz-countdown__num" data-mins>00</span><span class="hz-countdown__suffix">{{ section.settings.label_mins | escape }}</span></div>
+      <span class="hz-countdown__sep">:</span>
+      <div class="hz-countdown__unit"><span class="hz-countdown__num" data-secs>00</span><span class="hz-countdown__suffix">{{ section.settings.label_secs | escape }}</span></div>
+    </div>
+
+    {%- if section.settings.cta_label != blank -%}
+      <a
+        class="hz-countdown__cta"
+        {% if section.settings.cta_link != blank %}href="{{ section.settings.cta_link }}"{% else %}role="link" aria-disabled="true"{% endif %}
+      >
+        {{ section.settings.cta_label | escape }}
+      </a>
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById('SaleCountdown-{{ section.id }}');
+    if (!root) return;
+    var end = root.getAttribute('data-end');
+    if (!end) return;
+    var endMs = Date.parse(end);
+    if (Number.isNaN(endMs)) return;
+    var days = root.querySelector('[data-days]');
+    var hours = root.querySelector('[data-hours]');
+    var mins = root.querySelector('[data-mins]');
+    var secs = root.querySelector('[data-secs]');
+    function pad(n) { return String(Math.max(0, n)).padStart(2, '0'); }
+    function tick() {
+      var diff = Math.max(0, endMs - Date.now());
+      var s = Math.floor(diff / 1000);
+      var d = Math.floor(s / 86400); s -= d * 86400;
+      var h = Math.floor(s / 3600); s -= h * 3600;
+      var m = Math.floor(s / 60); s -= m * 60;
+      if (days) days.textContent = pad(d);
+      if (hours) hours.textContent = pad(h);
+      if (mins) mins.textContent = pad(m);
+      if (secs) secs.textContent = pad(s);
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Sale countdown bar",
+  "tag": "section",
+  "class": "section-sale-countdown-bar",
+  "enabled_on": { "groups": ["header"] },
+  "settings": [
+    { "type": "text", "id": "accessibility_label", "label": "Accessibility label", "default": "Limited time sale" },
+    { "type": "inline_richtext", "id": "sale_label", "label": "Sale label", "default": "Limited Time <strong>Sale</strong>" },
+    { "type": "text", "id": "end_datetime", "label": "End datetime (ISO)", "info": "Example: 2026-12-31T23:59:59+05:00", "default": "2026-12-31T23:59:59+05:00" },
+    { "type": "text", "id": "label_days", "label": "Days label", "default": "Days" },
+    { "type": "text", "id": "label_hours", "label": "Hours label", "default": "Hrs" },
+    { "type": "text", "id": "label_mins", "label": "Minutes label", "default": "Min" },
+    { "type": "text", "id": "label_secs", "label": "Seconds label", "default": "Sec" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Up to 50% off" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#0B1F33" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#FFFFFF" },
+    { "type": "color", "id": "accent_color", "label": "Accent", "default": "#C4A574" }
+  ],
+  "presets": [{ "name": "Sale countdown bar" }]
+}
+{% endschema %}

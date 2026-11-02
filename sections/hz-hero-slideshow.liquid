@@ -1,0 +1,166 @@
+{{ 'hz-hero-slideshow.css' | asset_url | stylesheet_tag }}
+{{ 'hz-theme.css' | asset_url | stylesheet_tag }}
+
+<section
+  id="HzHero-{{ section.id }}"
+  class="hz-hero"
+  data-autoplay="{{ section.settings.autoplay }}"
+  data-speed="{{ section.settings.autoplay_speed }}"
+  aria-label="{{ section.settings.accessibility_label | escape }}"
+>
+  <div class="hz-hero__viewport">
+    {%- for block in section.blocks -%}
+      {%- assign is_first = forloop.first -%}
+      <article
+        class="hz-hero__slide{% if is_first %} is-active{% endif %}"
+        data-hz-slide
+        {{ block.shopify_attributes }}
+        {% unless is_first %}hidden{% endunless %}
+      >
+        <div class="hz-hero__media">
+          {%- if block.settings.video != blank -%}
+            {{
+              block.settings.video
+              | video_tag:
+                autoplay: true,
+                loop: true,
+                muted: true,
+                controls: false,
+                image_size: '1600x'
+            }}
+          {%- elsif block.settings.image != blank -%}
+            {%- if is_first -%}
+              {%- assign img_loading = 'eager' -%}
+            {%- else -%}
+              {%- assign img_loading = 'lazy' -%}
+            {%- endif -%}
+            {%- assign slide_alt = block.settings.heading | default: block.settings.image.alt -%}
+            {{
+              block.settings.image
+              | image_url: width: 2400
+              | image_tag:
+                loading: img_loading,
+                decoding: 'async',
+                widths: '750, 1100, 1500, 1780, 2000, 2400',
+                sizes: '100vw',
+                alt: slide_alt
+            }}
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+        <div class="hz-hero__overlay" aria-hidden="true"></div>
+        <div class="hz-hero__content">
+          {%- if block.settings.eyebrow != blank -%}
+            <p class="hz-hero__eyebrow">{{ block.settings.eyebrow | escape }}</p>
+          {%- endif -%}
+          {%- if block.settings.heading != blank -%}
+            <h2 class="hz-hero__heading">{{ block.settings.heading | escape }}</h2>
+          {%- endif -%}
+          {%- if block.settings.text != blank -%}
+            <p class="hz-hero__text">{{ block.settings.text | escape }}</p>
+          {%- endif -%}
+          {%- if block.settings.button_label != blank -%}
+            <div class="hz-hero__actions">
+              <a
+                class="hz-btn hz-btn--primary"
+                {% if block.settings.button_link != blank %}href="{{ block.settings.button_link }}"{% else %}role="link" aria-disabled="true"{% endif %}
+              >
+                {{ block.settings.button_label | escape }}
+              </a>
+            </div>
+          {%- endif -%}
+        </div>
+      </article>
+    {%- endfor -%}
+
+    {%- if section.blocks.size > 1 -%}
+      <button type="button" class="hz-hero__nav hz-hero__nav--prev" data-hz-prev aria-label="Previous slide">‹</button>
+      <button type="button" class="hz-hero__nav hz-hero__nav--next" data-hz-next aria-label="Next slide">›</button>
+      <div class="hz-hero__dots" role="tablist">
+        {%- for block in section.blocks -%}
+          <button
+            type="button"
+            class="hz-hero__dot{% if forloop.first %} is-active{% endif %}"
+            data-hz-dot
+            aria-label="Slide {{ forloop.index }}"
+            {% if forloop.first %}aria-current="true"{% endif %}
+          ></button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById('HzHero-{{ section.id }}');
+    if (!root) return;
+    var slides = Array.prototype.slice.call(root.querySelectorAll('[data-hz-slide]'));
+    var dots = Array.prototype.slice.call(root.querySelectorAll('[data-hz-dot]'));
+    if (slides.length < 2) return;
+    var i = 0, timer;
+    var autoplay = root.getAttribute('data-autoplay') === 'true';
+    var speed = Math.max(3, Number(root.getAttribute('data-speed') || 6)) * 1000;
+    function go(n) {
+      slides[i].classList.remove('is-active');
+      slides[i].hidden = true;
+      if (dots[i]) { dots[i].classList.remove('is-active'); dots[i].removeAttribute('aria-current'); }
+      i = (n + slides.length) % slides.length;
+      slides[i].classList.add('is-active');
+      slides[i].hidden = false;
+      if (dots[i]) { dots[i].classList.add('is-active'); dots[i].setAttribute('aria-current', 'true'); }
+    }
+    function start() {
+      if (!autoplay || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      stop();
+      timer = setInterval(function () { go(i + 1); }, speed);
+    }
+    function stop() { if (timer) clearInterval(timer); }
+    dots.forEach(function (d, idx) { d.addEventListener('click', function () { go(idx); start(); }); });
+    var prev = root.querySelector('[data-hz-prev]');
+    var next = root.querySelector('[data-hz-next]');
+    if (prev) prev.addEventListener('click', function () { go(i - 1); start(); });
+    if (next) next.addEventListener('click', function () { go(i + 1); start(); });
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', start);
+    start();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "HZ hero slideshow",
+  "tag": "section",
+  "class": "section-hz-hero-slideshow",
+  "settings": [
+    { "type": "text", "id": "accessibility_label", "label": "Accessibility label", "default": "Homepage hero" },
+    { "type": "checkbox", "id": "autoplay", "label": "Autoplay", "default": true },
+    { "type": "range", "id": "autoplay_speed", "min": 3, "max": 12, "step": 1, "unit": "s", "label": "Autoplay speed", "default": 6 }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "video", "id": "video", "label": "Video (optional)" },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "HORIZON PK" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Luxury watches for every moment" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Discover formal, sports, smart, and couple collections with free delivery across Pakistan." },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Now" },
+        { "type": "url", "id": "button_link", "label": "Button link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "HZ hero slideshow",
+      "blocks": [
+        { "type": "slide", "settings": { "eyebrow": "New season", "heading": "Luxury watches for every moment", "button_label": "Shop Now" } },
+        { "type": "slide", "settings": { "eyebrow": "Sale", "heading": "Up to 50% off selected styles", "button_label": "Shop Sale" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,81 @@
+.hz-countdown {
+  background: var(--hz-cd-bg, #0b1f33);
+  color: var(--hz-cd-text, #fff);
+  font-family: var(--font-body-family), Manrope, sans-serif;
+}
+
+.hz-countdown__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem 1.25rem;
+  max-width: var(--page-width, 1200px);
+  margin: 0 auto;
+  padding: 0.65rem 1.25rem;
+  text-align: center;
+}
+
+.hz-countdown__label {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.hz-countdown__label strong {
+  color: var(--hz-cd-accent, #c4a574);
+}
+
+.hz-countdown__timer {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.hz-countdown__unit {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 2.5rem;
+}
+
+.hz-countdown__num {
+  font-size: 0.9375rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.hz-countdown__suffix {
+  font-size: 0.5625rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.hz-countdown__sep {
+  opacity: 0.5;
+  font-weight: 700;
+}
+
+.hz-countdown__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  background: var(--hz-cd-accent, #c4a574);
+  color: #0b1f33;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.hz-countdown__cta:hover {
+  filter: brightness(1.05);
+  color: #0b1f33;
+}
