@@ -1,0 +1,24 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "hz-policy-content",
+      "settings": {
+        "heading": "Privacy Policy",
+        "intro": "How HORIZON PK collects and protects your information.",
+        "body": "<p>We collect order details (name, phone, address, email) to process COD deliveries, customer support, and service improvements. Payment card data is handled by Shopify’s secure checkout — we do not store full card numbers on our servers.</p><h2>How we use data</h2><ul><li>Order fulfillment and courier coordination</li><li>WhatsApp/email support replies</li><li>Fraud prevention on COD orders</li><li>Optional marketing if you subscribe to the newsletter</li></ul><h2>Sharing</h2><p>We share necessary delivery details with logistics partners. We do not sell personal data.</p><h2>Your choices</h2><p>Contact support to update or remove marketing preferences. Account and order records may be retained as required for legal and accounting purposes.</p>",
+        "show_whatsapp": true,
+        "whatsapp_label": "Privacy questions"
+      }
+    }
+  },
+  "order": ["main"]
+}
