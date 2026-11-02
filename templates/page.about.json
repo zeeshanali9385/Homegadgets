@@ -1,0 +1,26 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "hz-policy-content",
+      "settings": {
+        "heading": "About HORIZON PK",
+        "intro": "Luxury, precision, and modern lifestyle — designed for Pakistan.",
+        "body": "<p>HORIZON PK is a premium watch brand built for people who want refined design without the overseas markup. From formal steel pieces to sports and smart watches, every model is selected for daily wear, COD convenience, and lasting craftsmanship.</p><h2>Our promise</h2><p>We combine accessible luxury with nationwide delivery, WhatsApp support, and a clear 1-year warranty — so buying a watch online in Lahore, Karachi, Islamabad, or any city feels effortless.</p><h2>Why Pakistan shops with us</h2><ul><li>Cash on Delivery across Pakistan</li><li>Quality-checked packaging before dispatch</li><li>7-day exchange support for damaged or incorrect items</li><li>Free shipping on eligible orders</li></ul>",
+        "cta_label": "Shop collections",
+        "cta_link": "shopify://collections/all",
+        "show_whatsapp": true,
+        "whatsapp_label": "Chat on WhatsApp"
+      }
+    }
+  },
+  "order": ["main"]
+}
