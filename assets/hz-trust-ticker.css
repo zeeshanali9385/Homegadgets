@@ -1,7 +1,7 @@
 .hz-trust {
   background: var(--hz-trust-bg, #f7f5f0);
   color: var(--hz-trust-text, #1a1a1a);
-  border-bottom: 1px solid rgba(11, 31, 51, 0.08);
+  border-bottom: 1px solid rgba(61, 46, 30, 0.08);
 }
 
 .hz-trust__inner {
@@ -28,7 +28,7 @@
   width: 0.35rem;
   height: 0.35rem;
   border-radius: 50%;
-  background: var(--hz-trust-accent, #c4a574);
+  background: var(--hz-trust-accent, #d4b26a);
   flex-shrink: 0;
 }
 

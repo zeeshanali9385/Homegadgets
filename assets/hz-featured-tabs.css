@@ -47,8 +47,8 @@
 }
 
 .hz-tabs__tab.is-active {
-  background: #0b1f33;
-  border-color: #0b1f33;
+  background: #3d2e1e;
+  border-color: #3d2e1e;
   color: #fff;
 }
 
@@ -92,20 +92,60 @@
 
 .hz-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 14px 28px -18px rgba(11, 31, 51, 0.35);
+  box-shadow: 0 14px 28px -18px rgba(61, 46, 30, 0.35);
 }
 
 .hz-card__media {
   position: relative;
   aspect-ratio: 1 / 1;
   background: #f7f5f0;
+  overflow: hidden;
 }
 
-.hz-card__media img {
+.hz-card__media img,
+.hz-card__img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.hz-card__img--secondary {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.hz-card:hover .hz-card__img--secondary {
+  opacity: 1;
+}
+
+.hz-card__title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.hz-card__atc {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 2.75rem;
+  margin-top: 0.55rem;
+  border: 0;
+  border-radius: 0.35rem;
+  background: #3d2e1e;
+  color: #fff;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.hz-card__atc:hover {
+  background: #163552;
 }
 
 .hz-card__badge {
@@ -121,7 +161,7 @@
   padding: 0.2rem 0.4rem;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.95);
-  color: #0b1f33;
+  color: #3d2e1e;
   font-size: 0.6875rem;
   font-weight: 700;
 }
@@ -155,7 +195,7 @@
 }
 
 .hz-card__price-current {
-  color: #0b1f33;
+  color: #3d2e1e;
   font-weight: 800;
 }
 
@@ -174,11 +214,11 @@
   display: inline-flex;
   align-items: center;
   min-height: 2.75rem;
-  color: #0b1f33;
+  color: #3d2e1e;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   text-decoration: none;
-  border-bottom: 1px solid #c4a574;
+  border-bottom: 1px solid #d4b26a;
 }

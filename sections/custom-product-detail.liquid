@@ -265,6 +265,21 @@
     </div>
 
     <div class="kg-pdp__below">
+      {%- assign accordion_blocks = section.blocks | where: 'type', 'accordion_item' -%}
+      {%- if accordion_blocks.size > 0 -%}
+        <section class="kg-pdp__block kg-pdp__faq" aria-label="{{ section.settings.accordion_heading | escape }}">
+          {%- if section.settings.accordion_heading != blank -%}
+            <h2 class="kg-pdp__block-title">{{ section.settings.accordion_heading | escape }}</h2>
+          {%- endif -%}
+          {%- for block in accordion_blocks -%}
+            <details {{ block.shopify_attributes }}{% if forloop.first %} open{% endif %}>
+              <summary>{{ block.settings.title | escape }}</summary>
+              <div class="kg-pdp__faq-answer">{{ block.settings.body | escape | newline_to_br }}</div>
+            </details>
+          {%- endfor -%}
+        </section>
+      {%- endif -%}
+
       {%- assign value_blocks = section.blocks | where: 'type', 'value_point' -%}
       {%- if value_blocks.size > 0 -%}
         <section class="kg-pdp__block" aria-labelledby="KgValues-{{ section.id }}">
@@ -337,6 +352,10 @@
       {%- endif -%}
     </div>
   </div>
+
+  <script type="application/ld+json">
+    {{ product | structured_data }}
+  </script>
 
   {%- if section.settings.enable_sticky_mobile_cta -%}
     <div class="kg-pdp__sticky" data-kg-sticky-cta>
@@ -498,6 +517,12 @@
     },
     {
       "type": "text",
+      "id": "accordion_heading",
+      "label": "Accordion heading",
+      "default": "Details"
+    },
+    {
+      "type": "text",
       "id": "values_heading",
       "label": "Value points heading",
       "default": "Why customers love this"
@@ -560,6 +585,24 @@
           "id": "text",
           "label": "Feature text",
           "default": "USB Rechargeable battery"
+        }
+      ]
+    },
+    {
+      "type": "accordion_item",
+      "name": "Accordion tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Product specifications"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body",
+          "default": "Case material, movement, water resistance, strap options, and dial details are listed on this product."
         }
       ]
     },
