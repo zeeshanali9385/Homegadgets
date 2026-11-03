@@ -1,1 +1,497 @@
-{"sections":{"slideshow":{"type":"slideshow","blocks":{"image_9fbV9k":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/hf_20261007_112105_9fb11c4b-1673-462d-8cc5-3e0723faafa2.png","subheading":"Limited pieces | Enjoy up to&nbsp;<strong>60% OFF<\/strong>","title":"<strong>CLEARANCE SALE<\/strong>","mobile_text_position":"place-self-end-center text-center","desktop_text_position":"sm:place-self-end-center sm:text-center","content_max_width":860,"button_1_text":"SHOP ALL","button_1_link":"shopify:\/\/collections\/all","button_1_style":"solid","button_1_background":"#ffffff","button_1_text_color":"#000000","button_2_text":"","button_2_link":"shopify:\/\/collections\/women","button_2_style":"solid","button_2_background":"#ffffff","button_2_text_color":"#000000","background":"#1c1c1c","background_opacity":0,"text_color":"#ffffff","border_color":"","gradient_overlay":"linear-gradient(180deg, rgba(NaN, NaN, NaN, 1), rgba(4, 4, 4, 0.65) 100%)","heading_shadow_color":"#1c1c1c","heading_shadow_x":2,"heading_shadow_y":2,"heading_shadow_blur":6}}},"block_order":["image_9fbV9k"],"custom_css":["h1,h2,h3,h4,h5,h6 {text-shadow: 6px 6px 0px rgba(0, 0, 0, 0.9), 4px 4px 6px rgba(0, 0, 0, 0.6), 6px 8px 14px rgba(0, 0, 0, 0.4);}"],"settings":{"allow_transparent_header":false,"show_next_section_button":false,"media_size":"lg","autoplay":true,"autoplay_pause_on_video":true,"cycle_speed":5,"background":"#1c1c1c","controls_color":"#ffffff"}},"featured_collections_7j7rLg":{"type":"featured-collections","blocks":{"collection_3kVpkX":{"type":"collection","settings":{"collection":"womens-jackets-coats","new_arrival_badge":false,"text":"","products_count":4,"title":"Jackets & Coats for Women","link_url":"shopify:\/\/collections\/womens-jackets-coats","link_text":"View all"}}},"block_order":["collection_3kVpkX"],"name":"t:sections.featured_collections.presets.featured_collections.name","settings":{"color_scheme":"","separate_section_with_border":false,"hide_product_information":false,"stack_products":true,"products_per_row_mobile":"2","products_per_row_desktop":4,"horizontal_spacing_factor":1,"vertical_spacing_factor":1,"subheading":""}},"collection_list_BihcWP":{"type":"collection-list","blocks":{"collection_FFHgJk":{"type":"collection","settings":{"color_scheme":"","collection":"women","image":"shopify:\/\/shop_images\/Womens-Jacket-Animal-Print-Zip-Front-Bomber.png","expand_collection":false,"content_position":"place-self-center text-center","subheading":"","title":"<strong>WOMEN'S COLLECTION<\/strong>","button_text":"SHOP NOW","button_link":"shopify:\/\/collections\/women","overlay_color":"#000000","overlay_opacity":15}},"collection_njzHQd":{"type":"collection","settings":{"color_scheme":"","collection":"men","image":"shopify:\/\/shop_images\/Mens-Jacket-Zip-Front-Stand-Collar-Bomber-7.png","expand_collection":false,"content_position":"place-self-center text-center","subheading":"","title":"<strong>MEN'S COLLECTION<\/strong>","button_text":"SHOP NOW","button_link":"shopify:\/\/collections\/men","overlay_color":"#000000","overlay_opacity":15}}},"block_order":["collection_FFHgJk","collection_njzHQd"],"custom_css":[],"name":"t:sections.collection_list.presets.collection_list.name","settings":{"color_scheme":"","separate_section_with_border":false,"image_size":"auto","show_text_outside":false,"space_items":true,"stack_collections":true,"collections_per_row_desktop":2,"subheading":"","title":"EXPLORE MEN & WOMEN","content":""}},"featured_collections_tnTftJ":{"type":"featured-collections","blocks":{"collection_TnhMNk":{"type":"collection","settings":{"collection":"mens-jackets-coats","new_arrival_badge":false,"text":"","products_count":4,"title":"Jackets & Coats for Men","link_url":"shopify:\/\/collections\/mens-jackets-coats","link_text":"View all"}}},"block_order":["collection_TnhMNk"],"name":"t:sections.featured_collections.presets.featured_collections.name","settings":{"color_scheme":"","separate_section_with_border":false,"hide_product_information":false,"stack_products":true,"products_per_row_mobile":"2","products_per_row_desktop":4,"horizontal_spacing_factor":1,"vertical_spacing_factor":1,"subheading":""}},"collection_list_CPYzha":{"type":"collection-list","blocks":{"collection_Jc4EmA":{"type":"collection","settings":{"color_scheme":"","collection":"womens-jackets-coats","expand_collection":false,"content_position":"place-self-end-center text-center","subheading":"","title":"","button_text":"JACKETS & COATS","button_link":"shopify:\/\/collections\/womens-jackets-coats","overlay_color":"#000000","overlay_opacity":0}},"collection_TztyHT":{"type":"collection","settings":{"color_scheme":"","collection":"dresses","expand_collection":false,"content_position":"place-self-end-center text-center","subheading":"","title":"","button_text":"DRESSES","button_link":"shopify:\/\/collections\/dresses","overlay_color":"#000000","overlay_opacity":0}},"collection_xMRY6J":{"type":"collection","settings":{"color_scheme":"","collection":"mens-jackets-coats","expand_collection":false,"content_position":"place-self-end-center text-center","subheading":"","title":"","button_text":"JACKETS & COATS","button_link":"shopify:\/\/collections\/mens-jackets-coats","overlay_color":"#000000","overlay_opacity":0}},"collection_N8rkGr":{"type":"collection","settings":{"color_scheme":"scheme-4","collection":"sweaters-hoodies","expand_collection":false,"content_position":"place-self-end-center text-center","subheading":"","title":"","button_text":"SWEATERS & HOODIES","button_link":"","overlay_color":"#000000","overlay_opacity":0}}},"block_order":["collection_Jc4EmA","collection_TztyHT","collection_xMRY6J","collection_N8rkGr"],"disabled":true,"name":"t:sections.collection_list.presets.collection_list.name","settings":{"color_scheme":"","separate_section_with_border":false,"image_size":"auto","show_text_outside":false,"space_items":true,"stack_collections":false,"collections_per_row_desktop":4,"subheading":"","title":"EXPLORE OUR COLLECTIONS","content":""}},"image_with_text_overlay_Vk6YCE":{"type":"image-with-text-overlay","blocks":{"heading_Xc6Rp6":{"type":"heading","settings":{"text":"<strong>30-DAYMONEY-BACK GUARANTEE<\/strong>","heading_tag":"h1"}},"richtext_mUBiqd":{"type":"richtext","settings":{"content":"<p>Customer satisfaction is our top priority. If you're not fully satisfied with your purchase, you can take advantage of our 30-day return policy.<\/p>"}}},"block_order":["heading_Xc6Rp6","richtext_mUBiqd"],"name":"t:sections.image_with_text_overlay.presets.image_with_text_overlay.name","settings":{"color_scheme":"","image_size":"sm","image":"shopify:\/\/shop_images\/hf_20261007_113220_7ba1e405-9f73-444b-9d6c-33fa7be8c64d.png","allow_transparent_header":false,"reveal_on_scroll":true,"remove_vertical_spacing":true,"content_width":"md","mobile_text_position":"place-self-center text-center","desktop_text_position":"sm:place-self-center sm:text-center","overlay_color":"#000000","overlay_opacity":30}},"image_with_text_QCRyTK":{"type":"image-with-text","blocks":{"heading_nwtQaD":{"type":"heading","settings":{"text":"Kerry Ann's","heading_tag":"h1"}},"richtext_ABbQxf":{"type":"richtext","settings":{"content":"<p>From the first glance, <strong>Kerry Ann’s <\/strong>draws attention with clean lined clothes made for real days. Not shouting for notice, each piece slips easily into your routine. Where comfort meets quiet design, choices feel both fresh and familiar. Confidence comes not from flash but from fit and fabric working together. You find what suits without effort, style that just makes sense.<\/p>"}},"button_6ThQ6H":{"type":"button","settings":{"style":"solid","text":"ABOUT US","url":"shopify:\/\/pages\/about-us","background":"","text_color":""}}},"block_order":["heading_nwtQaD","richtext_ABbQxf","button_6ThQ6H"],"name":"t:sections.image_with_text.presets.image_with_text.name","settings":{"color_scheme":"","separate_section_with_border":false,"image":"shopify:\/\/shop_images\/hf_20261007_112349_b527996a-cbe4-46a1-8dd5-e7f5f9cdb815.png","reveal_on_scroll":true,"image_position":"start","content_width":"sm","remove_vertical_spacing":false}},"faq_di6WFg":{"type":"faq","blocks":{"question_TJNFzt":{"type":"question","settings":{"question":"Do you offer free shipping?","answer":"<p>Yes! At Kerry Ann's, we offer free shipping on all orders within the United Kingdom, with no minimum purchase required. Enjoy shopping your favourite styles without any additional delivery costs.<\/p>"}},"question_3iUcQj":{"type":"question","settings":{"question":"Can I return my order if I'm not satisfied?","answer":"<p>Absolutely! We want you to love your purchase. If you're not completely satisfied, you can request a return within 30 days of receiving your order. Items must be unworn, unused, and in their original condition with all tags attached.<\/p>"}},"question_UKQkzp":{"type":"question","settings":{"question":"How can I track my order?","answer":"<p>Once your order has been shipped, you'll receive a confirmation email with your tracking number. You can use this number to follow your delivery or check your order status through the Track Your Order page on our website.<\/p>"}},"question_hwbG84":{"type":"question","settings":{"question":"How can I contact customer support?","answer":"<p>Our customer support team is always happy to help! You can reach us at <a href=\"mailto:support@kerryanns.com\">support@kerryanns.com<\/a>. Our team is available Monday to Friday, from 9:00 AM to 5:00 PM UK time, and we aim to respond to all emails within 1–2 business days.<\/p>"}}},"block_order":["question_TJNFzt","question_3iUcQj","question_UKQkzp","question_hwbG84"],"name":"t:sections.faq.presets.faq.name","settings":{"color_scheme":"","separate_section_with_border":false,"show_categories":false,"subheading":"","title":"FREQUENTLY ASKED QUESTIONS","content":"","header_alignment":"center"}},"ss_feature_16_g4yy9U":{"type":"ss-feature-16","blocks":{"feature_HQzHL8":{"type":"feature","settings":{"icon":"box","heading":"<h3>FREE SHIPPING<\/h3>","text":"<p>Enjoy free shipping on all United States orders<\/p>"}},"feature_hNttVr":{"type":"feature","settings":{"icon":"shield","heading":"<h3>EASY RETURNS<\/h3>","text":"<p>Changed your mind? Return your order within 30 days<\/p>"}},"feature_NbxTNz":{"type":"feature","settings":{"icon":"payment","heading":"<h3>SECURE PAYMENT<\/h3>","text":"<p>Your payment information is processed securely<\/p>"}},"feature_pTn47W":{"type":"feature","settings":{"icon":"phone","heading":"<h3>HERE TO HELP<\/h3>","text":"<p>Our customer care team is here when you need us<\/p>"}}},"block_order":["feature_HQzHL8","feature_hNttVr","feature_NbxTNz","feature_pTn47W"],"name":"SS - Feature #16","settings":{"feature_row":4,"feature_row_mobile":1,"feature_padding_horizontal":32,"feature_padding_horizontal_mobile":16,"feature_border_thickness":1,"content_horizontal_align":"center","content_horizontal_align_mobile":"center","icon_size":24,"icon_size_mobile":24,"heading_custom":false,"heading_font":"josefin_sans_n4","heading_size":18,"heading_size_mobile":18,"heading_height":130,"heading_mt_mobile":24,"text_custom":false,"text_font":"josefin_sans_n4","text_size":13,"text_size_mobile":13,"text_height":150,"text_mt":16,"text_mt_mobile":16,"dots_size":5,"feature_border_color":"#E7E7E7","icon_color":"#000000","heading_color":"#000000","text_color":"#000000","dots_color":"#000000","background_color":"#FFFFFF","background_gradient":"","border_color":"#E7E7E7","margin_top":0,"margin_bottom":0,"margin_horizontal":0,"margin_horizontal_mobile":0,"padding_top":36,"padding_bottom":36,"padding_horizontal":5,"padding_horizontal_mobile":1.5,"full_width":true,"content_width":120,"border_thickness":1,"section_radius":0,"lazy":true}}},"order":["slideshow","featured_collections_7j7rLg","collection_list_BihcWP","featured_collections_tnTftJ","collection_list_CPYzha","image_with_text_overlay_Vk6YCE","image_with_text_QCRyTK","faq_di6WFg","ss_feature_16_g4yy9U"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "slideshow": {
+      "type": "slideshow",
+      "blocks": {
+        "image_9fbV9k": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/home-essentials-kitchen-2f716493_bc6ab7be-38b1-43e6-bc9b-eda88b899c8e.png",
+            "subheading": "Explore practical picks for everyday living",
+            "title": "<strong>HOME ESSENTIALS</strong>",
+            "mobile_text_position": "place-self-end-center text-center",
+            "desktop_text_position": "sm:place-self-end-center sm:text-center",
+            "content_max_width": 860,
+            "button_1_text": "SHOP ALL",
+            "button_1_link": "shopify://collections/all",
+            "button_1_style": "solid",
+            "button_1_background": "#ffffff",
+            "button_1_text_color": "#000000",
+            "button_2_text": "",
+            "button_2_link": "shopify://collections/women",
+            "button_2_style": "solid",
+            "button_2_background": "#ffffff",
+            "button_2_text_color": "#000000",
+            "background": "#1c1c1c",
+            "background_opacity": 0,
+            "text_color": "#ffffff",
+            "border_color": "",
+            "gradient_overlay": "linear-gradient(180deg, rgba(NaN, NaN, NaN, 1), rgba(4, 4, 4, 0.65) 100%)",
+            "heading_shadow_color": "#1c1c1c",
+            "heading_shadow_x": 2,
+            "heading_shadow_y": 2,
+            "heading_shadow_blur": 6
+          }
+        }
+      },
+      "block_order": [
+        "image_9fbV9k"
+      ],
+      "custom_css": [
+        "h1,h2,h3,h4,h5,h6 {text-shadow: 6px 6px 0px rgba(0, 0, 0, 0.9), 4px 4px 6px rgba(0, 0, 0, 0.6), 6px 8px 14px rgba(0, 0, 0, 0.4);}"
+      ],
+      "settings": {
+        "allow_transparent_header": false,
+        "show_next_section_button": false,
+        "media_size": "lg",
+        "autoplay": true,
+        "autoplay_pause_on_video": true,
+        "cycle_speed": 5,
+        "background": "#1c1c1c",
+        "controls_color": "#ffffff"
+      }
+    },
+    "featured_collections_7j7rLg": {
+      "type": "featured-collections",
+      "blocks": {
+        "collection_3kVpkX": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "new_arrival_badge": false,
+            "text": "",
+            "products_count": 4,
+            "title": "Jackets & Coats for Women",
+            "link_url": "shopify://collections/womens-jackets-coats",
+            "link_text": "View all"
+          }
+        }
+      },
+      "block_order": [
+        "collection_3kVpkX"
+      ],
+      "disabled": true,
+      "name": "t:sections.featured_collections.presets.featured_collections.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": false,
+        "hide_product_information": false,
+        "stack_products": true,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "horizontal_spacing_factor": 1,
+        "vertical_spacing_factor": 1,
+        "subheading": ""
+      }
+    },
+    "collection_list_BihcWP": {
+      "type": "collection-list",
+      "blocks": {
+        "collection_FFHgJk": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "",
+            "collection": "",
+            "expand_collection": false,
+            "content_position": "place-self-center text-center",
+            "subheading": "",
+            "title": "<strong>WOMEN'S COLLECTION</strong>",
+            "button_text": "SHOP NOW",
+            "button_link": "shopify://collections/women",
+            "overlay_color": "#000000",
+            "overlay_opacity": 15
+          }
+        },
+        "collection_njzHQd": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "",
+            "collection": "",
+            "expand_collection": false,
+            "content_position": "place-self-center text-center",
+            "subheading": "",
+            "title": "<strong>MEN'S COLLECTION</strong>",
+            "button_text": "SHOP NOW",
+            "button_link": "shopify://collections/men",
+            "overlay_color": "#000000",
+            "overlay_opacity": 15
+          }
+        }
+      },
+      "block_order": [
+        "collection_FFHgJk",
+        "collection_njzHQd"
+      ],
+      "disabled": true,
+      "custom_css": [],
+      "name": "t:sections.collection_list.presets.collection_list.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": false,
+        "image_size": "auto",
+        "show_text_outside": false,
+        "space_items": true,
+        "stack_collections": true,
+        "collections_per_row_desktop": 2,
+        "subheading": "",
+        "title": "EXPLORE MEN & WOMEN",
+        "content": ""
+      }
+    },
+    "featured_collections_tnTftJ": {
+      "type": "featured-collections",
+      "blocks": {
+        "collection_TnhMNk": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "new_arrival_badge": false,
+            "text": "",
+            "products_count": 4,
+            "title": "Jackets & Coats for Men",
+            "link_url": "shopify://collections/mens-jackets-coats",
+            "link_text": "View all"
+          }
+        }
+      },
+      "block_order": [
+        "collection_TnhMNk"
+      ],
+      "disabled": true,
+      "name": "t:sections.featured_collections.presets.featured_collections.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": false,
+        "hide_product_information": false,
+        "stack_products": true,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "horizontal_spacing_factor": 1,
+        "vertical_spacing_factor": 1,
+        "subheading": ""
+      }
+    },
+    "collection_list_CPYzha": {
+      "type": "collection-list",
+      "blocks": {
+        "collection_Jc4EmA": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "",
+            "collection": "",
+            "expand_collection": false,
+            "content_position": "place-self-end-center text-center",
+            "subheading": "",
+            "title": "",
+            "button_text": "JACKETS & COATS",
+            "button_link": "shopify://collections/womens-jackets-coats",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "collection_TztyHT": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "",
+            "collection": "",
+            "expand_collection": false,
+            "content_position": "place-self-end-center text-center",
+            "subheading": "",
+            "title": "",
+            "button_text": "DRESSES",
+            "button_link": "shopify://collections/dresses",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "collection_xMRY6J": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "",
+            "collection": "",
+            "expand_collection": false,
+            "content_position": "place-self-end-center text-center",
+            "subheading": "",
+            "title": "",
+            "button_text": "JACKETS & COATS",
+            "button_link": "shopify://collections/mens-jackets-coats",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "collection_N8rkGr": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "scheme-4",
+            "collection": "",
+            "expand_collection": false,
+            "content_position": "place-self-end-center text-center",
+            "subheading": "",
+            "title": "",
+            "button_text": "SWEATERS & HOODIES",
+            "button_link": "",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "collection_Jc4EmA",
+        "collection_TztyHT",
+        "collection_xMRY6J",
+        "collection_N8rkGr"
+      ],
+      "disabled": true,
+      "name": "t:sections.collection_list.presets.collection_list.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": false,
+        "image_size": "auto",
+        "show_text_outside": false,
+        "space_items": true,
+        "stack_collections": false,
+        "collections_per_row_desktop": 4,
+        "subheading": "",
+        "title": "EXPLORE OUR COLLECTIONS",
+        "content": ""
+      }
+    },
+    "image_with_text_overlay_Vk6YCE": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_Xc6Rp6": {
+          "type": "heading",
+          "settings": {
+            "text": "<strong>30-DAYMONEY-BACK GUARANTEE</strong>",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_mUBiqd": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Customer satisfaction is our top priority. If you're not fully satisfied with your purchase, you can take advantage of our 30-day return policy.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Xc6Rp6",
+        "richtext_mUBiqd"
+      ],
+      "name": "t:sections.image_with_text_overlay.presets.image_with_text_overlay.name",
+      "settings": {
+        "color_scheme": "",
+        "image_size": "sm",
+        "allow_transparent_header": false,
+        "reveal_on_scroll": true,
+        "remove_vertical_spacing": true,
+        "content_width": "md",
+        "mobile_text_position": "place-self-center text-center",
+        "desktop_text_position": "sm:place-self-center sm:text-center",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30
+      }
+    },
+    "image_with_text_QCRyTK": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_nwtQaD": {
+          "type": "heading",
+          "settings": {
+            "text": "Home lighting",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_ABbQxf": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Explore lighting ideas for your home.</p>"
+          }
+        },
+        "button_6ThQ6H": {
+          "type": "button",
+          "settings": {
+            "style": "solid",
+            "text": "ABOUT US",
+            "url": "shopify://pages/about-us",
+            "background": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_nwtQaD",
+        "richtext_ABbQxf",
+        "button_6ThQ6H"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": false,
+        "image": "shopify://shop_images/home-lighting-7692f9b8_20f8a3b7-002d-4ecd-a673-ee9cea160f0f.png",
+        "reveal_on_scroll": true,
+        "image_position": "start",
+        "content_width": "sm",
+        "remove_vertical_spacing": false
+      }
+    },
+    "faq_di6WFg": {
+      "type": "faq",
+      "blocks": {
+        "question_TJNFzt": {
+          "type": "question",
+          "settings": {
+            "question": "Do you offer free shipping?",
+            "answer": "<p>Yes! At Kerry Ann's, we offer free shipping on all orders within the United Kingdom, with no minimum purchase required. Enjoy shopping your favourite styles without any additional delivery costs.</p>"
+          }
+        },
+        "question_3iUcQj": {
+          "type": "question",
+          "settings": {
+            "question": "Can I return my order if I'm not satisfied?",
+            "answer": "<p>Absolutely! We want you to love your purchase. If you're not completely satisfied, you can request a return within 30 days of receiving your order. Items must be unworn, unused, and in their original condition with all tags attached.</p>"
+          }
+        },
+        "question_UKQkzp": {
+          "type": "question",
+          "settings": {
+            "question": "How can I track my order?",
+            "answer": "<p>Once your order has been shipped, you'll receive a confirmation email with your tracking number. You can use this number to follow your delivery or check your order status through the Track Your Order page on our website.</p>"
+          }
+        },
+        "question_hwbG84": {
+          "type": "question",
+          "settings": {
+            "question": "How can I contact customer support?",
+            "answer": "<p>Our customer support team is always happy to help! You can reach us at <a href=\"mailto:support@kerryanns.com\">support@kerryanns.com</a>. Our team is available Monday to Friday, from 9:00 AM to 5:00 PM UK time, and we aim to respond to all emails within 1–2 business days.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_TJNFzt",
+        "question_3iUcQj",
+        "question_UKQkzp",
+        "question_hwbG84"
+      ],
+      "name": "t:sections.faq.presets.faq.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": false,
+        "show_categories": false,
+        "subheading": "",
+        "title": "FREQUENTLY ASKED QUESTIONS",
+        "content": "",
+        "header_alignment": "center"
+      }
+    },
+    "ss_feature_16_g4yy9U": {
+      "type": "ss-feature-16",
+      "blocks": {
+        "feature_HQzHL8": {
+          "type": "feature",
+          "settings": {
+            "icon": "box",
+            "heading": "<h3>FREE SHIPPING</h3>",
+            "text": "<p>Enjoy free shipping on all United States orders</p>"
+          }
+        },
+        "feature_hNttVr": {
+          "type": "feature",
+          "settings": {
+            "icon": "shield",
+            "heading": "<h3>EASY RETURNS</h3>",
+            "text": "<p>Changed your mind? Return your order within 30 days</p>"
+          }
+        },
+        "feature_NbxTNz": {
+          "type": "feature",
+          "settings": {
+            "icon": "payment",
+            "heading": "<h3>SECURE PAYMENT</h3>",
+            "text": "<p>Your payment information is processed securely</p>"
+          }
+        },
+        "feature_pTn47W": {
+          "type": "feature",
+          "settings": {
+            "icon": "phone",
+            "heading": "<h3>HERE TO HELP</h3>",
+            "text": "<p>Our customer care team is here when you need us</p>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_HQzHL8",
+        "feature_hNttVr",
+        "feature_NbxTNz",
+        "feature_pTn47W"
+      ],
+      "name": "SS - Feature #16",
+      "settings": {
+        "feature_row": 4,
+        "feature_row_mobile": 1,
+        "feature_padding_horizontal": 32,
+        "feature_padding_horizontal_mobile": 16,
+        "feature_border_thickness": 1,
+        "content_horizontal_align": "center",
+        "content_horizontal_align_mobile": "center",
+        "icon_size": 24,
+        "icon_size_mobile": 24,
+        "heading_custom": false,
+        "heading_font": "josefin_sans_n4",
+        "heading_size": 18,
+        "heading_size_mobile": 18,
+        "heading_height": 130,
+        "heading_mt_mobile": 24,
+        "text_custom": false,
+        "text_font": "josefin_sans_n4",
+        "text_size": 13,
+        "text_size_mobile": 13,
+        "text_height": 150,
+        "text_mt": 16,
+        "text_mt_mobile": 16,
+        "dots_size": 5,
+        "feature_border_color": "#e7e7e7",
+        "icon_color": "#000000",
+        "heading_color": "#000000",
+        "text_color": "#000000",
+        "dots_color": "#000000",
+        "background_color": "#ffffff",
+        "background_gradient": "",
+        "border_color": "#e7e7e7",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": true,
+        "content_width": 120,
+        "border_thickness": 1,
+        "section_radius": 0,
+        "lazy": true
+      }
+    }
+  },
+  "order": [
+    "slideshow",
+    "featured_collections_7j7rLg",
+    "collection_list_BihcWP",
+    "featured_collections_tnTftJ",
+    "collection_list_CPYzha",
+    "image_with_text_overlay_Vk6YCE",
+    "image_with_text_QCRyTK",
+    "faq_di6WFg",
+    "ss_feature_16_g4yy9U"
+  ]
+}
