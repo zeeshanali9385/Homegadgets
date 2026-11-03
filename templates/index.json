@@ -152,7 +152,7 @@
         "collection_TnhMNk": {
           "type": "collection",
           "settings": {
-            "collection": "",
+            "collection": "kitchen-essentials",
             "new_arrival_badge": false,
             "text": "",
             "products_count": 4,
@@ -165,7 +165,6 @@
       "block_order": [
         "collection_TnhMNk"
       ],
-      "disabled": true,
       "name": "t:sections.featured_collections.presets.featured_collections.name",
       "settings": {
         "color_scheme": "",
