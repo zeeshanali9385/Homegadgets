@@ -11,21 +11,30 @@
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
-    "sale-countdown-bar": {
-      "type": "sale-countdown-bar",
+    "header": {
+      "type": "header",
       "settings": {
-        "accessibility_label": "Limited time sale",
-        "sale_label": "Free Shipping across Pakistan on orders above <strong>PKR 3000</strong> | Cash on Delivery Available",
-        "end_datetime": "2026-12-31T23:59:59+05:00",
-        "label_days": "Days",
-        "label_hours": "Hrs",
-        "label_mins": "Min",
-        "label_secs": "Sec",
-        "cta_label": "Shop Sale →",
-        "cta_link": "shopify://collections/sale",
-        "background_color": "#ede4d4",
-        "text_color": "#3d2e1e",
-        "accent_color": "#c9a227"
+        "color_scheme": "scheme-1",
+        "enable_sticky": true,
+        "show_separation_border": true,
+        "reduce_padding": false,
+        "logo": "shopify://shop_images/zm-logo-transparent.png",
+        "logo_max_width": 65,
+        "logo_mobile_max_width": 100,
+        "menu": "main-menu",
+        "sidebar_menu": "",
+        "menu_open_trigger": "hover",
+        "enable_search": true,
+        "sidebar_color_scheme": "",
+        "sidebar_text_font": "heading",
+        "sidebar_show_dividers": true,
+        "layout": "logo_left_navigation_inline",
+        "show_icons": true,
+        "show_country_selector": true,
+        "show_country_name": false,
+        "show_country_flag": true,
+        "show_locale_selector": false,
+        "transparent_header_text_color": "#ffffff"
       }
     },
     "trust-ticker": {
@@ -61,37 +70,10 @@
         "text_color": "#3d2e1e",
         "accent_color": "#d4b26a"
       }
-    },
-    "header": {
-      "type": "header",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "enable_sticky": true,
-        "show_separation_border": true,
-        "reduce_padding": false,
-        "logo": "shopify://shop_images/zm-logo-transparent.png",
-        "logo_max_width": 140,
-        "logo_mobile_max_width": 100,
-        "menu": "main-menu",
-        "sidebar_menu": "",
-        "menu_open_trigger": "hover",
-        "enable_search": true,
-        "sidebar_color_scheme": "",
-        "sidebar_text_font": "heading",
-        "sidebar_show_dividers": true,
-        "layout": "logo_left_navigation_inline",
-        "show_icons": true,
-        "show_country_selector": true,
-        "show_country_name": false,
-        "show_country_flag": true,
-        "show_locale_selector": false,
-        "transparent_header_text_color": "#ffffff"
-      }
     }
   },
   "order": [
-    "sale-countdown-bar",
-    "trust-ticker",
-    "header"
+    "header",
+    "trust-ticker"
   ]
 }
