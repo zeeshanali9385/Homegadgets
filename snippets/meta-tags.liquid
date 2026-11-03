@@ -37,7 +37,7 @@
   <meta property="product:price:amount" content="{{ product.selected_or_first_available_variant.price | money_without_currency | strip_html }}">
   <meta property="product:price:currency" content="{{ cart.currency.iso_code }}">
   <meta property="product:availability" content="{% if product.available %}in stock{% else %}out of stock{% endif %}">
-  <meta property="product:brand" content="HORIZON PK">
+  <meta property="product:brand" content="Zeit & Meridian">
 {%- endif -%}
 
 {%- if settings.social_twitter_link != blank -%}
@@ -50,10 +50,10 @@
 {%- comment -%} Fallback SEO description for key templates when merchant left page description blank {%- endcomment -%}
 {%- unless page_description -%}
   {%- if request.page_type == 'index' -%}
-    <meta name="description" content="Buy HORIZON PK luxury watches online in Pakistan. Cash on Delivery, free shipping on eligible orders, 1-year warranty. Shop men, women, smart & couple watches.">
+    <meta name="description" content="Buy Zeit & Meridian luxury watches online in Pakistan. Cash on Delivery, free shipping on eligible orders, 1-year warranty. Shop men, women, smart & couple watches.">
   {%- elsif request.page_type == 'collection' -%}
-    <meta name="description" content="Shop {{ collection.title | escape }} at HORIZON PK. Premium watches with COD across Pakistan, fast courier delivery, and trusted warranty support.">
+    <meta name="description" content="Shop {{ collection.title | escape }} at Zeit & Meridian. Premium watches with COD across Pakistan, fast courier delivery, and trusted warranty support.">
   {%- elsif request.page_type == 'product' -%}
-    <meta name="description" content="Buy {{ product.title | escape }} from HORIZON PK. Price {{ product.price | money | strip_html }}. Cash on Delivery available across Pakistan.">
+    <meta name="description" content="Buy {{ product.title | escape }} from Zeit & Meridian. Price {{ product.price | money | strip_html }}. Cash on Delivery available across Pakistan.">
   {%- endif -%}
 {%- endunless -%}

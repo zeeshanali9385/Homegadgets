@@ -58,7 +58,7 @@
               <article class="hz-card">
                 <a class="hz-card__media" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
                   {%- if product.featured_media -%}
-                    {%- assign card_alt = product.featured_media.alt | default: product.title | append: ' | HORIZON PK' -%}
+                    {%- assign card_alt = product.featured_media.alt | default: product.title | append: ' | Zeit & Meridian' -%}
                     {{
                       product.featured_media
                       | image_url: width: 800
@@ -186,7 +186,7 @@
     { "type": "range", "id": "products_to_show", "min": 4, "max": 12, "step": 1, "label": "Products per tab", "default": 4 },
     { "type": "checkbox", "id": "show_fallback_rating", "label": "Show fallback rating badge", "default": true },
     { "type": "text", "id": "fallback_rating", "label": "Fallback rating", "default": "4.9" },
-    { "type": "text", "id": "placeholder_title", "label": "Placeholder product title", "default": "HORIZON Watch" },
+    { "type": "text", "id": "placeholder_title", "label": "Placeholder product title", "default": "Zeit & Meridian Watch" },
     { "type": "text", "id": "add_to_cart_label", "label": "Quick buy label", "default": "Quick buy" }
   ],
   "blocks": [
