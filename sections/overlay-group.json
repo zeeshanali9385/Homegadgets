@@ -1,0 +1,120 @@
+{
+  "type": "custom.overlay",
+  "name": "Overlay group",
+  "sections": {
+    "cart-drawer": {
+      "type": "cart-drawer",
+      "blocks": {
+        "tier_1": {
+          "type": "tier",
+          "settings": {
+            "threshold": 2,
+            "reward": "EXTRA 10% discount",
+            "badge_text": "EXTRA 10% OFF",
+            "label": "10% OFF"
+          }
+        },
+        "tier_2": {
+          "type": "tier",
+          "settings": {
+            "threshold": 3,
+            "reward": "EXTRA 15% discount",
+            "badge_text": "EXTRA 15% OFF",
+            "label": "15% OFF"
+          }
+        },
+        "tier_3": {
+          "type": "tier",
+          "settings": {
+            "threshold": 4,
+            "reward": "EXTRA 20% discount",
+            "badge_text": "EXTRA 20% OFF",
+            "label": "20% OFF"
+          }
+        }
+      },
+      "block_order": [
+        "tier_1",
+        "tier_2",
+        "tier_3"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "logo": "shopify://shop_images/010fcbf6-b0c9-488b-ad4d-72bd3b30705e.png",
+        "logo_height": 66,
+        "logo_subtitle": "",
+        "close_bg": "#f2f2f2",
+        "show_announcement": true,
+        "announcement_text": "CLEARANCE SALE ENDS TONIGHT AT 11:59 PM",
+        "announcement_bg": "#efefef",
+        "announcement_text_color": "#000000",
+        "announcement_border": "#cfcfcf",
+        "show_rewards": true,
+        "tier_basis": "quantity",
+        "progress_message": "You're [remaining] away from an [reward]!",
+        "complete_message": "Congrats! You've unlocked an [reward]!",
+        "unit_singular": "product",
+        "unit_plural": "products",
+        "show_tier_labels": false,
+        "track_color": "#e3e3e3",
+        "show_variant_options": true,
+        "show_savings": true,
+        "savings_text": "(Save [amount])",
+        "savings_color": "#22b16b",
+        "show_discounts": true,
+        "discounts_label": "Discounts",
+        "use_tier_badge": true,
+        "badge_bg": "#f1f1f1",
+        "checkout_label": "Checkout",
+        "show_checkout_button": true,
+        "show_price_in_checkout_button": true,
+        "show_view_cart_button": false,
+        "button_radius": 0,
+        "show_payment_icons": true,
+        "payment_icons": "visa,master,discover,american_express,apple_pay,google_pay",
+        "show_cart_note": false,
+        "show_shipping_text": false,
+        "empty_text": "Your cart is empty",
+        "empty_button_label": "Continue shopping",
+        "empty_button_link": "",
+        "drawer_font": "jost_n4",
+        "text_color": "#000000",
+        "muted_color": "#9b9b9b",
+        "border_color": "#e3e3e3",
+        "accent_color": "#000000",
+        "accent_text_color": "#ffffff",
+        "cross_sell_products": [],
+        "cross_sell_title": "Complete Your Look:",
+        "cross_sell_stack_products": false
+      }
+    },
+    "newsletter-popup": {
+      "type": "newsletter-popup",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "apparition_delay": 5,
+        "show_only_on_index": true,
+        "hide_for_account_holders": true,
+        "show_only_once": true,
+        "title": "Signup for our newsletter",
+        "content": "Describe what your customers will receive when subscribing to your newsletter.",
+        "button_text": "Subscribe"
+      }
+    },
+    "privacy-banner": {
+      "type": "privacy-banner",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "title": "🍪 Cookie policy",
+        "content": "<p>We use cookies and similar technologies to provide the best experience on our website. Refer to our Privacy Policy for more information.</p>"
+      }
+    }
+  },
+  "order": [
+    "cart-drawer",
+    "newsletter-popup",
+    "privacy-banner"
+  ]
+}

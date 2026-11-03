@@ -1,0 +1,117 @@
+<div class="circle container">
+  <div class="circle-row">
+    {% for block in section.blocks %}
+    <div class="circle-columns">
+      <a href="{{ block.settings.link-circle }}">
+      <div class="circle-image">
+        <img src="{{ block.settings.image-circle | img_url:"master" }}">
+      </div>
+      <div class="circle-heading">
+        <span>{{ block.settings.image-head }}</span>
+      </div>
+      </a>
+    </div>
+      {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "New List Collection",
+    "settings": [],
+    "blocks":
+    [
+      {
+        "type": "list",
+        "name":"list",
+        "settings": [
+          {
+            "type":"image_picker",
+            "label":"Enter Your Image",
+            "id":"image-circle"
+          },
+          {
+            "type": "text",
+            "label":"Enter Your Heading",
+            "id":"image-head"
+          },
+          {
+            "type": "url",
+            "label":"Enter Your Url",
+            "id":"link-circle"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name":"New List Collection",
+        "category":"New List Collection"
+      }
+    ]
+  }
+{% endschema %}
+
+<style>
+  .circle.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center the columns */
+  margin-bottom:10px;
+  margin-top:10px
+}
+
+.circle-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px; /* Add some space between columns */
+  justify-content: center;
+}
+
+.circle-columns {
+  text-align: center; /* Center the content inside the column */
+}
+
+.circle-image img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0px auto;
+  padding: 1px;
+}
+ .circle-image {
+    text-align: center;
+    border: 2px solid #F7639A;
+    border-radius: 50%;
+    width: 64px;
+       margin: 0px auto;
+}
+    @media (max-width:749px)
+  {
+    .circle-row {
+    display: flex;
+    justify-content: left !important;
+    align-items: center;
+    flex-wrap: unset !important;
+    overflow: auto;
+    white-space: nowrap;
+}
+    .circle-row {
+    gap: 0px !important;
+}
+    .circle-columns {
+    text-align: center;
+    margin: 5px 5px;
+}
+    .circle.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 10px;
+    max-width: 100% !important;
+    width: 100% !important;
+    margin-left: 0px;
+}
+  }
+</style>

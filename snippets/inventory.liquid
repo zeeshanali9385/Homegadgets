@@ -1,0 +1,108 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+PRODUCT INVENTORY COMPONENT
+----------------------------------------------------------------------------------------------------------------------
+Available products show: "Only {random 4–7} left in stock" (red).
+The number is randomized with JavaScript on every page refresh.
+{%- endcomment -%}
+
+{%- capture inventory_for_variants -%}
+  {%- assign inventory_default_status = 'warning' -%}
+  {%- assign inventory_default_quantity = 0 -%}
+
+  {%- if product -%}
+    {%- for variant in product.variants -%}
+      {%- liquid
+        assign inventory_status = 'warning'
+        assign use_random_qty = false
+
+        if variant.available
+          assign inventory_status = 'warning'
+          assign use_random_qty = true
+        elsif variant.incoming
+          assign use_random_qty = false
+          if variant.next_incoming_date
+            assign next_incoming_date = variant.next_incoming_date | date: format: 'date'
+            assign inventory_status = 'warning'
+            assign inventory_text = 'product.inventory.incoming_stock' | t: next_incoming_date: next_incoming_date
+          else
+            assign inventory_status = 'warning'
+            assign inventory_text = 'product.inventory.oversell_stock' | t
+          endif
+        else
+          assign use_random_qty = false
+          assign inventory_status = 'error'
+          assign inventory_text = 'product.inventory.out_of_stock' | t
+        endif
+
+        if variant == product.selected_or_first_available_variant
+          assign inventory_default_status = inventory_status
+          if variant.inventory_management != blank
+            assign inventory_default_quantity = variant.inventory_quantity | at_least: 0
+          else
+            assign inventory_default_quantity = progress_bar_max_value | default: 50
+          endif
+        endif
+      -%}
+
+      <span
+        {% unless variant == product.selected_or_first_available_variant %}hidden{% endunless %}
+        data-variant-id="{{ variant.id }}"
+        data-status="{{ inventory_status }}"
+        data-quantity="{% if variant.inventory_management != blank %}{{ variant.inventory_quantity | at_least: 0 }}{% else %}{{ progress_bar_max_value | default: 50 }}{% endif %}"
+        class="inventory__status inventory__status--{{ inventory_status }}"
+      >
+        {%- if use_random_qty -%}
+          Only <span class="inventory__random-qty">5</span> left in stock
+        {%- else -%}
+          {{- inventory_text -}}
+        {%- endif -%}
+      </span>
+    {%- endfor -%}
+  {%- else -%}
+    <span data-status="warning" class="inventory__status inventory__status--warning">
+      Only <span class="inventory__random-qty">5</span> left in stock
+    </span>
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- if inventory_for_variants != blank -%}
+  <variant-inventory
+    class="inventory inventory--banner text-{{ inventory_default_status }}"
+    data-stock-status="{{ inventory_default_status }}"
+    data-random-stock="true"
+    {% if form_id %}form="{{ form_id }}"{% endif %}
+  >
+    <div class="inventory__banner">
+      <span class="inventory__dot" aria-hidden="true"></span>
+      <span class="inventory__label">
+        {{- inventory_for_variants -}}
+      </span>
+    </div>
+
+    {%- if show_progress_bar -%}
+      <progress-bar class="progress-bar" animate-on-scroll aria-valuenow="{{ inventory_default_quantity }}" aria-valuemax="{{ progress_bar_max_value | default: 50 }}"></progress-bar>
+    {%- endif -%}
+  </variant-inventory>
+
+  <script>
+    (function () {
+      function randomStockQty() {
+        return Math.floor(Math.random() * 4) + 4; /* 4, 5, 6, or 7 */
+      }
+
+      function applyRandomStock() {
+        var n = randomStockQty();
+        document.querySelectorAll('.inventory__random-qty').forEach(function (el) {
+          el.textContent = String(n);
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', applyRandomStock);
+      } else {
+        applyRandomStock();
+      }
+    })();
+  </script>
+{%- endif -%}

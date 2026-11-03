@@ -1,0 +1,102 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "vendor",
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "badge_style": "text",
+            "sale_price_color": "#00b67a",
+            "save_text_color": "#00b67a",
+            "discount_box_percentage": true
+          }
+        },
+        "payment_terms": {
+          "type": "payment_terms",
+          "settings": {}
+        },
+        "separator": {
+          "type": "separator",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {}
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {}
+        },
+        "pickup_availability": {
+          "type": "pickup_availability",
+          "settings": {}
+        },
+        "complementary_products": {
+          "type": "complementary_products",
+          "settings": {}
+        },
+        "trust_points_KaTp01": {
+          "type": "trust_points",
+          "settings": {
+            "text_1": "Free Shipping with Royal Mail",
+            "text_2": "30-Day Money-Back Guarantee",
+            "text_3": "Buy more, Save more!",
+            "icon_size": 18,
+            "font_size": 14,
+            "text_color": "#000000"
+          }
+        },
+        "inventory_KaSt01": {
+          "type": "inventory",
+          "settings": {
+            "show_in_stock_quantity": false,
+            "low_inventory_threshold": 10,
+            "show_progress_bar": false,
+            "progress_bar_max_value": 50
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "price",
+        "trust_points_KaTp01",
+        "payment_terms",
+        "separator",
+        "description",
+        "variant_picker",
+        "inventory_KaSt01",
+        "quantity_selector",
+        "pickup_availability",
+        "buy_buttons",
+        "complementary_products"
+      ],
+      "settings": {}
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "related-products"
+  ]
+}

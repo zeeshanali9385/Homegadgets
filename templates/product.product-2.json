@@ -1,0 +1,200 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "liquid_nfUHYC": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<head>\n  <style>\n    .outer-container {\n      padding: 0px 0; /* 0px */\n    }\n\n    .image-text-container {\n      display: flex;\n      align-items: center;\n    }\n\n    .text {\n      margin-left: 10px; /* Adjust the margin as needed to separate image and text */\n    }\n\n    .review-text {\n      font-size: 12px; /* Change the font size to your desired value */\n    }\n  </style>\n</head>\n<body>\n  <div class=\"outer-container\">\n    <div class=\"image-text-container\">\n      <img src=\"https://cdn.shopify.com/s/files/1/0670/8317/4184/files/Ontwerp_zonder_titel_20.png?v=1709568053\" alt=\"Custom Image\" style=\"width: 75px; height: auto;\">\n      <div class=\"text\">\n        <p class=\"review-text\">4.7/5 Uitstekend 1200+ tevreden klanten </p>\n      </div>\n    </div>\n  </div>\n</body>"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "heading_tag": "h2"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false,
+            "badge_style": "text",
+            "sale_price_color": "#00b67a",
+            "save_text_color": "#00b67a",
+            "discount_box_percentage": true
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "hide_sold_out_variants": false,
+            "selector_type": "block",
+            "color_selector_type": "variant",
+            "size_chart_page": "maat-label"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": false,
+            "show_gift_card_recipient": false,
+            "atc_button_background": "",
+            "atc_button_text_color": "",
+            "payment_button_background": "",
+            "payment_button_text_color": ""
+          }
+        },
+        "image_MxWiya": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/CHECKOUT_1.0.svg",
+            "alignment": "center",
+            "width_mode": "custom",
+            "max_width": 250,
+            "mobile_max_width": 220
+          }
+        },
+        "liquid_WtXmy7": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<ul class=\"sales-points\">\n                  \n                          <li class=\"sales-point\">\n                            <span class=\"icon-and-text\">\n                             <img src=\"https://cdn.shopify.com/s/files/1/0670/8317/4184/files/Truck_01.svg?v=1713869005\">\n                              <span><b>BESTEL VANDAAG</b> EN JE BESTELLING WORDT <span id=\"color-section\">MORGEN VERZONDEN</span></span>\n                            </span>\n                          </li>\n                           <li class=\"sales-point\">\n                            <span class=\"icon-and-text\">\n                            <img src=\"https://cdn.shopify.com/s/files/1/0670/8317/4184/files/Icon_Loaves.svg?v=1713869097\">\n                                \n                              <span><B>GEMAKKELIJK</B> 30 DAGEN RETOURNEREN</span>\n                            </span>\n                          </li>\n                          <li class=\"sales-point\">\n                            <span class=\"icon-and-text\">\n                              <img src=\"https://cdn.shopify.com/s/files/1/0670/8317/4184/files/AAA.svg?v=1713868867\">\n                              <span>ONTWORPEN IN <B>AMSTERDAM</B>, NEDERLAND </span>\n                            </span>\n                          </li>\n</ul>\n\n<style>\n    .sales-points{\n  list-style:none;\n  padding:0;\n  margin:25px 0\n}\n\n\n\n.sales-point {\n    display: block;\n    margin-bottom: 10px;\n    background: #f9f9f9;\n    border-radius: 8px;\n}\n.sales-point:last-child{\n    margin-bottom:0;\n  }\n\n.sales-point .icon{\n    position:relative;\n    width:25px;\n    height:25px;\n    margin-right:10px\n  }\n\nli.sales-point img {\n    width: 25px;\n    height: 25px;\n    object-fit: contain;\n    margin-right: 10px;\n}\n\n.sales-point .icon {\n    position: relative;\n    width: 25px;\n    height: 25px;\n    margin-right: 25px;\n}\n.icon-and-text {\n    display: flex;\n    flex-wrap: nowrap;\n    align-items: center;\n}\n\nspan.icon-and-text i {\n    padding-right: 15px;\n}\nspan#color-section {\n    color: #03A355;\n    font-weight: 700;\n}\nul.sales-points li {\n    list-style: none;\npadding:20px 10px;\n\n}\nul.sales-points {\n    margin-left: 0px;\n}\nspan.icon-and-text i {\n    font-size: 20px;\n    padding-right: 25px;\n}\n\n  </style>"
+          }
+        },
+        "description_gTqttp": {
+          "type": "description",
+          "settings": {
+            "collapse_content": true
+          }
+        },
+        "accordion_d9nfiP": {
+          "type": "accordion",
+          "settings": {
+            "icon": "none",
+            "title": "CARE / WASINSTRUCTIES",
+            "content": "<p>Wij raden u aan een milieuvriendelijke merk te gebruiken die geen agressieve chemicaliën gebruikt.</p>",
+            "liquid": "",
+            "page": ""
+          }
+        },
+        "accordion_zV4f4w": {
+          "type": "accordion",
+          "settings": {
+            "icon": "none",
+            "title": "DUURZAAMHEID",
+            "content": "<p>We willen dat Loaves een merk is waar we op alle mogelijke manieren trots op kunnen zijn. Met dat in gedachten doen we een belofte: we willen de kleding waar jij van houdt ontwerpen en maken met een minimale impact op het milieu en een positieve sociale impact.</p>",
+            "liquid": "",
+            "page": ""
+          }
+        },
+        "accordion_cHiKLy": {
+          "type": "accordion",
+          "settings": {
+            "icon": "none",
+            "title": "VERZENDING & RETOUR",
+            "content": "<p>Gratis verzending op bestellingen van meer dan €70. </p><p>Verzending van €3,95 op bestellingen van minder dan €70. </p><p>Houd rekening met 5-8 werkdagen voor standaardverzending. </p><p><strong>30 Dagen probleemloos retourneren.</strong><br/><br/>We bieden 30 dagen gratis retourneren voor winkelkrediet. Voor een terugbetaling naar de oorspronkelijke betaalmethode brengen we een kleine vergoeding in rekening voor het verzenden van het vervangende artikel, afhankelijk van je locatie. Producten moeten ongedragen, ongewassen, in originele staat en met alle labels en voeringen eraan worden geretourneerd.</p>",
+            "liquid": "",
+            "page": ""
+          }
+        },
+        "trust_points_KaTp01": {
+          "type": "trust_points",
+          "settings": {
+            "text_1": "Free Shipping with Royal Mail",
+            "text_2": "30-Day Money-Back Guarantee",
+            "text_3": "Buy more, Save more!",
+            "icon_size": 18,
+            "font_size": 14,
+            "text_color": "#000000"
+          }
+        },
+        "inventory_KaSt01": {
+          "type": "inventory",
+          "settings": {
+            "show_in_stock_quantity": false,
+            "low_inventory_threshold": 10,
+            "show_progress_bar": false,
+            "progress_bar_max_value": 50
+          }
+        }
+      },
+      "block_order": [
+        "liquid_nfUHYC",
+        "title",
+        "price",
+        "trust_points_KaTp01",
+        "variant_picker",
+        "inventory_KaSt01",
+        "buy_buttons",
+        "image_MxWiya",
+        "liquid_WtXmy7",
+        "description_gTqttp",
+        "accordion_d9nfiP",
+        "accordion_zV4f4w",
+        "accordion_cHiKLy"
+      ],
+      "custom_css": [
+        "price {font-weight: 16px;}"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "container_size": "full",
+        "product_info_size": 60,
+        "show_sticky_add_to_cart": true,
+        "center_basic_info": false,
+        "desktop_media_layout": "grid_2x_highlighted",
+        "desktop_media_grid_gap": 10,
+        "mobile_controls": "free_scroll",
+        "enable_media_autoplay": false,
+        "enable_video_looping": true,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 3
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "custom_css": [
+        "h1 {font-size: 26px; font-family: serif;}"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": false,
+        "hide_product_information": false,
+        "stack_products": true,
+        "recommendations_count": 10,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 5,
+        "horizontal_spacing_factor": 0.2,
+        "vertical_spacing_factor": 0.2,
+        "subheading": "",
+        "title": "",
+        "content": "<h1>ANDERE KOCHTEN</h1>"
+      }
+    },
+    "recently_viewed_products_RnRGgC": {
+      "type": "recently-viewed-products",
+      "custom_css": [
+        "h1 {font-size: 28px; font-family: serif;}"
+      ],
+      "settings": {
+        "separate_section_with_border": false,
+        "color_scheme": "scheme-1",
+        "hide_product_information": false,
+        "stack_products": false,
+        "products_count": 9,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 5,
+        "horizontal_spacing_factor": 0.2,
+        "vertical_spacing_factor": 0.2,
+        "subheading": "",
+        "title": "",
+        "content": "<h1>NET BEKEKEN</h1>"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related-products",
+    "recently_viewed_products_RnRGgC"
+  ]
+}

@@ -1,0 +1,298 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+PRODUCT PRICE
+----------------------------------------------------------------------------------------------------------------------
+
+Render a list of price for a product, variant or line item.
+
+********************************************
+Supported variables
+********************************************
+
+* product: if provided, the prices are rendered for the whole product
+* variant: if provided, then only the price from this variant is rendered
+* line_item: if provided, then the price from this line item are rendered (used on cart or order)
+* hide_unit_price: if set to true unit prices are hidden (mostly useful for size constrained elements)
+* context: can be "product", "line_item" or "card". This controls how the prices are displayed (using the correct sizes)
+* form_id: if specified, the prices are updated dynamically based on the form update
+{%- endcomment -%}
+
+{%- liquid
+  case context
+    when 'card' or 'line_item'
+      assign base_text_class = ''
+
+      if settings.product_card_text_font == 'heading'
+        assign base_text_class = 'h6 '
+      endif
+
+      assign regular_price_classes = base_text_class | append: 'text-subdued'
+      assign on_sale_price_classes = base_text_class | append: 'text-on-sale'
+      assign compare_at_price_classes = base_text_class | append: 'text-subdued line-through'
+      assign unit_price_classes = base_text_class | append: 'text-subdued'
+
+    when 'product'
+      assign regular_price_classes = base_text_class | append: 'product-price__current'
+      assign on_sale_price_classes = base_text_class | append: 'product-price__current product-price__current--sale text-on-sale'
+      assign compare_at_price_classes = base_text_class | append: 'product-price__compare line-through'
+      assign unit_price_classes = base_text_class | append: 'product-price__unit text-subdued'
+  endcase
+-%}
+
+{%- liquid
+  assign sale_price_color = '#00b67a'
+  assign save_text_color = '#00b67a'
+  assign badge_style = 'text'
+  assign badge_bg_color = '#decad9'
+  assign seasonal_sale = blank
+  assign discount_box_percentage = true
+
+  if block != blank and block.settings != blank
+    if block.settings.sale_price_color != blank
+      assign sale_price_color = block.settings.sale_price_color
+    endif
+    if block.settings.save_text_color != blank
+      assign save_text_color = block.settings.save_text_color
+    else
+      assign save_text_color = sale_price_color
+    endif
+    if block.settings.badge_style != blank
+      assign badge_style = block.settings.badge_style
+    endif
+    if block.settings.badge_bg_color != blank
+      assign badge_bg_color = block.settings.badge_bg_color
+    endif
+    assign seasonal_sale = block.settings.seasonal_sale
+    if block.settings.discount_box_percentage == false
+      assign discount_box_percentage = false
+    endif
+  endif
+-%}
+<price-list
+  {% if form_id %}role="region" aria-live="polite"{% endif %}
+  class="{% if seasonal_sale != blank %}price-list-promotion {% endif %}price-list {% if context == 'product' %}price-list--product{% endif %}"
+  {% if context == 'product' %}style="--sale-price-color: {{ sale_price_color }}; --save-text-color: {{ save_text_color }}; --save-badge-bg: {{ badge_bg_color }};"{% endif %}
+>
+  {%- if variant != blank -%}
+    {%- comment -%}
+    --------------------------------------------------------------------------------------------------------------------
+    VARIANT CASE (used on product page, quick view...)
+    --------------------------------------------------------------------------------------------------------------------
+    {%- endcomment -%}
+    {%- liquid
+      assign compare_at_price = variant.compare_at_price
+      if compare_at_price == blank or compare_at_price == 0
+        if product != blank and product.compare_at_price > variant.price
+          assign compare_at_price = product.compare_at_price
+        endif
+      endif
+      assign is_on_sale = false
+      if compare_at_price != blank and compare_at_price > variant.price
+        assign is_on_sale = true
+      endif
+    -%}
+    <compare-at-price {% if form_id %}form="{{ form_id }}"{% endif %} {% unless is_on_sale %}hidden{% endunless %} class="{{ compare_at_price_classes }}">
+      <span class="sr-only">{{ 'product.price.regular_price' | t }}</span>
+
+      {%- if settings.currency_code_enabled -%}
+        {{- compare_at_price | money_with_currency -}}
+      {%- else -%}
+        {{- compare_at_price | money -}}
+      {%- endif -%}
+    </compare-at-price>
+
+    <sale-price {% if form_id %}form="{{ form_id }}"{% endif %} class="{% if is_on_sale %}{{ on_sale_price_classes }}{% else %}{{ regular_price_classes }}{% endif %}">
+      <span class="sr-only">{{ 'product.price.sale_price' | t }}</span>
+
+      {%- if settings.currency_code_enabled -%}
+        {{- variant.price | money_with_currency -}}
+      {%- else -%}
+        {{- variant.price | money -}}
+      {%- endif -%}
+    </sale-price>
+
+    {%- if discount_box_percentage -%}
+      {%- assign savings_value = '0%' -%}
+      {%- if is_on_sale -%}
+        {%- assign discount_amount = compare_at_price | minus: variant.price -%}
+        {%- assign discount_percentage = discount_amount | times: 100.0 | divided_by: compare_at_price | round -%}
+        {%- assign savings_value = discount_percentage | append: '%' -%}
+      {%- endif -%}
+      <price-badge
+        {% if form_id %}form="{{ form_id }}"{% endif %}
+        discount-mode="percentage"
+        class="price-save{% if badge_style == 'badge' %} price-save--badge{% endif %}"
+        {% unless is_on_sale %}hidden{% endunless %}
+      >{{ 'product.general.discount_badge_html' | t: savings: savings_value }}</price-badge>
+    {%- elsif is_on_sale -%}
+      {%- assign discount_amount = compare_at_price | minus: variant.price -%}
+      {%- assign savings_value = discount_amount | money -%}
+      <price-badge
+        {% if form_id %}form="{{ form_id }}"{% endif %}
+        discount-mode="amount"
+        class="price-save{% if badge_style == 'badge' %} price-save--badge{% endif %}"
+      >{{ 'product.general.discount_badge_html' | t: savings: savings_value }}</price-badge>
+    {%- endif -%}
+
+    {% if seasonal_sale != blank %}
+      <price-seasonal>{{ seasonal_sale }}</price-seasonal>
+    {% endif %}
+  {%- elsif line_item != blank -%}
+    {%- comment -%}
+    --------------------------------------------------------------------------------------------------------------------
+    LINE ITEM CASE (used on cart, order page...)
+    --------------------------------------------------------------------------------------------------------------------
+    {%- endcomment -%}
+    <sale-price class="{% if line_item.original_price > line_item.final_price %}{{ on_sale_price_classes }}{% else %}{{ regular_price_classes }}{% endif %}">
+      <span class="sr-only">{{ 'product.price.sale_price' | t }}</span>
+
+      {%- if settings.currency_code_enabled -%}
+        {{- line_item.final_price | money_with_currency -}}
+      {%- else -%}
+        {{- line_item.final_price | money -}}
+      {%- endif -%}
+    </sale-price>
+
+    {%- if line_item.original_price > line_item.final_price -%}
+      <compare-at-price class="{{ compare_at_price_classes }}">
+        <span class="sr-only">{{ 'product.price.regular_price' | t }}</span>
+
+        {%- if settings.currency_code_enabled -%}
+          {{- line_item.original_price | money_with_currency -}}
+        {%- else -%}
+          {{- line_item.original_price | money -}}
+        {%- endif -%}
+      </compare-at-price>
+    {%- endif -%}
+  {%- elsif product != blank -%}
+    {%- comment -%}
+    --------------------------------------------------------------------------------------------------------------------
+    PRODUCT CASE (used on card)
+    --------------------------------------------------------------------------------------------------------------------
+    {%- endcomment -%}
+    {%- liquid
+      if product.price_varies and settings.product_price_strategy != 'from_price'
+        assign variant = product.variants | sort: 'price' | last | default: product.selected_or_first_available_variant
+      else
+        assign variant = product.variants | sort: 'price' | first | default: product.selected_or_first_available_variant
+      endif
+
+      if settings.currency_code_enabled
+        assign variant_price = variant.price | money_with_currency
+        assign variant_compare_at_price = variant.compare_at_price | money_with_currency
+      else
+        assign variant_price = variant.price | money
+        assign variant_compare_at_price = variant.compare_at_price | money
+      endif
+    -%}
+
+    {%- if product.price_varies -%}
+      {%- assign is_variant_on_sale = false -%}
+
+      {%- if variant.price < variant.compare_at_price -%}
+        {%- assign is_variant_on_sale = true -%}
+      {%- endif -%}
+
+      {%- if settings.product_price_strategy == 'from_price' -%}
+        <sale-price class="{% if is_variant_on_sale %}{{ on_sale_price_classes }}{% else %}{{ regular_price_classes }}{% endif %}">
+          <span class="sr-only">{{ 'product.price.sale_price' | t }}</span>
+          {{- 'product.price.from_price_html' | t: price_min: variant_price -}}
+        </sale-price>
+      {%- else -%}
+        <sale-price class="{{ on_sale_price_classes }}">
+          <span class="sr-only">{{ 'product.price.sale_price' | t }}</span>
+          {{- variant_price -}}
+        </sale-price>
+      {%- endif -%}
+    {%- else -%}
+      <sale-price class="{% if variant.price < variant.compare_at_price %}{{ on_sale_price_classes }}{% else %}{{ regular_price_classes }}{% endif %}">
+        <span class="sr-only">{{ 'product.price.sale_price' | t }}</span>
+        {{- variant_price -}}
+      </sale-price>
+    {%- endif -%}
+
+    {%- if variant.price < variant.compare_at_price -%}
+      <compare-at-price class="{{ compare_at_price_classes }}">
+        <span class="sr-only">{{ 'product.price.regular_price' | t }}</span>
+        {{- variant_compare_at_price -}}
+      </compare-at-price>
+    {%- endif -%}
+  {%- else -%}
+    {%- comment -%}
+    --------------------------------------------------------------------------------------------------------------------
+    PLACEHOLDER CASE (used on featured product section for instance)
+    --------------------------------------------------------------------------------------------------------------------
+    {%- endcomment -%}
+
+    <sale-price class="{{ regular_price_classes }}">
+      <span class="sr-only">{{ 'product.price.sale_price' | t }}</span>
+
+      {%- if settings.currency_code_enabled -%}
+        {{- 4999 | money_with_currency -}}
+      {%- else -%}
+        {{- 4999 | money -}}
+      {%- endif -%}
+    </sale-price>
+  {%- endif -%}
+
+  {%- unless hide_unit_price -%}
+    {%- assign unit_price_item = variant | default: line_item | default: product.selected_or_first_available_variant -%}
+
+    {%- if unit_price_item.unit_price or form_id != blank -%}
+      <unit-price {% if form_id %}form="{{ form_id }}"{% endif %} {% unless unit_price_item.unit_price %}hidden{% endunless %} class="{{ unit_price_classes }}">
+        {%- assign unit_price_measurement = unit_price_item.unit_price_measurement -%}
+
+        {%- if unit_price_measurement.reference_value != 1 -%}
+          {%- assign reference_value = unit_price_measurement.reference_value -%}
+        {%- endif -%}
+
+        ({{ unit_price_item.unit_price | money }}/{{ reference_value }}{{ unit_price_measurement.reference_unit }})
+      </unit-price>
+    {%- endif -%}
+  {%- endunless -%}
+</price-list>
+
+{% if block != blank and block.settings.txt_1 != blank %}
+  <p class="text-under-price">{{ block.settings.txt_1 }}</p>
+{% endif %}
+
+{%- if context == 'product' and form_id != blank -%}
+  <script>
+    (function () {
+      if (window.customElements.get('price-badge')) return;
+
+      class PriceBadge extends HTMLElement {
+        connectedCallback() {
+          this._onVariantChanged = this._onVariantChanged.bind(this);
+          document.forms[this.getAttribute('form')]?.addEventListener('variant:change', this._onVariantChanged);
+        }
+
+        disconnectedCallback() {
+          document.forms[this.getAttribute('form')]?.removeEventListener('variant:change', this._onVariantChanged);
+        }
+
+        _onVariantChanged(event) {
+          const variant = event.detail.variant;
+          if (!variant) return;
+
+          if (variant.compare_at_price > variant.price) {
+            this.hidden = false;
+            let savings;
+            if (this.getAttribute('discount-mode') === 'percentage') {
+              savings = Math.round((variant.compare_at_price - variant.price) * 100 / variant.compare_at_price) + '%';
+            } else if (window.formatMoney) {
+              savings = window.formatMoney(variant.compare_at_price - variant.price);
+            } else {
+              savings = ((variant.compare_at_price - variant.price) / 100).toFixed(2);
+            }
+            this.textContent = (window.themeVariables?.strings?.discountBadge || 'Save @@').replace('@@', savings);
+          } else {
+            this.hidden = true;
+          }
+        }
+      }
+
+      window.customElements.define('price-badge', PriceBadge);
+    })();
+  </script>
+{%- endif -%}

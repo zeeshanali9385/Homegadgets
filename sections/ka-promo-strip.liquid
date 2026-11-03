@@ -1,0 +1,265 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+PROMO STRIP - Nomtech
+Thin rotating message bar (e.g. "BUY 2 GET AN EXTRA 10% OFF"). Add one Message block per line.
+----------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+
+{%- liquid
+  assign s = section.settings
+  assign messages = section.blocks | where: 'type', 'message'
+  assign strip_font = s.font
+  assign strip_font_bold = strip_font | font_modify: 'weight', '700'
+  if strip_font_bold == nil
+    assign strip_font_bold = strip_font
+  endif
+-%}
+
+{%- if messages.size > 0 -%}
+  {%- style -%}
+    {{ strip_font | font_face: font_display: 'swap' }}
+    {{ strip_font_bold | font_face: font_display: 'swap' }}
+
+    #ka-strip-{{ section.id }} {
+      background: {{ s.background }};
+      color: {{ s.text_color }};
+      {%- if s.show_border %}
+        border-top: 1px solid {{ s.border_color }};
+        border-bottom: 1px solid {{ s.border_color }};
+      {%- endif %}
+    }
+
+    #ka-strip-{{ section.id }} .ka-strip__inner {
+      min-height: {{ s.height_mobile }}px;
+      padding: 0 16px;
+    }
+
+    #ka-strip-{{ section.id }} .ka-strip__msg {
+      font-family: {{ strip_font_bold.family }}, {{ strip_font_bold.fallback_families }};
+      font-weight: {{ strip_font_bold.weight }};
+      font-size: {{ s.font_size_mobile }}px;
+      letter-spacing: {{ s.letter_spacing | divided_by: 100.0 }}em;
+    }
+
+    @media screen and (min-width: 700px) {
+      #ka-strip-{{ section.id }} .ka-strip__inner {
+        min-height: {{ s.height_desktop }}px;
+        padding: 0 40px;
+      }
+
+      #ka-strip-{{ section.id }} .ka-strip__msg {
+        font-size: {{ s.font_size_desktop }}px;
+      }
+    }
+
+    ka-promo-strip {
+      display: block;
+      width: 100%;
+    }
+
+    .ka-strip__inner {
+      display: grid;
+      align-items: center;
+      justify-items: center;
+      overflow: hidden;
+    }
+
+    .ka-strip__msg {
+      grid-area: 1 / 1;
+      max-width: 100%;
+      margin: 0;
+      line-height: 1.4;
+      text-align: center;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: inherit;
+      text-decoration: none;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(6px);
+      transition: opacity .45s ease, transform .45s ease, visibility 0s linear .45s;
+    }
+
+    .ka-strip__msg.is-active {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      transition: opacity .45s ease, transform .45s ease, visibility 0s;
+    }
+
+    /* Slide mode: new message comes in from the right, old one leaves to the left */
+    .ka-strip--slide .ka-strip__inner {
+      justify-items: stretch;
+      touch-action: pan-y;
+    }
+
+    .ka-strip--slide .ka-strip__msg {
+      width: 100%;
+      opacity: 1;
+      visibility: hidden;
+      transform: translateX(100%);
+      transition: none;
+    }
+
+    .ka-strip--slide .ka-strip__msg.is-active,
+    .ka-strip--slide .ka-strip__msg.is-leaving {
+      visibility: visible;
+      transition: transform var(--ka-strip-duration, .6s) cubic-bezier(.65, 0, .35, 1);
+    }
+
+    .ka-strip--slide .ka-strip__msg.is-active {
+      transform: translateX(0);
+    }
+
+    .ka-strip--slide .ka-strip__msg.is-leaving {
+      transform: translateX(-100%);
+    }
+
+    .ka-strip--slide.is-reverse .ka-strip__msg:not(.is-active):not(.is-leaving) {
+      transform: translateX(-100%);
+    }
+
+    .ka-strip--slide.is-reverse .ka-strip__msg.is-leaving {
+      transform: translateX(100%);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ka-strip__msg,
+      .ka-strip--slide .ka-strip__msg.is-active,
+      .ka-strip--slide .ka-strip__msg.is-leaving {
+        transition: none;
+      }
+    }
+  {%- endstyle -%}
+
+  <ka-promo-strip id="ka-strip-{{ section.id }}" class="ka-strip {% if s.animation == 'slide' %}ka-strip--slide{% endif %}" data-speed="{{ s.speed }}" style="--ka-strip-duration: {{ s.slide_duration | divided_by: 10.0 }}s;" role="region" aria-label="Promotions">
+    <div class="ka-strip__inner">
+      {%- for block in messages -%}
+        {%- if block.settings.link != blank -%}
+          <a href="{{ block.settings.link }}" class="ka-strip__msg {% if forloop.first %}is-active{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.text }}</a>
+        {%- else -%}
+          <p class="ka-strip__msg {% if forloop.first %}is-active{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.text }}</p>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </ka-promo-strip>
+
+  <script>
+    if (!customElements.get('ka-promo-strip')) {
+      customElements.define('ka-promo-strip', class extends HTMLElement {
+        connectedCallback() {
+          this.items = [...this.querySelectorAll('.ka-strip__msg')];
+          this.index = 0;
+          this.paused = false;
+          if (this.items.length < 2) return;
+
+          this.addEventListener('mouseenter', () => (this.paused = true));
+          this.addEventListener('mouseleave', () => (this.paused = false));
+          this.addEventListener('focusin', () => (this.paused = true));
+          this.addEventListener('focusout', () => (this.paused = false));
+
+          /* Theme editor: show the block being edited */
+          this.items.forEach((item, i) => {
+            item.addEventListener('shopify:block:select', () => { this.paused = true; this.go(i); });
+            item.addEventListener('shopify:block:deselect', () => (this.paused = false));
+          });
+
+          /* Swipe on phones */
+          let startX = null;
+          this.addEventListener('pointerdown', (e) => { startX = e.clientX; });
+          this.addEventListener('pointerup', (e) => {
+            if (startX === null) return;
+            const dx = e.clientX - startX;
+            startX = null;
+            if (Math.abs(dx) > 30) {
+              this.go(dx < 0 ? this.index + 1 : this.index - 1, dx > 0);
+              this.restart();
+            }
+          });
+
+          this.restart();
+        }
+
+        disconnectedCallback() {
+          clearInterval(this.timer);
+        }
+
+        restart() {
+          clearInterval(this.timer);
+          const speed = Math.max(2, Number(this.dataset.speed) || 5) * 1000;
+          this.timer = setInterval(() => {
+            if (!this.paused && !document.hidden) this.go(this.index + 1);
+          }, speed);
+        }
+
+        go(i, reverse = false) {
+          const next = (i + this.items.length) % this.items.length;
+          if (next === this.index) return;
+
+          const current = this.items[this.index];
+          const incoming = this.items[next];
+          this.classList.toggle('is-reverse', reverse);
+
+          this.items.forEach((item) => item.classList.remove('is-leaving'));
+          incoming.offsetWidth; /* place the incoming message off-screen before animating */
+
+          current.classList.remove('is-active');
+          current.classList.add('is-leaving');
+          incoming.classList.add('is-active');
+
+          clearTimeout(this.leaveTimer);
+          const ms = (parseFloat(getComputedStyle(incoming).transitionDuration) || 0.6) * 1000;
+          this.leaveTimer = setTimeout(() => current.classList.remove('is-leaving'), ms + 100);
+          this.index = next;
+        }
+      });
+    }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Promo strip",
+  "tag": "section",
+  "class": "shopify-section--ka-promo-strip",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "range", "id": "speed", "label": "Change message every", "min": 2, "max": 10, "step": 1, "unit": "sec", "default": 5 },
+    { "type": "select", "id": "animation", "label": "Animation", "options": [ { "value": "slide", "label": "Slide" }, { "value": "fade", "label": "Fade" } ], "default": "slide" },
+    { "type": "range", "id": "slide_duration", "label": "Slide speed", "min": 3, "max": 12, "step": 1, "unit": "ds", "info": "In tenths of a second (6 = 0.6s).", "default": 6 },
+    { "type": "header", "content": "Style" },
+    { "type": "font_picker", "id": "font", "label": "Font", "default": "montserrat_n7" },
+    { "type": "range", "id": "font_size_desktop", "label": "Text size (desktop)", "min": 9, "max": 18, "step": 1, "unit": "px", "default": 11 },
+    { "type": "range", "id": "font_size_mobile", "label": "Text size (mobile)", "min": 8, "max": 16, "step": 1, "unit": "px", "default": 10 },
+    { "type": "range", "id": "letter_spacing", "label": "Letter spacing", "min": 0, "max": 40, "step": 2, "unit": "%", "default": 20 },
+    { "type": "range", "id": "height_desktop", "label": "Height (desktop)", "min": 24, "max": 70, "step": 2, "unit": "px", "default": 36 },
+    { "type": "range", "id": "height_mobile", "label": "Height (mobile)", "min": 24, "max": 70, "step": 2, "unit": "px", "default": 34 },
+    { "type": "color", "id": "background", "label": "Background", "default": "#f5f5f5" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#000000" },
+    { "type": "checkbox", "id": "show_border", "label": "Show top and bottom border", "default": false },
+    { "type": "color", "id": "border_color", "label": "Border", "default": "#e8e8e1" }
+  ],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Buy 2 get an extra 10% off" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promo strip",
+      "blocks": [
+        { "type": "message", "settings": { "text": "Buy 2 get an extra 10% off" } },
+        { "type": "message", "settings": { "text": "Buy 3 get an extra 15% off" } },
+        { "type": "message", "settings": { "text": "Buy 4 get an extra 20% off" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

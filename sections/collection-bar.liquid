@@ -1,0 +1,95 @@
+<style>
+  @font-face {
+    font-family: "Montserrat_custom";
+    font-weight: 500;
+    src: url("https://cdn.shopify.com/s/files/1/0857/1499/3483/files/Montserrat-Medium.ttf?v=1747567247") format("opentype");
+  }
+  @font-face {
+    font-family: "Montserrat_custom";
+    font-weight: 600;
+    src: url("https://cdn.shopify.com/s/files/1/0857/1499/3483/files/Montserrat-SemiBold.ttf?v=1747567250") format("opentype");
+  }
+  .ms-collections-bar {
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    border-style: solid;
+    border-width: 0;
+    border-color: rgb(0 0 0 / .12);
+    box-sizing: border-box;
+    width: 100%;
+    align-items: center;
+    justify-content: safe center;
+    scrollbar-width: none;
+    padding: 0 20px;
+    gap: 28px;
+    border-top: 0px solid #ebebeb;
+    background: rgb(0 0 0/ .05);
+    border-bottom: 0px solid #ebebeb;
+    overflow: scroll;
+    display: flex;
+  }
+  .ms-collections-bar a {
+    padding: 12px 0 10px ;
+    color: #000000a8 ;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: 0;
+    text-align: center;
+    text-transform: uppercase;
+    transition: all .2s ease;
+    font-size: 14px;
+    white-space: nowrap;
+    border-bottom: solid 2px transparent;
+  }
+  .ms-collections-bar a.active,
+  .ms-collections-bar a:hover:not(.active) {
+    border-color: #00000080;
+    color: #000;
+    font-weight: 600;
+  }
+  @media only screen and (max-width: 767px) {
+    .ms-collections-bar {
+      gap: 18px;
+    }
+    .ms-collections-bar a {
+      padding: 8px 0 6px !important;
+    }
+    .ms-collections-bar a {
+      font-size: 12px !important;
+    }
+  }
+</style>
+<div class="ms-collections-bar">
+  {% for block in section.blocks %}
+    <a href="{{ block.settings.col.url }}">{{ block.settings.text }}</a>
+  {% endfor %}
+</div>
+{% schema %}
+  {
+    "name": "Collections bar",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "Collection",
+        "settings": [
+          {
+            "type": "collection",
+            "id": "col",
+            "label": "Collection"
+          },
+          {
+            "type": "text",
+            "id": "text",
+            "label": "Text"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Collections bar"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,72 @@
+<div class="ms-guarantees">
+  <style>
+    .ms-guarantees {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .ms-guarantee {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      width: fit-content;
+    }
+    .ms-guarantee-img {
+      display: flex;
+      width: 32px;
+      height: 32px;
+      justify-content: center;
+      align-items: center;
+      border-radius: 240px;
+      background: #f3f3f3;
+    }
+    .ms-guarantee-img img {
+      width: 19px;
+      height: 19px;
+    }
+    .ms-guarantee p {
+      font-weight: 500;
+    }
+    @media (max-width: 810px) {
+      .ms-guarantee-img {
+        width: 30px;
+        height: 30px;
+      }
+      .ms-guarantees {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+    }
+    @media (max-width: 500px) {
+      .guarantee-block {
+        gap: 8px;
+      }
+      .ms-guarantee-img img {
+        width: 16px;
+        height: 16px;
+      }
+      .ms-guarantee {
+        gap: 12px;
+      }
+    }
+  </style>
+  <div class="ms-guarantee">
+    <div class="ms-guarantee-img">
+      <img src="{{ block.settings.img_1 | img_url: 'master' }}">
+    </div>
+    <p>{{ block.settings.txt_1 }}</p>
+  </div>
+  <div class="ms-guarantee">
+    <div class="ms-guarantee-img">
+      <img src="{{ block.settings.img_2 | img_url: 'master' }}">
+    </div>
+    <p>{{ block.settings.txt_2 }}</p>
+  </div>
+  <div class="ms-guarantee">
+    <div class="ms-guarantee-img">
+      <img src="{{ block.settings.img_3 | img_url: 'master' }}">
+    </div>
+    <p>{{ block.settings.txt_3 }}</p>
+  </div>
+</div>

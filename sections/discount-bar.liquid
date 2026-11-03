@@ -1,0 +1,484 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+DISCOUNT BAR
+Top announcement bar with sale text + countdown timer. Text, colors, and end date come from the theme editor.
+----------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+
+{%- liquid
+  assign s = section.settings
+  assign end_iso = blank
+  if s.end_datetime != blank
+    assign end_iso = s.end_datetime | date: '%FT%T%:z'
+  endif
+-%}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    --db-title-size: {{ s.title_size_mobile }}px;
+    --db-sub-size: {{ s.subheading_size_mobile }}px;
+    --db-num-size: {{ s.timer_size_mobile }}px;
+    --db-lbl-size: {{ s.label_size_mobile }}px;
+    --db-gap: 12px;
+    --db-pad-y: 6px;
+    --db-pad-x: 10px;
+    --db-timer-gap: 3px;
+    --db-num-min: 22px;
+    --db-num-pad: 3px;
+  }
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} {
+      --db-title-size: {{ s.title_size_desktop }}px;
+      --db-sub-size: {{ s.subheading_size_desktop }}px;
+      --db-num-size: {{ s.timer_size_desktop }}px;
+      --db-lbl-size: {{ s.label_size_desktop }}px;
+      --db-gap: 22px;
+      --db-pad-y: 9px;
+      --db-pad-x: 14px;
+      --db-timer-gap: 5px;
+      --db-num-min: 28px;
+      --db-num-pad: 4px 5px;
+    }
+  }
+
+  #discount-bar-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--db-gap);
+    padding: var(--db-pad-y) var(--db-pad-x);
+    background: linear-gradient(
+      {{ s.gradient_angle }}deg,
+      {{ s.gradient_start }} 0%,
+      {{ s.gradient_mid }} 48%,
+      {{ s.gradient_end }} 100%
+    );
+    color: {{ s.text_color }};
+    font-family: inherit;
+    line-height: 1.15;
+  }
+
+  #discount-bar-{{ section.id }} .discount-bar__text {
+    text-align: center;
+  }
+
+  #discount-bar-{{ section.id }} .discount-bar__title {
+    margin: 0;
+    font-weight: 800;
+    font-size: var(--db-title-size);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: inherit;
+  }
+
+  #discount-bar-{{ section.id }} .discount-bar__sub {
+    margin: 3px 0 0;
+    font-weight: 500;
+    font-size: var(--db-sub-size);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: inherit;
+  }
+
+  #discount-bar-{{ section.id }} .discount-bar__timer {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--db-timer-gap);
+    flex-shrink: 0;
+  }
+
+  #discount-bar-{{ section.id }} .discount-bar__unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #discount-bar-{{ section.id }} .discount-bar__num {
+    min-width: var(--db-num-min);
+    padding: var(--db-num-pad);
+    border-radius: 4px;
+    background: {{ s.timer_box_color.rgb }} / {{ s.timer_box_opacity | divided_by: 100.0 }};
+    font-weight: 700;
+    font-size: var(--db-num-size);
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+    color: inherit;
+    line-height: 1.2;
+  }
+
+  #discount-bar-{{ section.id }} .discount-bar__lbl {
+    font-size: var(--db-lbl-size);
+    letter-spacing: 0.12em;
+    margin-top: 3px;
+    opacity: 0.75;
+    text-transform: uppercase;
+    color: inherit;
+  }
+
+  #discount-bar-{{ section.id }} .discount-bar__sep {
+    font-weight: 700;
+    font-size: var(--db-num-size);
+    opacity: 0.6;
+    padding-top: 4px;
+    color: inherit;
+  }
+
+  @media screen and (max-width: 749px) {
+    #discount-bar-{{ section.id }} .discount-bar__sub {
+      margin-top: 2px;
+    }
+
+    #discount-bar-{{ section.id }} .discount-bar__lbl {
+      margin-top: 2px;
+    }
+
+    #discount-bar-{{ section.id }} .discount-bar__sep {
+      padding-top: 3px;
+    }
+  }
+
+  {%- if s.link != blank -%}
+    #discount-bar-{{ section.id }} a.discount-bar__link {
+      color: inherit;
+      text-decoration: none;
+      display: contents;
+    }
+  {%- endif -%}
+{%- endstyle -%}
+
+<div
+  class="discount-bar"
+  id="discount-bar-{{ section.id }}"
+  data-discount-bar
+  data-end="{{ end_iso | escape }}"
+  {% if s.hide_when_ended %}data-hide-when-ended{% endif %}
+>
+  {%- if s.link != blank -%}
+    <a class="discount-bar__link" href="{{ s.link }}">
+  {%- endif -%}
+
+  <div class="discount-bar__text">
+    {%- if s.heading != blank -%}
+      <p class="discount-bar__title">{{ s.heading | escape }}</p>
+    {%- endif -%}
+    {%- if s.subheading != blank -%}
+      <p class="discount-bar__sub">{{ s.subheading | escape }}</p>
+    {%- endif -%}
+  </div>
+
+  {%- if s.show_timer -%}
+    <div class="discount-bar__timer" role="timer" aria-label="Sale ends {{ s.end_datetime | escape }}">
+      <div class="discount-bar__unit">
+        <span class="discount-bar__num" data-u="d">00</span>
+        <span class="discount-bar__lbl">{{ s.label_days | escape }}</span>
+      </div>
+      <span class="discount-bar__sep" aria-hidden="true">:</span>
+      <div class="discount-bar__unit">
+        <span class="discount-bar__num" data-u="h">00</span>
+        <span class="discount-bar__lbl">{{ s.label_hours | escape }}</span>
+      </div>
+      <span class="discount-bar__sep" aria-hidden="true">:</span>
+      <div class="discount-bar__unit">
+        <span class="discount-bar__num" data-u="m">00</span>
+        <span class="discount-bar__lbl">{{ s.label_minutes | escape }}</span>
+      </div>
+      <span class="discount-bar__sep" aria-hidden="true">:</span>
+      <div class="discount-bar__unit">
+        <span class="discount-bar__num" data-u="s">00</span>
+        <span class="discount-bar__lbl">{{ s.label_seconds | escape }}</span>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if s.link != blank -%}
+    </a>
+  {%- endif -%}
+</div>
+
+{%- if s.show_timer -%}
+  <script>
+    (function () {
+      var root = document.getElementById('discount-bar-{{ section.id }}');
+      if (!root) return;
+
+      var endAttr = root.getAttribute('data-end');
+      var end = endAttr ? new Date(endAttr) : null;
+      if (!end || isNaN(end.getTime())) return;
+
+      var nodes = {};
+      ['d', 'h', 'm', 's'].forEach(function (k) {
+        nodes[k] = root.querySelector('[data-u="' + k + '"]');
+      });
+
+      function pad(n) {
+        return (n < 10 ? '0' : '') + n;
+      }
+
+      function setZero() {
+        if (nodes.d) nodes.d.textContent = '00';
+        if (nodes.h) nodes.h.textContent = '00';
+        if (nodes.m) nodes.m.textContent = '00';
+        if (nodes.s) nodes.s.textContent = '00';
+      }
+
+      function tick() {
+        var diff = Math.floor((end.getTime() - Date.now()) / 1000);
+
+        if (diff <= 0) {
+          setZero();
+          if (root.hasAttribute('data-hide-when-ended')) {
+            var section = document.getElementById('shopify-section-{{ section.id }}');
+            if (section) section.style.display = 'none';
+          }
+          return false;
+        }
+
+        var days = Math.floor(diff / 86400);
+        var hours = Math.floor((diff % 86400) / 3600);
+        var mins = Math.floor((diff % 3600) / 60);
+        var secs = diff % 60;
+
+        if (nodes.d) nodes.d.textContent = pad(days);
+        if (nodes.h) nodes.h.textContent = pad(hours);
+        if (nodes.m) nodes.m.textContent = pad(mins);
+        if (nodes.s) nodes.s.textContent = pad(secs);
+        return true;
+      }
+
+      if (!tick()) return;
+      var timer = setInterval(function () {
+        if (!tick()) clearInterval(timer);
+      }, 1000);
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Discount bar",
+  "class": "shopify-section--discount-bar",
+  "tag": "section",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "EARLY BLACK FRIDAY SALE"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "UP TO 50% OFF + FREE MYSTERY GIFT 🎁"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link (optional)"
+    },
+    {
+      "type": "header",
+      "content": "Countdown timer"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_timer",
+      "label": "Show countdown timer",
+      "default": true
+    },
+    {
+      "type": "paragraph",
+      "content": "Use your store timezone. Format: YYYY-MM-DD HH:MM (example: 2026-11-28 23:59)."
+    },
+    {
+      "type": "text",
+      "id": "end_datetime",
+      "label": "End date and time",
+      "default": "2026-11-28 23:59",
+      "info": "Timer shows 00:00:00:00 when this time is reached."
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_when_ended",
+      "label": "Hide bar when timer ends",
+      "default": false,
+      "info": "If unchecked, the timer stays at 00 after the end time."
+    },
+    {
+      "type": "text",
+      "id": "label_days",
+      "label": "Days label",
+      "default": "DAYS"
+    },
+    {
+      "type": "text",
+      "id": "label_hours",
+      "label": "Hours label",
+      "default": "HRS"
+    },
+    {
+      "type": "text",
+      "id": "label_minutes",
+      "label": "Minutes label",
+      "default": "MIN"
+    },
+    {
+      "type": "text",
+      "id": "label_seconds",
+      "label": "Seconds label",
+      "default": "SEC"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "gradient_start",
+      "label": "Gradient start",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "color",
+      "id": "gradient_mid",
+      "label": "Gradient middle",
+      "default": "#171212"
+    },
+    {
+      "type": "color",
+      "id": "gradient_end",
+      "label": "Gradient end",
+      "default": "#6b0f16"
+    },
+    {
+      "type": "range",
+      "id": "gradient_angle",
+      "label": "Gradient angle",
+      "min": 0,
+      "max": 180,
+      "step": 2,
+      "unit": "deg",
+      "default": 100
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "timer_box_color",
+      "label": "Timer box color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "timer_box_opacity",
+      "label": "Timer box opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_size_desktop",
+      "label": "Heading size (desktop)",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "label": "Heading size (mobile)",
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_desktop",
+      "label": "Subheading size (desktop)",
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_mobile",
+      "label": "Subheading size (mobile)",
+      "min": 7,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 9
+    },
+    {
+      "type": "range",
+      "id": "timer_size_desktop",
+      "label": "Timer number size (desktop)",
+      "min": 10,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "timer_size_mobile",
+      "label": "Timer number size (mobile)",
+      "min": 8,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "label_size_desktop",
+      "label": "Timer label size (desktop)",
+      "min": 6,
+      "max": 12,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "label_size_mobile",
+      "label": "Timer label size (mobile)",
+      "min": 5,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 6
+    }
+  ],
+  "presets": [
+    {
+      "name": "Discount bar"
+    }
+  ]
+}
+{% endschema %}
