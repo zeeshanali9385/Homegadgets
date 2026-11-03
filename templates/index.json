@@ -156,8 +156,8 @@
             "new_arrival_badge": false,
             "text": "",
             "products_count": 4,
-            "title": "Jackets & Coats for Men",
-            "link_url": "shopify://collections/mens-jackets-coats",
+            "title": "",
+            "link_url": "shopify://collections/kitchen-essentials",
             "link_text": "View all"
           }
         }
@@ -171,7 +171,7 @@
         "separate_section_with_border": false,
         "hide_product_information": false,
         "stack_products": true,
-        "products_per_row_mobile": "2",
+        "products_per_row_mobile": "1",
         "products_per_row_desktop": 4,
         "horizontal_spacing_factor": 1,
         "vertical_spacing_factor": 1,
