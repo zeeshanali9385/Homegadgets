@@ -1,80 +1,77 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
+  "name": "t:sections.header.name",
   "type": "header",
-  "name": "Header group",
   "sections": {
-    "announcement-bar": {
-      "type": "announcement-bar",
+    "sale-countdown-bar": {
+      "type": "sale-countdown-bar",
+      "settings": {
+        "accessibility_label": "Limited time sale",
+        "sale_label": "Free Shipping across Pakistan on orders above <strong>PKR 3000</strong> | Cash on Delivery Available",
+        "end_datetime": "2026-12-31T23:59:59+05:00",
+        "label_days": "Days",
+        "label_hours": "Hrs",
+        "label_mins": "Min",
+        "label_secs": "Sec",
+        "cta_label": "Shop Sale →",
+        "cta_link": "shopify://collections/sale",
+        "background_color": "#ede4d4",
+        "text_color": "#3d2e1e",
+        "accent_color": "#c9a227"
+      }
+    },
+    "trust-ticker": {
+      "type": "trust-ticker",
       "blocks": {
-        "message_rQ969T": {
-          "type": "message",
+        "t1": {
+          "type": "trust_item",
           "settings": {
-            "text": "<strong>CLEARANCE SALE ENDS TODAY | UP TO 60% OFF</strong>",
-            "desktop_text": "",
-            "mobile_text": ""
+            "text": "30 Days Hassle-free Returns"
+          }
+        },
+        "t2": {
+          "type": "trust_item",
+          "settings": {
+            "text": "1 Year International Warranty"
+          }
+        },
+        "t3": {
+          "type": "trust_item",
+          "settings": {
+            "text": "Free Delivery Across Pakistan"
           }
         }
       },
       "block_order": [
-        "message_rQ969T"
-      ],
-      "custom_css": [
-        "p {font-weight: 800; letter-spacing: 0;}"
+        "t1",
+        "t2",
+        "t3"
       ],
       "settings": {
-        "color_scheme": "scheme-ff85aa93-e233-4569-9e09-8ef848ca7638",
-        "enable_sticky": true,
-        "autoplay": true,
-        "cycle_speed": 5,
-        "desktop_padding_vertical": 12,
-        "mobile_padding_vertical": 10,
-        "desktop_font_size": 12,
-        "mobile_font_size": 11,
-        "font_weight": 400,
-        "show_arrows_mobile": false
+        "accessibility_label": "Store promises",
+        "background_color": "#fff9f0",
+        "text_color": "#3d2e1e",
+        "accent_color": "#d4b26a"
       }
     },
     "header": {
       "type": "header",
-      "blocks": {
-        "mega_menu_rh4zDP": {
-          "type": "mega_menu",
-          "settings": {
-            "menu_item": "",
-            "images_position": "right",
-            "image_1_heading": "",
-            "image_1_text": "",
-            "image_1_link": "",
-            "image_2_heading": "",
-            "image_2_text": "",
-            "image_2_link": ""
-          }
-        },
-        "mega_menu_BWX49f": {
-          "type": "mega_menu",
-          "settings": {
-            "menu_item": "CLOTHING",
-            "images_position": "right",
-            "image_1_heading": "",
-            "image_1_text": "",
-            "image_1_link": "",
-            "image_2_heading": "",
-            "image_2_text": "",
-            "image_2_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "mega_menu_rh4zDP",
-        "mega_menu_BWX49f"
-      ],
       "settings": {
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
         "enable_sticky": true,
-        "show_separation_border": false,
-        "reduce_padding": true,
-        "logo": "shopify://shop_images/010fcbf6-b0c9-488b-ad4d-72bd3b30705e.png",
-        "logo_max_width": 195,
-        "logo_mobile_max_width": 155,
+        "show_separation_border": true,
+        "reduce_padding": false,
+        "logo": "shopify://shop_images/zm-logo-transparent.png",
+        "logo_max_width": 140,
+        "logo_mobile_max_width": 100,
         "menu": "main-menu",
         "sidebar_menu": "",
         "menu_open_trigger": "hover",
@@ -82,95 +79,19 @@
         "sidebar_color_scheme": "",
         "sidebar_text_font": "heading",
         "sidebar_show_dividers": true,
-        "layout": "logo_center_navigation_below",
+        "layout": "logo_left_navigation_inline",
         "show_icons": true,
         "show_country_selector": true,
         "show_country_name": false,
         "show_country_flag": true,
-        "show_locale_selector": true,
+        "show_locale_selector": false,
         "transparent_header_text_color": "#ffffff"
-      }
-    },
-    "ka_promo_strip": {
-      "type": "ka-promo-strip",
-      "blocks": {
-        "msg_1": {
-          "type": "message",
-          "settings": {
-            "text": "Buy 2 get an extra 10% off",
-            "link": ""
-          }
-        },
-        "msg_2": {
-          "type": "message",
-          "settings": {
-            "text": "Buy 3 get an extra 15% off",
-            "link": ""
-          }
-        },
-        "msg_3": {
-          "type": "message",
-          "settings": {
-            "text": "Buy 4 get an extra 20% off",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "msg_1",
-        "msg_2",
-        "msg_3"
-      ],
-      "settings": {
-        "speed": 5,
-        "animation": "slide",
-        "slide_duration": 6,
-        "font": "poppins_n4",
-        "font_size_desktop": 11,
-        "font_size_mobile": 10,
-        "letter_spacing": 20,
-        "height_desktop": 36,
-        "height_mobile": 34,
-        "background": "#f5f5f5",
-        "text_color": "#000000",
-        "show_border": false,
-        "border_color": "#e8e8e1"
-      }
-    },
-    "discount_bar": {
-      "type": "discount-bar",
-      "settings": {
-        "heading": "EARLY BLACK FRIDAY SALE",
-        "subheading": "UP TO 50% OFF + FREE MYSTERY GIFT 🎁",
-        "link": "",
-        "show_timer": true,
-        "end_datetime": "2026-11-28 23:59",
-        "hide_when_ended": false,
-        "label_days": "DAYS",
-        "label_hours": "HRS",
-        "label_minutes": "MIN",
-        "label_seconds": "SEC",
-        "gradient_start": "#0d0d0d",
-        "gradient_mid": "#171212",
-        "gradient_end": "#6b0f16",
-        "gradient_angle": 100,
-        "text_color": "#ffffff",
-        "timer_box_color": "#ffffff",
-        "timer_box_opacity": 16,
-        "title_size_desktop": 15,
-        "title_size_mobile": 12,
-        "subheading_size_desktop": 12,
-        "subheading_size_mobile": 9,
-        "timer_size_desktop": 13,
-        "timer_size_mobile": 11,
-        "label_size_desktop": 8,
-        "label_size_mobile": 6
       }
     }
   },
   "order": [
-    "discount_bar",
-    "header",
-    "ka_promo_strip"
+    "sale-countdown-bar",
+    "trust-ticker",
+    "header"
   ]
 }
