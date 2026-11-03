@@ -100,11 +100,11 @@
           "type": "collection",
           "settings": {
             "color_scheme": "",
-            "collection": "",
+            "collection": "cleaning-storage",
             "expand_collection": false,
             "content_position": "place-self-center text-center",
             "subheading": "",
-            "title": "<strong>WOMEN'S COLLECTION</strong>",
+            "title": "<strong>cleaning and storage</strong>",
             "button_text": "SHOP NOW",
             "button_link": "shopify://collections/women",
             "overlay_color": "#000000",
@@ -115,11 +115,11 @@
           "type": "collection",
           "settings": {
             "color_scheme": "",
-            "collection": "",
+            "collection": "home-appliances-lighting",
             "expand_collection": false,
             "content_position": "place-self-center text-center",
             "subheading": "",
-            "title": "<strong>MEN'S COLLECTION</strong>",
+            "title": "<strong>Home Essentials&nbsp;</strong>",
             "button_text": "SHOP NOW",
             "button_link": "shopify://collections/men",
             "overlay_color": "#000000",
@@ -131,7 +131,6 @@
         "collection_FFHgJk",
         "collection_njzHQd"
       ],
-      "disabled": true,
       "custom_css": [],
       "name": "t:sections.collection_list.presets.collection_list.name",
       "settings": {
@@ -286,6 +285,7 @@
         "heading_Xc6Rp6",
         "richtext_mUBiqd"
       ],
+      "disabled": true,
       "name": "t:sections.image_with_text_overlay.presets.image_with_text_overlay.name",
       "settings": {
         "color_scheme": "",
