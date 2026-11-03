@@ -1,8 +1,19 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": "Dawn",
   "presets": {
     "Dawn": {
-      "logo_width": 90,
+      "logo": "shopify://shop_images/zm-logo-transparent.png",
+      "logo_width": 120,
+      "favicon": "shopify://shop_images/zm-favicon-transparent.png",
       "customer_account_menu": "customer-account-main-menu",
       "color_schemes": {
         "scheme-1": {
@@ -156,13 +167,14 @@
       "badge_corner_radius": 40,
       "sale_badge_color_scheme": "scheme-4",
       "sold_out_badge_color_scheme": "scheme-3",
-      "brand_headline": "HORIZON PK",
-      "brand_description": "<p>Affordable luxury watches for Pakistan — free delivery, COD, and a 1-year warranty.</p>",
-      "brand_image_width": 100,
+      "brand_headline": "Zeit & Meridian",
+      "brand_description": "<p>Luxury watches for Pakistan — free delivery, COD, and a 1-year warranty.</p>",
+      "brand_image": "shopify://shop_images/zm-logo-transparent.png",
+      "brand_image_width": 120,
       "social_twitter_link": "",
-      "social_facebook_link": "",
+      "social_facebook_link": "https://www.facebook.com/profile.php?id=61596035497616",
       "social_pinterest_link": "",
-      "social_instagram_link": "",
+      "social_instagram_link": "https://www.instagram.com/zeitnmeridian/",
       "social_tiktok_link": "",
       "social_tumblr_link": "",
       "social_snapchat_link": "",

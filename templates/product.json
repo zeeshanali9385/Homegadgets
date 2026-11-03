@@ -26,13 +26,13 @@
         },
         "feature_4": {
           "type": "feature_item",
-          "settings": { "text": "1-year HORIZON international warranty" }
+          "settings": { "text": "1-year Zeit & Meridian international warranty" }
         },
         "acc_specs": {
           "type": "accordion_item",
           "settings": {
             "title": "Product specifications",
-            "body": "Movement, case size, water resistance, strap/dial options, and materials are listed for this HORIZON model. Check the product title and description for exact specs."
+            "body": "Movement, case size, water resistance, strap/dial options, and materials are listed for this Zeit & Meridian model. Check the product title and description for exact specs."
           }
         },
         "acc_ship": {
@@ -91,7 +91,7 @@
           "type": "faq_item",
           "settings": {
             "question": "What is the warranty policy?",
-            "answer": "Every HORIZON watch includes a 1-year international warranty covering manufacturing defects."
+            "answer": "Every Zeit & Meridian watch includes a 1-year international warranty covering manufacturing defects."
           }
         },
         "review_1": {
@@ -161,7 +161,7 @@
         "sticky_buy_label": "Checkout",
         "show_description_features": false,
         "features_heading": "Specifications",
-        "values_heading": "Why shop HORIZON",
+        "values_heading": "Why shop Zeit & Meridian",
         "faq_heading": "Frequently asked questions",
         "open_first_faq": true,
         "reviews_heading": "Verified customer reviews",

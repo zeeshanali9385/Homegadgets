@@ -16,7 +16,7 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/photo-1524592094714-0f0654e20314.jpg",
-            "eyebrow": "HORIZON PK",
+            "eyebrow": "Zeit & Meridian",
             "heading": "Luxury watches for every moment",
             "text": "Discover formal, sports, smart, and couple collections with Cash on Delivery across Pakistan.",
             "button_label": "Shop Now",
@@ -189,7 +189,7 @@
     "hz_video": {
       "type": "video",
       "settings": {
-        "heading": "See HORIZON on the wrist",
+        "heading": "See Zeit & Meridian on the wrist",
         "cover_image": "shopify://shop_images/photo-1508685096489-7aacd43bd3b1.jpg",
         "video_url": "https://www.youtube.com/watch?v=ScMzIvxBSi4",
         "description": "Lifestyle look at everyday luxury watches — COD delivery across Pakistan.",
@@ -313,7 +313,7 @@
       "block_order": ["r1", "r2", "r3"],
       "settings": {
         "heading": "Loved across Pakistan",
-        "subheading": "Verified feedback from HORIZON customers"
+        "subheading": "Verified feedback from Zeit & Meridian customers"
       }
     },
     "hz_watch": {
@@ -403,9 +403,9 @@
       },
       "block_order": ["l1", "l2", "l3", "l4", "l5"],
       "settings": {
-        "heading": "HORIZON PK | Buy luxury watches online in Pakistan",
-        "body": "<p>Shop HORIZON PK wrist watches with Cash on Delivery, free shipping on eligible orders, and a 1-year warranty. Formal, sports, smart, and couple collections ship nationwide to Lahore, Karachi, Islamabad, and beyond.</p>",
-        "cta_label": "Shop HORIZON",
+        "heading": "Zeit & Meridian | Buy luxury watches online in Pakistan",
+        "body": "<p>Shop Zeit & Meridian wrist watches with Cash on Delivery, free shipping on eligible orders, and a 1-year warranty. Formal, sports, smart, and couple collections ship nationwide to Lahore, Karachi, Islamabad, and beyond.</p>",
+        "cta_label": "Shop Zeit & Meridian",
         "cta_link": "shopify://collections/all"
       }
     },

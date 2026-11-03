@@ -12,12 +12,12 @@
     "main": {
       "type": "hz-contact-page",
       "settings": {
-        "heading": "Contact HORIZON PK",
+        "heading": "Contact Zeit & Meridian",
         "intro": "Questions about COD, sizing, or delivery? Our Pakistan support team replies on WhatsApp and email.",
         "whatsapp_heading": "WhatsApp support",
         "whatsapp_display": "+92 300 0000000",
         "email_heading": "Email",
-        "email": "support@horizon.pk",
+        "email": "zeitmeridian@gmail.com",
         "location_heading": "Fulfillment",
         "location_text": "Lahore & Karachi, Pakistan — nationwide COD dispatch",
         "name_label": "Full name",
